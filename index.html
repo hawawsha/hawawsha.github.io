@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوق Pi التقني المتكامل</title>
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <style>
+        :root { --main-purple: #4B0082; --gold: #ffa500; --bg: #f8f9fa; }
+        body { font-family: 'Cairo', sans-serif; background-color: var(--bg); margin: 0; padding: 0; color: #333; }
+        .navbar { background: var(--main-purple); color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .user-info { background: rgba(255,255,255,0.15); padding: 8px 15px; border-radius: 25px; font-size: 14px; border: 1px solid rgba(255,255,255,0.3); }
+        .cart-trigger { position: relative; cursor: pointer; font-size: 24px; transition: 0.3s; }
+        .badge { position: absolute; top: -5px; right: -10px; background: var(--gold); color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px; font-weight: bold; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 20px; }
+        .section-header { margin: 40px 0 20px; border-right: 6px solid var(--gold); padding-right: 15px; color: var(--main-purple); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 25px; }
+        .item-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #eee; }
+        .item-card:hover { transform: translateY(-10px); }
+        .item-card img { width: 100%; height: 220px; object-fit: contain; padding: 15px; background: #fff; }
+        .item-info { padding: 20px; text-align: center; }
+        .item-price { font-size: 22px; font-weight: bold; color: var(--main-purple); margin: 10px 0; }
+        .add-btn { background: var(--main-purple); color: white; border: none; width: 100%; padding: 12px; border-radius: 12px; cursor: pointer; font-weight: bold; }
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 9999; backdrop-filter: blur(5px); }
+        .modal-body { background: white; width: 95%; max-width: 450px; margin: 40px auto; border-radius: 25px; padding: 30px; position: relative; }
+        .checkout-btn { background: #28a745; color: white; border: none; width: 100%; padding: 16px; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="cart-trigger" onclick="openCart()">🛒 <span class="badge" id="count">0</span></div>
+        <h2 style="margin:0;">سوق Pi الذكي</h2>
+        <div id="username-display" class="user-info">جاري التحقق...</div>
+    </nav>
+
+    <div class="container">
+        <h3 class="section-header">📱 الهواتف والكمبيوتر</h3>
+        <div class="grid">
+            <div class="item-card">
+                <img src="iphone.jpg" alt="iPhone">
+                <div class="item-info"><h4>آيفون 15 برو</h4><p class="item-price">0.05 Pi</p><button class="add-btn" onclick="addToCart('آيفون 15 برو', 0.05)">أضف للسلة</button></div>
+            </div>
+            <div class="item-card">
+                <img src="https://m.media-amazon.com/images/I/61fVAo699VL._AC_SL1500_.jpg" alt="MacBook">
+                <div class="item-info"><h4>ماك بوك إير</h4><p class="item-price">0.08 Pi</p><button class="add-btn" onclick="addToCart('ماك بوك إير', 0.08)">أضف للسلة</button></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-body">
+            <span style="float:left; cursor:pointer;" onclick="openCart()">✖</span>
+            <h3>سلة المشتريات</h3>
+            <div id="itemsList" style="max-height: 200px; overflow-y: auto; margin: 20px 0;"></div>
+            <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:20px;">
+                <span>الإجمالي:</span><span id="totalPrice">0</span> Pi
+            </div>
+            <button class="checkout-btn" onclick="payNow()">تأكيد الشراء بالمحفظة</button>
+        </div>
+    </div>
+
+    <script>
+        const Pi = window.Pi;
+        Pi.init({ version: "2.0", sandbox: true }); // تفعيل وضع الاختبار (Testnet)
+
+        let cart = [];
+        let total = 0;
+
+        async function initApp() {
+            try {
+                const user = await Pi.authenticate(['username', 'payments'], onIncompletePaymentFound);
+                document.getElementById('username-display').innerText = "مرحباً: " + user.user.username;
+            } catch (err) {
+                document.getElementById('username-display').innerText = "يرجى الفتح من متصفح Pi";
+            }
+        }
+
+        function addToCart(n, p) {
+            cart.push({n, p});
+            total += p;
+            document.getElementById('count').innerText = cart.length;
+            document.getElementById('totalPrice').innerText = total.toFixed(3);
+            document.getElementById('itemsList').innerHTML = cart.map(i => `<p>${i.n} - ${i.p} Pi</p>`).join('');
+        }
+
+        function openCart() {
+            let m = document.getElementById('cartModal');
+            m.style.display = (m.style.display === 'block') ? 'none' : 'block';
+        }
+
+        async function payNow() {
+            if (cart.length === 0) return;
+            try {
+                const payment = await Pi.createPayment({
+                    amount: total,
+                    memo: "شراء من سوق باي",
+                    metadata: { items: cart.map(i => i.n).join(',') }
+                }, {
+                    onReadyForServerApproval: (pid) => {
+                        console.log("Payment ID:", pid);
+                        // هنا يتم التأكيد من خلال الـ API الخاص بك لاحقاً
+                    },
+                    onReadyForServerCompletion: (pid, txid) => { 
+                        alert("تمت العملية بنجاح! شكراً لك.");
+                        cart = []; total = 0; openCart();
+                    }
+                });
+            } catch (err) { alert("حدث خطأ في الدفع: " + err.message); }
+        }
+
+        function onIncompletePaymentFound(p) { console.log("Payment found", p); }
+        initApp();
+    </script>
+</body>
+</html>
