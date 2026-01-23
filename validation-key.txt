@@ -1,1 +1,1 @@
-MY_ACCESS_KEY=ms68qp6cplueif6mbfnooqkzsyox8uycu34pqqtm0rks22i4e1fbcjdpwfgxbokn
+ms68qp6cplueif6mbfnooqkzsyox8uycu34pqqtm0rks22i4e1fbcjdpwfgxbokn
