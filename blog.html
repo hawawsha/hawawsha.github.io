@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المدونة - سوق باي</title>
+    <style>
+        /* إعدادات التنسيق العربي للمدونة */
+        body { font-family: sans-serif; margin: 0; padding: 0; }
+        header { background: #333; color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        nav a { color: white; text-decoration: none; margin: 0 10px; }
+        .blog-container { padding: 20px; max-width: 800px; margin: auto; }
+        .post { border-bottom: 1px solid #ccc; padding: 15px 0; }
+        .lang-btn { background: #f39c12; color: white; border: none; padding: 8px; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="index.html" id="home-link">الرئيسية</a>
+        <a href="projects.html" id="projects-link">المشاريع</a>
+        <a href="cv.html" id="cv-link">السيرة الذاتية</a>
+    </nav>
+    <button class="lang-btn" id="lang-btn" onclick="toggleBlogLang()">English</button>
+</header>
+
+<div class="blog-container" id="blog-content">
+    <h1 id="blog-title">مدونة سوق باي</h1>
+    <div class="post">
+        <h2 id="post-title">أهلاً بكم في مدونتي</h2>
+        <p id="post-text">هنا ستجد آخر التحديثات والمقالات حول مشروع souq-pi-app.</p>
+    </div>
+</div>
+
+<script>
+    function toggleBlogLang() {
+        const html = document.documentElement;
+        const btn = document.getElementById('lang-btn');
+        
+        // جلب عناصر المدونة لتغيير لغتها
+        const title = document.getElementById('blog-title');
+        const home = document.getElementById('home-link');
+        const projects = document.getElementById('projects-link');
+        const cv = document.getElementById('cv-link');
+
+        if (html.dir === "rtl") {
+            html.dir = "ltr";
+            html.lang = "en";
+            btn.innerText = "العربية";
+            title.innerText = "Souq Pi Blog";
+            home.innerText = "Home";
+            projects.innerText = "Projects";
+            cv.innerText = "CV";
+        } else {
+            html.dir = "rtl";
+            html.lang = "ar";
+            btn.innerText = "English";
+            title.innerText = "مدونة سوق باي";
+            home.innerText = "الرئيسية";
+            projects.innerText = "المشاريع";
+            cv.innerText = "السيرة الذاتية";
+        }
+    }
+</script>
+
+</body>
+</html>
