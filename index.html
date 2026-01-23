@@ -3,59 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوق باي - souq-pi-app</title>
+    <title>سوق باي</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header { background-color: #333; color: white; padding: 1rem; text-align: center; }
-        .content { padding: 20px; text-align: center; }
-        #pay-button { padding: 15px 30px; background-color: #f39c12; color: white; border: none; border-radius: 8px; font-size: 18px; cursor: pointer; display: block; margin: 20px auto; }
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        .product-img { max-width: 250px; margin: 20px 0; border-radius: 15px; }
+        #pay-button { 
+            background-color: #f39c12; 
+            color: white; 
+            padding: 15px 40px; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 18px; 
+            cursor: pointer; 
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h2>سوق باي</h2>
-</header>
-
-<div class="content">
     <h1>مرحباً بك في تطبيق سوق باي</h1>
     <p>بوابتك لإتمام الخطوة العاشرة بنجاح.</p>
-    <img src="iphone.jpg" alt="iPhone" style="max-width: 200px; margin-top: 20px;">
+
+    <img src="iphone.jpg" class="product-img" alt="منتج باي">
+
     <button id="pay-button">شراء المنتج (1 Pi)</button>
-</div>
 
-<script src="https://sdk.minepi.com/pi-sdk.js"></script>
-<script>
-    const Pi = window.Pi;
-    Pi.init({ version: "2.0", sandbox: true }); 
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <script>
+        const Pi = window.Pi;
+        Pi.init({ version: "2.0", sandbox: true });
 
-    document.getElementById('pay-button').onclick = async function() {
-        try {
-            // طلب الصلاحيات برمجياً لفتح المحفظة
-            await Pi.authenticate(['payments']); 
-            
-            const payment = await Pi.createPayment({
-                amount: 1,
-                memo: "اختبار إتمام الخطوة 10",
-                metadata: { productId: "item-10" }
-            }, {
-                onReadyForServerApproval: (paymentId) => {
-                    return fetch('/api/index', { 
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ paymentId })
-                    });
-                },
-                onReadyForServerCompletion: (paymentId, txid) => {
-                    alert("مبروك! تمت العملية بنجاح: " + txid);
-                },
-                onCancel: (paymentId) => { console.log("تم الإلغاء"); },
-                onError: (error) => { alert("خطأ: " + error.message); }
-            });
-        } catch (err) {
-            alert("النظام جاهز، اضغط مرة أخرى لتأكيد الصلاحية");
-        }
-    };
-</script>
+        document.getElementById('pay-button').onclick = async function() {
+            try {
+                // خطوة المصادقة لفتح المحفظة وتجاوز خطأ الصلاحيات
+                const scopes = ['payments'];
+                const auth = await Pi.authenticate(scopes, (paymentId) => {});
+
+                // بدء عملية الدفع
+                const payment = await Pi.createPayment({
+                    amount: 1,
+                    memo: "إتمام الخطوة 10",
+                    metadata: { productId: "item-10" }
+                }, {
+                    onReadyForServerApproval: (paymentId) => {
+                        return fetch('/api/index', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ paymentId })
+                        });
+                    },
+                    onReadyForServerCompletion: (paymentId, txid) => {
+                        alert("مبروك! تم الدفع بنجاح ورقم العملية هو: " + txid);
+                    },
+                    onCancel: (paymentId) => { console.log("تم إلغاء العملية"); },
+                    onError: (error) => { alert("خطأ في الدفع: " + error.message); }
+                });
+            } catch (err) {
+                alert("تنبيه: " + err.message);
+            }
+        };
+    </script>
 </body>
 </html>
