@@ -1,33 +1,27 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوق باي - الدفع السريع</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4; }
-        .container { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 400px; margin: auto; }
-        .product-img { max-width: 100%; border-radius: 15px; margin-bottom: 20px; }
-        #pay-button { 
-            background-color: #f39c12; 
-            color: white; 
-            padding: 18px 45px; 
-            border: none; 
-            border-radius: 12px; 
-            font-size: 20px; 
-            font-weight: bold;
-            cursor: pointer; 
-            width: 100%;
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <h1>سوق باي</h1>
-        <p>اضغط للبدء في الخطوة العاشرة</p>
-        
-        <img src="iphone.jpg" class="product-img" alt="Product">
-
-        <button id="pay-button">شراء المنتج (1 Pi)</button>
-    </div>
+  // كود للتأكد من استجابة الزر فوراً
+  document.getElementById('pay-button').addEventListener('click', async function() {
+    alert("بدء الاتصال بالمحفظة..."); // تنبيه للتأكد من الاستجابة
+    try {
+      await Pi.authenticate(['payments']); 
+      const payment = await Pi.createPayment({
+        amount: 1,
+        memo: "الخطوة الأخيرة للنجاح",
+        metadata: { productId: "item-10" }
+      }, {
+        onReadyForServerApproval: (paymentId) => {
+          return fetch('/api/index', { 
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ paymentId })
+          });
+        },
+        onReadyForServerCompletion: (paymentId, txid) => {
+          alert("مبروك! تم النجاح: " + txid);
+        },
+        onCancel: (paymentId) => { alert("تم إلغاء الدفع"); },
+        onError: (error) => { alert("خطأ: " + error.message); }
+      });
+    } catch (err) {
+      alert("يرجى المحاولة مرة ثانية بعد ثوانٍ");
+    }
+  });
