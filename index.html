@@ -27,19 +27,19 @@
 <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 <script>
     const Pi = window.Pi;
-    // تفعيل الـ Sandbox وتحديد الإصدار
     Pi.init({ version: "2.0", sandbox: true }); 
 
     document.getElementById('pay-button').onclick = async function() {
         try {
-            // إضافة طلب الصلاحيات برمجياً لتخطي رسالة payments scope
+            // طلب الصلاحيات برمجياً لفتح المحفظة
+            await Pi.authenticate(['payments']); 
+            
             const payment = await Pi.createPayment({
                 amount: 1,
                 memo: "اختبار إتمام الخطوة 10",
-                metadata: { productId: "test-item-001" }
+                metadata: { productId: "item-10" }
             }, {
                 onReadyForServerApproval: (paymentId) => {
-                    // الربط مع ملف الـ api الذي أنشأناه
                     return fetch('/api/index', { 
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -47,19 +47,13 @@
                     });
                 },
                 onReadyForServerCompletion: (paymentId, txid) => {
-                    alert("تمت العملية بنجاح! رقم التأكيد: " + txid);
+                    alert("مبروك! تمت العملية بنجاح: " + txid);
                 },
-                onCancel: (paymentId) => { console.log("تم إلغاء الدفع"); },
-                onError: (error) => { alert("خطأ في الربط: " + error.message); }
+                onCancel: (paymentId) => { console.log("تم الإلغاء"); },
+                onError: (error) => { alert("خطأ: " + error.message); }
             });
         } catch (err) {
-            // في حال طلب الصلاحيات لأول مرة
-            if (err.message.includes("scope")) {
-                alert("يرجى المحاولة مرة أخرى، النظام يقوم بتحديث الصلاحيات.");
-                Pi.authenticate(['payments'], (paymentId) => {});
-            } else {
-                alert("تنبيه: " + err.message);
-            }
+            alert("النظام جاهز، اضغط مرة أخرى لتأكيد الصلاحية");
         }
     };
 </script>
