@@ -6,7 +6,7 @@
     <title>سوق باي - souq-pi-app</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header { background-color: #333; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        header { background-color: #333; color: white; padding: 1rem; text-align: center; }
         .content { padding: 20px; text-align: center; }
         #pay-button { padding: 15px 30px; background-color: #f39c12; color: white; border: none; border-radius: 8px; font-size: 18px; cursor: pointer; display: block; margin: 20px auto; }
     </style>
@@ -14,7 +14,7 @@
 <body>
 
 <header>
-    <div class="logo"><h2>سوق باي</h2></div>
+    <h2>سوق باي</h2>
 </header>
 
 <div class="content">
@@ -27,20 +27,19 @@
 <script src="https://sdk.minepi.com/pi-sdk.js"></script>
 <script>
     const Pi = window.Pi;
-    // التعديل هنا: أضفنا طلب الصلاحيات ليتخطى الخطأ السابق
+    // تفعيل الـ Sandbox وتحديد الإصدار
     Pi.init({ version: "2.0", sandbox: true }); 
 
     document.getElementById('pay-button').onclick = async function() {
         try {
-            // نطلب الدخول باستخدام صلاحية المدفوعات برمجياً
-            const scopes = ['payments'];
-            
+            // إضافة طلب الصلاحيات برمجياً لتخطي رسالة payments scope
             const payment = await Pi.createPayment({
                 amount: 1,
-                memo: "اختبار إتمام الخطوة 10 - سوق باي",
-                metadata: { productId: "test-001" }
+                memo: "اختبار إتمام الخطوة 10",
+                metadata: { productId: "test-item-001" }
             }, {
                 onReadyForServerApproval: (paymentId) => {
+                    // الربط مع ملف الـ api الذي أنشأناه
                     return fetch('/api/index', { 
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -48,14 +47,19 @@
                     });
                 },
                 onReadyForServerCompletion: (paymentId, txid) => {
-                    alert("نجحت العملية! رقم التأكيد: " + txid);
-                    // هنا سيتحول تطبيقك في Dashboard إلى 10/10
+                    alert("تمت العملية بنجاح! رقم التأكيد: " + txid);
                 },
-                onCancel: (paymentId) => { console.log("تم الإلغاء"); },
+                onCancel: (paymentId) => { console.log("تم إلغاء الدفع"); },
                 onError: (error) => { alert("خطأ في الربط: " + error.message); }
             });
         } catch (err) {
-            alert("تنبيه: " + err.message);
+            // في حال طلب الصلاحيات لأول مرة
+            if (err.message.includes("scope")) {
+                alert("يرجى المحاولة مرة أخرى، النظام يقوم بتحديث الصلاحيات.");
+                Pi.authenticate(['payments'], (paymentId) => {});
+            } else {
+                alert("تنبيه: " + err.message);
+            }
         }
     };
 </script>
