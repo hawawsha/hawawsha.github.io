@@ -1,31 +1,31 @@
-// هذا هو ملف Node.js (السيرفر) الذي طلبه صديقك
 export default async function handler(req, res) {
-    // التأكد أن الطلب قادم بطريقة POST (للموافقة على الدفع)
-    if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method Not Allowed' });
-    }
+  console.log("APPROVE ENDPOINT HIT"); // هذه الجملة ستظهر في Vercel إذا نجح الاتصال
 
-    try {
-        const { paymentId } = req.body;
-        const PI_API_KEY = process.env.PI_API_KEY; // قراءة مفتاحك من Vercel
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-        // إرسال طلب الموافقة (Approve) الرسمي لشبكة Pi كما شرح صديقك
-        const response = await fetch(`https://api.minepi.com/v2/payments/${paymentId}/approve`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Key ${PI_API_KEY}`,
-                'Content-Type': 'application/json'
-            }
-        });
+  const { paymentId } = req.body;
+  console.log("Payment ID received:", paymentId); // للتأكد أن رقم العملية وصل للسيرفر
 
-        if (response.ok) {
-            // إذا وافقت شبكة Pi، نرسل نجاح للمتصفح
-            return res.status(200).json({ status: 'approved' });
-        } else {
-            const errorText = await response.text();
-            return res.status(500).json({ error: 'Pi Approval Failed', details: errorText });
-        }
-    } catch (err) {
-        return res.status(500).json({ error: 'Internal Server Error' });
-    }
+  try {
+    const response = await fetch(
+      `https://api.minepi.com/v2/payments/${paymentId}/approve`,
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Key ${process.env.PI_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+    console.log("PI RESPONSE:", data); // لرؤية رد شركة Pi Network الرسمي
+
+    return res.status(200).json(data);
+  } catch (err) {
+    console.error("APPROVE ERROR:", err);
+    return res.status(500).json({ error: err.message });
+  }
 }
