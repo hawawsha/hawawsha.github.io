@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوق باي - الخطوة 10</title>
+    <title>سوق باي | Souq Pi</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-        .btn-pay { background-color: #f39c12; color: white; padding: 20px 40px; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; }
+        body { font-family: sans-serif; text-align: center; padding-top: 100px; background-color: #f4f4f4; }
+        .btn-pay { background-color: #f39c12; color: white; padding: 25px 50px; border: none; border-radius: 15px; font-size: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .btn-pay:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
@@ -16,32 +17,35 @@
 
     <script>
         const Pi = window.Pi;
-        Pi.init({ version: "2.0", sandbox: false }); // الإنتاج الحقيقي
+        Pi.init({ version: "2.0", sandbox: false }); // وضع الإنتاج الحقيقي
 
         document.getElementById('pay-button').onclick = async function() {
             try {
-                await Pi.authenticate(['payments'], (paymentId) => {});
+                // طلب تسجيل الدخول والموافقة على الدفع
+                const auth = await Pi.authenticate(['payments'], (paymentId) => {});
                 
                 const payment = await Pi.createPayment({
                     amount: 1,
-                    memo: "إتمام الخطوة 10",
+                    memo: "تفعيل الخطوة 10 - Souq Pi",
                     metadata: { productId: "step-10" }
                 }, {
                     onReadyForServerApproval: (paymentId) => {
-                        return fetch('/api/index', {
+                        console.log("إرسال طلب الموافقة إلى السيرفر (Endpoint Hit)...");
+                        // استدعاء ملف السيرفر api/index.js
+                        return fetch('/api/index', { 
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({ paymentId })
-                        });
+                        }).then(res => res.json());
                     },
                     onReadyForServerCompletion: (paymentId, txid) => {
-                        alert("مبروك! اكتملت الخطوة 10 بنجاح");
+                        alert("مبروك! تم تأكيد العملية واكتملت الخطوة 10");
                     },
-                    onCancel: (paymentId) => { console.log("إلغاء"); },
-                    onError: (error) => { alert("خطأ: " + error.message); }
+                    onCancel: (paymentId) => { console.log("تم إلغاء الدفع"); },
+                    onError: (error) => { alert("خطأ في العملية: " + error.message); }
                 });
             } catch (err) {
-                alert("خطأ في الاتصال: " + err.message);
+                alert("خطأ تقني: " + err.message);
             }
         };
     </script>
