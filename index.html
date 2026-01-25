@@ -2,51 +2,57 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>إصلاح شامل للخطوة 10</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفعيل الخطوة 10</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background-color: #f0f2f5; }
+        .container { text-align: center; background: white; padding: 40px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        button { background-color: #8A2BE2; color: white; border: none; padding: 15px 30px; border-radius: 8px; font-size: 18px; cursor: pointer; transition: 0.3s; }
+        button:hover { background-color: #6a1b9a; }
+    </style>
 </head>
 <body>
-    <div style="text-align:center; padding-top:50px; font-family:sans-serif;">
-        <h2>جاري فحص العمليات المعلقة...</h2>
-        <p id="status">يرجى الانتظار، نحن نقوم بإغلاق الدفع القديم الآن.</p>
+    <div class="container">
+        <h2>توثيق التطبيق - الخطوة 10</h2>
+        <p>اضغط على الزر أدناه لإتمام عملية التفعيل وتحويل الحالة للأخضر.</p>
+        <button id="pay-btn">تفعيل الآن (1 Pi)</button>
+        <p id="status" style="margin-top: 20px; color: #555;"></p>
     </div>
 
     <script>
         const Pi = window.Pi;
         Pi.init({ version: "2.0", sandbox: false });
 
-        async function fixPending() {
-            const statusBox = document.getElementById('status');
+        document.getElementById('pay-btn').onclick = async function() {
+            const status = document.getElementById('status');
             try {
-                await Pi.authenticate(['payments']);
+                status.innerText = "جاري الاتصال بالمحفظة...";
+                const auth = await Pi.authenticate(['payments']);
                 
-                // هذه هي الوظيفة السحرية لإيجاد أي دفع لم يكتمل وإغلاقه
-                Pi.createPayment({
+                await Pi.createPayment({
                     amount: 1,
-                    memo: "Fixing Step 10",
+                    memo: "Official Step 10 Activation",
                     metadata: { step: "10" }
                 }, {
-                    onIncompletePaymentFound: (payment) => {
-                        statusBox.innerText = "تم العثور على دفع معلق! جاري إغلاقه...";
-                        // إرسال رقم الدفع المعلق للسيرفر لإتمامه فوراً
+                    onReadyForServerApproval: (paymentId) => {
+                        status.innerText = "تم الدفع بنجاح! جاري تحديث الحالة...";
                         fetch('/api/index', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ paymentId: payment.identifier, action: "complete" })
+                            body: JSON.stringify({ paymentId: paymentId })
                         });
                     },
-                    onReadyForServerApproval: (paymentId) => { /* ... */ },
                     onReadyForServerCompletion: (paymentId, txid) => {
-                        statusBox.innerText = "✅ تم حل المشكلة! الخطوة 10 ستصبح خضراء الآن.";
+                        status.innerText = "✅ اكتمل التفعيل بنجاح! يمكنك العودة للوحة التحكم الآن.";
                     },
-                    onCancel: (paymentId) => { },
-                    onError: (error) => { statusBox.innerText = "الحالة: " + error.message; }
+                    onCancel: (paymentId) => { status.innerText = "تم إلغاء العملية."; },
+                    onError: (error) => { status.innerText = "خطأ: " + error.message; }
                 });
             } catch (err) {
-                statusBox.innerText = "تأكد من فتح الرابط داخل Pi Browser.";
+                status.innerText = "يرجى فتح الرابط من داخل Pi Browser.";
             }
-        }
-        fixPending();
+        };
     </script>
 </body>
 </html>
