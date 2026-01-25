@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Souq Pi | التفعيل النهائي</title>
+    <title>Souq Pi | التفعيل النهائي الاحترافي</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
         body { font-family: sans-serif; text-align: center; padding-top: 50px; background-color: #f4f4f4; }
         .btn-pay { background-color: #f39c12; color: white; padding: 20px 40px; border: none; border-radius: 10px; font-size: 18px; cursor: pointer; }
+        .container { background: white; display: inline-block; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        #status { margin-top: 15px; color: #666; }
     </style>
 </head>
 <body>
-    <div style="background: white; display: inline-block; padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-        <h2>توثيق الخطوة 10</h2>
+    <div class="container">
+        <h2>توثيق الخطوة 10 الاحترافي</h2>
         <button id="pay-button" class="btn-pay">دفع 1 Pi للموافقة الفورية</button>
-        <p id="status" style="margin-top: 15px; color: #666;">في انتظار بدء العملية...</p>
+        <p id="status">في انتظار بدء العملية...</p>
     </div>
 
     <script>
@@ -25,30 +27,42 @@
             const statusBox = document.getElementById('status');
             try {
                 statusBox.innerText = "جاري الاتصال بالمحفظة...";
-                const auth = await Pi.authenticate(['payments'], (paymentId) => {});
+                await Pi.authenticate(['payments']);
 
                 const payment = await Pi.createPayment({
                     amount: 1,
                     memo: "تفعيل الخطوة 10 - Souq Pi",
                     metadata: { productId: "step-10" }
                 }, {
-                    onReadyForServerApproval: async (paymentId) => {
+                    onReadyForServerApproval: async (payment) => {
                         statusBox.innerText = "تم إنشاء الدفع.. نرسل الموافقة الآن للسيرفر!";
-                        // تنفيذ نصيحة صديقك: استخدام fetch فوري ومباشر
-                        const response = await fetch('/api/index', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ paymentId: paymentId }) // استخدام المعرف المباشر
-                        });
-                        return response.json();
+
+                        try {
+                            const response = await fetch('/api/index', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ paymentId: payment.identifier })
+                            });
+
+                            const data = await response.json();
+
+                            if (data.error) {
+                                statusBox.innerText = "خطأ في الموافقة: " + data.error;
+                            } else {
+                                statusBox.innerText = "تمت الموافقة بنجاح!";
+                            }
+                        } catch (err) {
+                            statusBox.innerText = "فشل الاتصال بالسيرفر: " + err.message;
+                        }
                     },
-                    onReadyForServerCompletion: (paymentId, txid) => {
-                        statusBox.innerText = "نجاح! اكتملت الخطوة 10.";
-                        alert("تم التوثيق بنجاح!");
+                    onReadyForServerCompletion: (payment, txid) => {
+                        statusBox.innerText = "نجاح! اكتملت العملية.";
+                        alert("تم التوثيق النهائي!");
                     },
-                    onCancel: (paymentId) => { statusBox.innerText = "تم إلغاء الدفع."; },
+                    onCancel: (payment) => { statusBox.innerText = "تم إلغاء الدفع."; },
                     onError: (error) => { statusBox.innerText = "خطأ: " + error.message; }
                 });
+
             } catch (err) {
                 statusBox.innerText = "خطأ تقني: " + err.message;
             }
