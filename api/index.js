@@ -4,13 +4,12 @@ export default async function handler(req, res) {
   }
 
   const { paymentId } = req.body;
-
   if (!paymentId) {
     return res.status(400).json({ error: "Missing paymentId" });
   }
 
   try {
-    // 1️⃣ APPROVE
+    // 1️⃣ الموافقة (Approve)
     await fetch(`https://api.minepi.com/v2/payments/${paymentId}/approve`, {
       method: "POST",
       headers: {
@@ -19,7 +18,7 @@ export default async function handler(req, res) {
       }
     });
 
-    // 2️⃣ COMPLETE (إجباري)
+    // 2️⃣ الإكمال (Complete)
     const completeRes = await fetch(
       `https://api.minepi.com/v2/payments/${paymentId}/complete`,
       {
