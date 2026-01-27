@@ -3,77 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوق Pi العربي - souq pi-v2</title>
-    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+    <title>SOUQ PI-V2 | سوق بي العربي</title>
     <style>
-        /* التنسيق العام للموقع */
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f0f2f5; text-align: center; padding: 20px; margin: 0; }
-        .card { background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); display: inline-block; width: 90%; max-width: 450px; margin-top: 50px; }
-        
-        /* تنسيق زر تسجيل الدخول */
-        .btn-auth { background-color: #673ab7; color: white; border: none; padding: 15px 30px; border-radius: 10px; cursor: pointer; font-size: 18px; width: 100%; transition: 0.3s; }
-        .btn-auth:hover { background-color: #512da8; }
-
-        /* لوحة بيانات المستخدم بعد الدخول */
-        .user-box { background: #f8f9fa; border: 2px dashed #673ab7; padding: 15px; border-radius: 12px; margin-top: 20px; display: none; }
-        .status-badge { background: #e8f5e9; color: #2e7d32; padding: 5px 15px; border-radius: 20px; font-size: 14px; display: inline-block; margin-top: 10px; }
-
-        /* تنسيق الـ Footer (كود صديقك المعتمد) */
-        .site-footer { margin-top: 60px; padding: 20px 10px; text-align: center; font-size: 14px; color: #666; border-top: 1px solid #e0e0e0; }
-        .site-footer a { color: #0070f3; text-decoration: none; margin: 0 5px; }
-        .site-footer a:hover { text-decoration: underline; }
-        .footer-links { margin-bottom: 8px; }
+        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: white; text-align: center; padding: 20px; }
+        .container { max-width: 800px; margin: auto; }
+        .product-card { background: #2d2d2d; border: 1px solid #d4af37; border-radius: 15px; padding: 20px; margin: 20px 0; }
+        .product-image { width: 100%; max-width: 200px; border-radius: 10px; }
+        .price { color: #d4af37; font-size: 24px; font-weight: bold; }
+        .buy-btn { background-color: #673ab7; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 18px; margin-top: 10px; }
+        .buy-btn:hover { background-color: #512da8; }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>مرحباً بكم في SOUQ PI-V2</h1>
+        <p>بوابتك لتبادل المنتجات والخدمات الرقمية مقابل عملة Pi</p>
 
-    <div class="card">
-        <h1 style="color: #333;">مرحباً بكم في سوق Pi العربي 🍎</h1>
-        <p style="color: #666;">تطبيق souq pi-v2 الموثق وجاهز لخدمتكم</p>
-        
-        <button id="auth-btn" class="btn-auth" onclick="login()">تسجيل الدخول عبر Pi</button>
-        
-        <div id="user-panel" class="user-box">
-            <p>أهلاً بك يا <span id="username" style="font-weight: bold; color: #673ab7;"></span></p>
-            <div class="status-badge">تم تسجيل دخولك بنجاح ✅</div>
-            <p style="font-size: 12px; color: #666; margin-top: 10px;">شكراً لزيارتك، تم احتسابك كمستخدم موثق للتطبيق.</p>
+        <div class="product-card">
+            <img src="iphone.jpg" alt="iPhone" class="product-image">
+            <h2>هاتف ذكي حديث</h2>
+            <p>أفضل المواصفات متاح الآن للدفع عبر Pi</p>
+            <p class="price">150 Pi</p>
+            <button class="buy-btn">شراء الآن باستخدام Pi</button>
+        </div>
+
+        <div class="product-card">
+            <h2>خدمة تصميم شعار احترافي</h2>
+            <p>احصل على شعار مميز لمشروعك خلال 24 ساعة</p>
+            <p class="price">10 Pi</p>
+            <button class="buy-btn">طلب الخدمة</button>
         </div>
     </div>
-
-    <footer class="site-footer">
-      <div class="footer-links">
-        <a href="/privacy.html">سياسة الخصوصية</a>
-        <span>|</span>
-        <a href="/terms.html">شروط الخدمة</a>
-      </div>
-      <p class="footer-copy">
-        © 2026 سوق Pi العربي - جميع الحقوق محفوظة
-      </p>
-    </footer>
-
-    <script>
-        const Pi = window.Pi;
-        // تهيئة الـ SDK
-        Pi.init({ version: "2.0", sandbox: false });
-
-        async function login() {
-            try {
-                const scopes = ['username', 'payments'];
-                const auth = await Pi.authenticate(scopes, (payment) => {
-                    console.log("Incomplete payment found", payment);
-                });
-                
-                // تحديث الواجهة عند النجاح (مثلما حدث مع المستخدم ALHAWAWSHEH1953)
-                document.getElementById('auth-btn').style.display = 'none';
-                document.getElementById('user-panel').style.display = 'block';
-                document.getElementById('username').innerText = auth.user.username;
-                
-                console.log("Login Success:", auth.user.username);
-            } catch (err) {
-                console.error("Auth failed", err);
-                alert("يرجى فتح التطبيق من داخل متصفح Pi Browser لضمان تسجيل الدخول.");
-            }
-        }
-    </script>
 </body>
 </html>
