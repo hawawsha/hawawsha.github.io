@@ -5,51 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOUQ PI-V2 | دعم سعر الإجماع GCV</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f0f; color: white; text-align: center; padding: 20px; }
-        .gcv-badge { background-color: #d4af37; color: black; padding: 5px 15px; border-radius: 20px; font-weight: bold; display: inline-block; margin-bottom: 20px; }
-        .container { max-width: 800px; margin: auto; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f0f; color: white; text-align: center; padding: 20px; margin: 0; }
+        .gcv-badge { background-color: #d4af37; color: black; padding: 5px 15px; border-radius: 20px; font-weight: bold; display: inline-block; margin-bottom: 20px; margin-top: 10px; }
+        .container { max-width: 800px; margin: auto; padding: 10px; }
         
-        /* القسم الجديد: شبكة المنتجات المستوحاة من سوق العراق */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
+        /* شريط البحث الجديد */
+        .search-bar { width: 90%; max-width: 500px; padding: 12px; border-radius: 25px; border: 1px solid #d4af37; background: #1a1a1a; color: white; margin-bottom: 20px; outline: none; }
         
-        .product-card { background: #1e1e1e; border: 2px solid #d4af37; border-radius: 20px; padding: 25px; transition: transform 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        /* أزرار الأقسام */
+        .categories { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; overflow-x: auto; padding: 10px; }
+        .cat-btn { background: #2d2d2d; color: #d4af37; border: 1px solid #d4af37; padding: 8px 20px; border-radius: 15px; cursor: pointer; white-space: nowrap; font-size: 14px; }
+        .cat-btn.active { background: #d4af37; color: black; }
+
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .product-card { background: #1e1e1e; border: 2px solid #d4af37; border-radius: 20px; padding: 20px; transition: transform 0.3s; display: flex; flex-direction: column; }
         .product-card:hover { transform: scale(1.02); }
-        .product-image { width: 100%; max-height: 200px; border-radius: 15px; margin-bottom: 15px; object-fit: cover; }
+        .product-image { width: 100%; height: 200px; border-radius: 15px; margin-bottom: 15px; object-fit: cover; }
         .price-container { background: #2d2d2d; padding: 10px; border-radius: 10px; margin: 15px 0; }
         .price { color: #d4af37; font-size: 24px; font-weight: bold; display: block; }
         .usd-val { color: #888; font-size: 13px; }
-        .buy-btn { background-color: #673ab7; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; }
-        .footer-note { font-size: 12px; color: #666; margin-top: 50px; }
+        .buy-btn { background-color: #673ab7; color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        .footer-note { font-size: 12px; color: #666; margin-top: 50px; padding-bottom: 30px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="gcv-badge">نحن ندعم سعر الإجماع العالمي 314,159$</div>
         <h1>SOUQ PI-V2</h1>
-        <p>متجركم الأول للمقايضة بسعر الإجماع</p>
+        
+        <input type="text" class="search-bar" placeholder="ابحث عن منتج بالـ Pi...">
+        
+        <div class="categories">
+            <button class="cat-btn active">الكل</button>
+            <button class="cat-btn">إلكترونيات</button>
+            <button class="cat-btn">خدمات</button>
+            <button class="cat-btn">عروض GCV</button>
+        </div>
 
         <div class="product-grid">
-            
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1632661674596-df8be070a5c5?auto=format&fit=crop&w=400&q=80" alt="iPhone" class="product-image">
+                <img src="https://images.unsplash.com/photo-1632661674596-df8be070a5c5?auto=format&fit=crop&w=400&q=80" class="product-image">
                 <h2>هاتف آيفون 16 Pro</h2>
-                <p>أحدث إصدار - شحن فوري</p>
                 <div class="price-container">
                     <span class="price">0.00318 Pi</span>
                     <span class="usd-val">يعادل 1,000$ بسعر GCV</span>
                 </div>
-                <button class="buy-btn" onclick="launchPayment()">شراء باستخدام Pi</button>
+                <button class="buy-btn" onclick="launchPayment()">شراء الآن</button>
             </div>
 
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&w=400&q=80" alt="Coffee Maker" class="product-image">
+                <img src="https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&w=400&q=80" class="product-image">
                 <h2>صانعة قهوة احترافية</h2>
-                <p>جودة عالية - تدفع بـ Pi</p>
                 <div class="price-container">
                     <span class="price">0.00047 Pi</span>
                     <span class="usd-val">يعادل 150$ بسعر GCV</span>
@@ -58,46 +64,36 @@
             </div>
 
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=80" alt="Coding" class="product-image">
+                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=400&q=80" class="product-image">
                 <h2>استشارة برمجية</h2>
-                <p>تطوير تطبيقات لشبكة Pi</p>
                 <div class="price-container">
                     <span class="price">0.00016 Pi</span>
                     <span class="usd-val">يعادل 50$ بسعر GCV</span>
                 </div>
                 <button class="buy-btn" onclick="launchPayment()">طلب الخدمة</button>
             </div>
+        </div>
 
-        </div> 
         <p class="footer-note">جميع المعاملات تتم عبر Pi Browser ومحمية ببروتوكول Pi Network</p>
     </div>
 
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <script>
-        // تهيئة الـ SDK الخاص بـ Pi Network
         const Pi = window.Pi;
         Pi.init({ version: "2.0", sandbox: false });
 
+        async function showPiAd() {
+            try {
+                await Pi.Ads.showAd({ adUnitId: "put_your_ad_unit_id_here" });
+            } catch (err) { console.error("Ad failed", err); }
+        }
+
         function launchPayment() {
-            // استدعاء الإعلان عند محاولة الشراء لزيادة التفاعل
             showPiAd();
             alert("سيتم فتح بوابة دفع Pi الآمنة فور تفعيل الدومين alhawawsheh.pi");
         }
 
-        // كود إظهار الإعلانات لإنهاء حالة الـ Pending
-        async function showPiAd() {
-            try {
-                const ad = await Pi.Ads.showAd({
-                    adUnitId: "put_your_ad_unit_id_here" 
-                });
-                console.log("Ad displayed successfully");
-            } catch (err) {
-                console.error("Ad failed to load", err);
-            }
-        }
-        
-        // تشغيل الإعلان تلقائياً عند دخول فريق المراجعة للموقع
-        showPiAd();
+        window.onload = showPiAd;
     </script>
 </body>
 </html>
