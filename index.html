@@ -3,74 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUQ PI-V2 | طلبات خاصة ودعم GCV</title>
+    <title>SOUQ PI-V2 | متجر الهواوشه العالمي</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f0f; color: white; text-align: center; padding: 20px; margin: 0; }
-        .gcv-badge { background-color: #d4af37; color: black; padding: 5px 15px; border-radius: 20px; font-weight: bold; display: inline-block; margin-bottom: 20px; }
-        .container { max-width: 800px; margin: auto; }
+        :root { --gold: #d4af37; --dark: #0f0f0f; --card: #1e1e1e; --purple: #673ab7; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--dark); color: white; text-align: center; margin: 0; padding: 0; }
+        .container { max-width: 800px; margin: auto; padding: 20px; }
+        
+        /* رسالة الترحيب */
+        .welcome-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+        .welcome-box { background: var(--card); border: 2px solid var(--gold); padding: 30px; border-radius: 20px; max-width: 80%; }
         
         /* البحث والأقسام */
-        .search-bar { width: 90%; max-width: 500px; padding: 12px; border-radius: 25px; border: 1px solid #d4af37; background: #1a1a1a; color: white; margin-bottom: 20px; outline: none; }
+        .search-bar { width: 90%; padding: 12px; border-radius: 25px; border: 1px solid var(--gold); background: #1a1a1a; color: white; margin: 20px 0; outline: none; }
         .categories { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; overflow-x: auto; padding: 10px; }
-        .cat-btn { background: #2d2d2d; color: #d4af37; border: 1px solid #d4af37; padding: 8px 20px; border-radius: 15px; cursor: pointer; white-space: nowrap; }
+        .cat-btn { background: #2d2d2d; color: var(--gold); border: 1px solid var(--gold); padding: 8px 18px; border-radius: 15px; cursor: pointer; white-space: nowrap; }
         
-        /* شبكة المنتجات */
+        /* المنتجات */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .product-card { background: #1e1e1e; border: 2px solid #d4af37; border-radius: 20px; padding: 20px; transition: transform 0.3s; }
-        .product-image { width: 100%; height: 200px; border-radius: 15px; object-fit: cover; }
-        .price-container { background: #2d2d2d; padding: 10px; border-radius: 10px; margin: 15px 0; }
-        .price { color: #d4af37; font-size: 24px; font-weight: bold; }
+        .product-card { background: var(--card); border: 1px solid #333; border-radius: 20px; padding: 15px; transition: 0.3s; }
+        .product-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .product-image { width: 100%; height: 180px; border-radius: 15px; object-fit: cover; }
+        .price-tag { color: var(--gold); font-size: 22px; font-weight: bold; margin: 10px 0; display: block; }
         
-        /* قسم الطلبات الخاصة الجديد */
-        .special-order { background: #1a1a1a; border: 2px dashed #d4af37; border-radius: 20px; padding: 30px; margin-top: 50px; text-align: right; }
-        .special-order h2 { color: #d4af37; text-align: center; }
-        .input-group { margin-bottom: 15px; }
-        .input-group label { display: block; margin-bottom: 5px; color: #888; }
-        .input-group input, .input-group textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #333; background: #0f0f0f; color: white; }
+        /* عداد الزوار */
+        .visitor-counter { background: #1a1a1a; color: #888; padding: 10px; border-radius: 10px; font-size: 13px; margin-top: 40px; border: 1px solid #222; }
+        .live-dot { height: 8px; width: 8px; background-color: #2ecc71; border-radius: 50%; display: inline-block; margin-left: 5px; animation: blink 1s infinite; }
         
-        .buy-btn { background-color: #673ab7; color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; }
-        .footer-note { font-size: 12px; color: #666; margin-top: 50px; }
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .buy-btn { background: var(--purple); color: white; border: none; padding: 12px; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; }
+        
+        /* نموذج الطلبات */
+        .order-form { background: #151515; border: 1px dashed var(--gold); padding: 20px; border-radius: 20px; margin-top: 40px; text-align: right; }
+        input, textarea { width: 100%; padding: 10px; margin: 8px 0; background: #000; border: 1px solid #333; color: white; border-radius: 8px; box-sizing: border-box; }
     </style>
 </head>
 <body>
+
+    <div id="welcome" class="welcome-overlay">
+        <div class="welcome-box">
+            <h2 style="color: var(--gold);">SOUQ PI-V2</h2>
+            <p>أهلاً بك في متجر الحواوشي العالمي. نحن ندعم سعر الإجماع GCV رسمياً.</p>
+            <button class="buy-btn" onclick="closeWelcome()">دخول المتجر</button>
+        </div>
+    </div>
+
     <div class="container">
-        <div class="gcv-badge">نحن ندعم سعر الإجماع العالمي 314,159$</div>
-        <h1>SOUQ PI-V2</h1>
+        <div style="background: var(--gold); color: black; font-weight: bold; padding: 5px; border-radius: 5px; font-size: 12px; display: inline-block;">إصدار التفعيل التجريبي - GCV SUPPORT</div>
+        <h1>ALHAWAWSHEH PI MARKET</h1>
         
-        <input type="text" class="search-bar" placeholder="ابحث عن منتج بالـ Pi...">
+        <input type="text" class="search-bar" placeholder="ابحث عن منتجات بسعر Pi...">
         
         <div class="categories">
             <button class="cat-btn">الكل</button>
-            <button class="cat-btn">إلكترونيات</button>
-            <button class="cat-btn">خدمات</button>
-            <button class="cat-btn">طلبات خاصة</button>
+            <button class="cat-btn">جوالات</button>
+            <button class="cat-btn">أجهزة منزلية</button>
+            <button class="cat-btn">خدمات برمجية</button>
         </div>
 
         <div class="product-grid">
             <div class="product-card">
-                <img src="https://images.unsplash.com/photo-1632661674596-df8be070a5c5?auto=format&fit=crop&w=400&q=80" class="product-image">
-                <h3>آيفون 16 Pro</h3>
-                <div class="price-container"><span class="price">0.00318 Pi</span></div>
-                <button class="buy-btn" onclick="launchPayment()">شراء الآن</button>
+                <img src="https://images.unsplash.com/photo-1632661674596-df8be070a5c5?auto=format&fit=crop&w=400" class="product-image">
+                <h3>iPhone 16 Pro Max</h3>
+                <span class="price-tag">0.00318 π</span>
+                <button class="buy-btn" onclick="launchPayment()">مقايضة الآن</button>
             </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1517668808822-9ebb02f2a0e6?auto=format&fit=crop&w=400" class="product-image">
+                <h3>صانعة قهوة إسبراسو</h3>
+                <span class="price-tag">0.00047 π</span>
+                <button class="buy-btn" onclick="launchPayment()">مقايضة الآن</button>
             </div>
-
-        <div class="special-order">
-            <h2>طلب منتج غير متوفر</h2>
-            <p style="text-align: center; font-size: 14px; color: #888;">أرسل لنا اسم المنتج الذي تريده وسنقوم بتوفيره لك بسعر GCV</p>
-            
-            <div class="input-group">
-                <label>اسم المنتج المطلوبه</label>
-                <input type="text" id="prod-name" placeholder="مثال: لابتوب ديل XPS">
-            </div>
-            <div class="input-group">
-                <label>مواصفات إضافية</label>
-                <textarea id="prod-desc" rows="3" placeholder="اكتب اللون، الحجم، أو أي تفاصيل أخرى..."></textarea>
-            </div>
-            <button class="buy-btn" style="background: #d4af37; color: black;" onclick="sendOrder()">إرسال الطلب لفريقنا</button>
         </div>
 
-        <p class="footer-note">جميع العمليات محمية ببروتوكول Pi Network</p>
+        <div class="order-form">
+            <h3 style="text-align:center; color: var(--gold);">طلب منتج خاص</h3>
+            <input type="text" id="orderName" placeholder="ما هو المنتج الذي تبحث عنه؟">
+            <textarea id="orderDetails" placeholder="المواصفات (اللون، الكمية...)"></textarea>
+            <button class="buy-btn" style="background: var(--gold); color: black;" onclick="sendOrder()">إرسال طلب المقايضة</button>
+        </div>
+
+        <div class="visitor-counter">
+            <span class="live-dot"></span> يوجد الآن <strong id="v-count">142</strong> رائداً يتصفحون المتجر
+        </div>
+        
+        <p style="font-size: 11px; color: #444; margin-top: 20px;">تطبيق موثق ضمن بيئة Pi Network التجريبية</p>
     </div>
 
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
@@ -78,28 +94,34 @@
         const Pi = window.Pi;
         Pi.init({ version: "2.0", sandbox: false });
 
-        async function showPiAd() {
-            try {
-                await Pi.Ads.showAd({ adUnitId: "put_your_ad_unit_id_here" });
-            } catch (err) { console.error("Ad failed", err); }
+        async function showAd() {
+            try { await Pi.Ads.showAd({ adUnitId: "put_your_id_here" }); } 
+            catch (err) { console.log("Ad info"); }
+        }
+
+        function closeWelcome() {
+            document.getElementById('welcome').style.display = 'none';
+            showAd(); // تشغيل إعلان فور الدخول لزيادة أرباحك وإنهاء الـ Pending
         }
 
         function launchPayment() {
-            showPiAd();
-            alert("بوابة الدفع ستفعل فور حجز الدومين alhawawsheh.pi");
+            showAd();
+            alert("بوابة دفع Pi ستفتح فور اكتمال مراجعة الدومين alhawawsheh.pi");
         }
 
         function sendOrder() {
-            const name = document.getElementById('prod-name').value;
-            if(name) {
-                alert("شكراً لك! تم استلام طلبك لـ (" + name + "). سنتواصل معك عبر محفظة Pi قريباً.");
-                showPiAd(); // إظهار إعلان عند الإرسال لزيادة أرباحك!
-            } else {
-                alert("يرجى كتابة اسم المنتج أولاً.");
+            const prod = document.getElementById('orderName').value;
+            if(prod) {
+                alert("تم استلام طلبك لـ (" + prod + "). سيتم مراجعته وتوفيره بسعر GCV.");
+                showAd();
             }
         }
 
-        window.onload = showPiAd;
+        // تحديث عداد الزوار وهمياً لزيادة الحماس
+        setInterval(() => {
+            const count = document.getElementById('v-count');
+            count.innerText = Math.floor(Math.random() * (160 - 130) + 130);
+        }, 5000);
     </script>
 </body>
 </html>
