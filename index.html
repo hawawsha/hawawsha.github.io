@@ -3,36 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUQ PI-V2 | سوق بي العربي</title>
+    <title>SOUQ PI-V2 | دعم سعر الإجماع GCV</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #1a1a1a; color: white; text-align: center; padding: 20px; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f0f; color: white; text-align: center; padding: 20px; }
+        .gcv-badge { background-color: #d4af37; color: black; padding: 5px 15px; border-radius: 20px; font-weight: bold; display: inline-block; margin-bottom: 20px; }
         .container { max-width: 800px; margin: auto; }
-        .product-card { background: #2d2d2d; border: 1px solid #d4af37; border-radius: 15px; padding: 20px; margin: 20px 0; }
-        .product-image { width: 100%; max-width: 200px; border-radius: 10px; }
-        .price { color: #d4af37; font-size: 24px; font-weight: bold; }
-        .buy-btn { background-color: #673ab7; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 18px; margin-top: 10px; }
-        .buy-btn:hover { background-color: #512da8; }
+        .product-card { background: #1e1e1e; border: 2px solid #d4af37; border-radius: 20px; padding: 25px; margin: 25px 0; transition: transform 0.3s; }
+        .product-card:hover { transform: scale(1.02); }
+        .product-image { width: 100%; max-width: 220px; border-radius: 15px; margin-bottom: 15px; }
+        .price-container { background: #2d2d2d; padding: 10px; border-radius: 10px; margin: 15px 0; }
+        .price { color: #d4af37; font-size: 28px; font-weight: bold; display: block; }
+        .usd-val { color: #888; font-size: 14px; }
+        .buy-btn { background-color: #673ab7; color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-size: 18px; font-weight: bold; width: 100%; }
+        .footer-note { font-size: 12px; color: #666; margin-top: 50px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>مرحباً بكم في SOUQ PI-V2</h1>
-        <p>بوابتك لتبادل المنتجات والخدمات الرقمية مقابل عملة Pi</p>
+        <div class="gcv-badge">نحن ندعم سعر الإجماع العالمي 314,159$</div>
+        <h1>SOUQ PI-V2</h1>
+        <p>متجركم الأول للمقايضة بسعر الإجماع</p>
 
         <div class="product-card">
             <img src="iphone.jpg" alt="iPhone" class="product-image">
-            <h2>هاتف ذكي حديث</h2>
-            <p>أفضل المواصفات متاح الآن للدفع عبر Pi</p>
-            <p class="price">150 Pi</p>
-            <button class="buy-btn">شراء الآن باستخدام Pi</button>
+            <h2>هاتف آيفون 16 Pro</h2>
+            <p>أحدث إصدار - متوفر للشحن الفوري</p>
+            <div class="price-container">
+                <span class="price">0.00318 Pi</span>
+                <span class="usd-val">يعادل 1,000$ بسعر GCV</span>
+            </div>
+            <button class="buy-btn" onclick="launchPayment()">شراء باستخدام Pi</button>
         </div>
 
         <div class="product-card">
-            <h2>خدمة تصميم شعار احترافي</h2>
-            <p>احصل على شعار مميز لمشروعك خلال 24 ساعة</p>
-            <p class="price">10 Pi</p>
-            <button class="buy-btn">طلب الخدمة</button>
+            <h2>استشارة برمجية (ساعة واحدة)</h2>
+            <p>تطوير تطبيقات ومواقع لشبكة Pi</p>
+            <div class="price-container">
+                <span class="price">0.00016 Pi</span>
+                <span class="usd-val">يعادل 50$ بسعر GCV</span>
+            </div>
+            <button class="buy-btn" onclick="launchPayment()">طلب الخدمة</button>
         </div>
+
+        <p class="footer-note">جميع المعاملات تتم عبر Pi Browser ومحمية ببروتوكول Pi Network</p>
     </div>
+
+    <script>
+        function launchPayment() {
+            alert("سيتم فتح بوابة دفع Pi الآمنة فور تفعيل الدومين alhawawsheh.pi");
+        }
+    </script>
 </body>
 </html>
