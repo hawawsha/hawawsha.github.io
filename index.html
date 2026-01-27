@@ -52,6 +52,27 @@
         function launchPayment() {
             alert("سيتم فتح بوابة دفع Pi الآمنة فور تفعيل الدومين alhawawsheh.pi");
         }
-    </script>
+   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+<script>
+    // تهيئة الـ SDK
+    const Pi = window.Pi;
+    Pi.init({ version: "2.0", sandbox: false });
+
+    // كود إظهار الإعلانات عند تحميل الصفحة
+    async function showPiAd() {
+        try {
+            const ad = await Pi.Ads.showAd({
+                adUnitId: "put_your_ad_unit_id_here" // سيتم تزويدك بهذا المعرف لاحقاً من لوحة تحكم الإعلانات
+            });
+            console.log("Ad displayed successfully");
+        } catch (err) {
+            console.error("Ad failed to load", err);
+        }
+    }
+    
+    // تشغيل الإعلان تلقائياً
+    showPiAd();
+</script>
+
 </body>
 </html>
