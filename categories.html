@@ -5,62 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أقسام سوق باي الأردن</title>
     <style>
-        body { background-color: #310d5a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 20px; }
-        h1 { color: #ffca28; }
+        body { background-color: #310d5a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 20px; margin: 0; }
+        .header { margin-bottom: 30px; }
+        h1 { color: #ffca28; margin-bottom: 5px; }
+        
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(2, 1fr); /* عرض قسمين في كل صف للهواتف */
             gap: 15px;
-            max-width: 800px;
+            max-width: 600px;
             margin: 20px auto;
+            padding: 10px;
         }
+
         .cat-card {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #ffca28;
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #ffca28;
+            padding: 25px 10px;
             border-radius: 20px;
             text-decoration: none;
             color: white;
             transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .cat-card:hover { background: #ffca28; color: #310d5a; transform: translateY(-5px); }
-        .cat-icon { font-size: 2.5em; display: block; margin-bottom: 10px; }
+
+        .cat-card:hover {
+            background: #ffca28;
+            color: #310d5a;
+            transform: translateY(-5px);
+        }
+
+        .cat-icon { font-size: 3em; margin-bottom: 10px; }
         .cat-name { font-weight: bold; font-size: 1.1em; }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 30px;
+            color: #ffca28;
+            text-decoration: none;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-    <h1>🗂️ أقسام المتجر</h1>
-    <p>اختر القسم لتصفح منتجات المقايضة المستقبلية</p>
+    <div class="header">
+        <h1>🗂️ تصنيفات المقايضة</h1>
+        <p>جميع الأقسام تعتمد سعر الإجماع GCV</p>
+    </div>
 
     <div class="categories-grid">
         <a href="jordan-pages.html" class="cat-card">
             <span class="cat-icon">📱</span>
-            <span class="cat-name">الأجهزة والخلويات</span>
+            <span class="cat-name">الخلويات</span>
         </a>
 
-        <a href="#" class="cat-card">
+        <a href="electronics.html" class="cat-card">
             <span class="cat-icon">💻</span>
             <span class="cat-name">الإلكترونيات</span>
         </a>
 
-        <a href="#" class="cat-card">
+        <a href="cars.html" class="cat-card">
             <span class="cat-icon">🚗</span>
             <span class="cat-name">السيارات</span>
         </a>
 
-        <a href="#" class="cat-card">
+        <a href="home.html" class="cat-card">
             <span class="cat-icon">🏠</span>
-            <span class="cat-name">العقارات</span>
+            <span class="cat-name">المنزل</span>
         </a>
 
-        <a href="#" class="cat-card">
+        <a href="fashion.html" class="cat-card">
             <span class="cat-icon">👔</span>
             <span class="cat-name">الموضة</span>
         </a>
+
+        <a href="real-estate.html" class="cat-card">
+            <span class="cat-icon">🏢</span>
+            <span class="cat-name">العقارات</span>
+        </a>
     </div>
 
-    <a href="index.html" style="color: #ffca28; text-decoration: none;">⬅️ العودة للرئيسية</a>
+    <a href="index.html" class="btn-back">⬅️ العودة للرئيسية</a>
 
 </body>
 </html>
