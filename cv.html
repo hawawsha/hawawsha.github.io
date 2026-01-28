@@ -22,14 +22,16 @@
             background: rgba(255, 255, 255, 0.03);
         }
         .profile-img {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             border: 3px solid #ffca28;
             object-fit: cover;
             margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(255, 202, 40, 0.3);
         }
         h2 { color: #ffca28; margin: 10px 0; }
+        
         .info-box {
             background: rgba(255, 255, 255, 0.1);
             margin: 10px 0;
@@ -37,9 +39,9 @@
             border-radius: 15px;
             text-align: right;
             border-right: 5px solid #ffca28;
+            font-size: 0.95em;
         }
 
-        /* تنسيق المعرض المصلح لمنع التداخل */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -52,26 +54,21 @@
             overflow: hidden;
             border: 1px solid rgba(255,202,40,0.3);
             display: flex;
-            flex-direction: column; /* جعل العناصر تحت بعضها لمنع التداخل */
-        }
-        .project-title {
-            font-size: 0.85em;
-            font-weight: bold;
-            padding: 5px;
-            color: #ffca28;
-            background: rgba(0,0,0,0.2);
+            flex-direction: column;
         }
         .gallery-item img {
             width: 100%;
             height: 100px;
             object-fit: cover;
             display: block;
+            background: #4a148c; 
         }
-        .gallery-item p {
-            font-size: 0.75em;
-            padding: 8px;
-            margin: 0;
+        .project-desc {
+            font-size: 0.8em;
+            padding: 10px 5px;
             background: #1a0633;
+            color: #ffca28;
+            font-weight: bold;
         }
 
         .btn-back {
@@ -90,32 +87,31 @@
 
     <div class="cv-card">
         <img src="my-photo.jpg" alt="مطور سوق باي الأردن" class="profile-img">
+        
         <h2>مطور سوق باي الأردن</h2>
-        <div class="info-box">📍 <strong>الموقع:</strong> عمان، الأردن</div>
-        <div class="info-box">🚀 <strong>التخصص:</strong> بناء وإدارة المتاجر الرقمية.</div>
+        <p style="font-size: 0.9em; opacity: 0.8;">🛡️ رائد وموثق في شبكة Pi Network</p>
+
+        <div class="info-box">📍 <strong>النطاق:</strong> المملكة الأردنية الهاشمية</div>
+        <div class="info-box">🚀 <strong>التخصص:</strong> بناء وإدارة المتاجر الرقمية للرواد الأردنيين.</div>
 
         <h3 style="color: #ffca28; margin-top: 25px;">📸 معرض المشاريع والأعمال</h3>
         
         <div class="gallery-grid">
             <div class="gallery-item">
-                <div class="project-title">مشروع 1</div>
                 <img src="work1.jpg" alt="مشروع 1">
-                <p>واجهة المتجر الأول</p>
+                <div class="project-desc">واجهة المتجر الأول</div>
             </div>
             <div class="gallery-item">
-                <div class="project-title">مشروع 2</div>
                 <img src="work2.jpg" alt="مشروع 2">
-                <p>نظام الدفع بالباي</p>
+                <div class="project-desc">نظام الدفع بالباي</div>
             </div>
             <div class="gallery-item">
-                <div class="project-title">مشروع 3</div>
                 <img src="work3.jpg" alt="مشروع 3">
-                <p>توثيق الحسابات</p>
+                <div class="project-desc">توثيق الحسابات</div>
             </div>
             <div class="gallery-item">
-                <div class="project-title">مشروع 4</div>
                 <img src="work4.jpg" alt="مشروع 4">
-                <p>دعم الرواد</p>
+                <div class="project-desc">دعم الرواد النشامى</div>
             </div>
         </div>
 
