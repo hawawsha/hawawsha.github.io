@@ -3,70 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض السيارات | سوق باي الأردن</title>
+    <title>معرض السيارات الفاخرة | سوق باي الأردن</title>
     <style>
-        body { background-color: #310d5a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 20px; }
-        h1 { color: #ffca28; margin-bottom: 30px; }
-        
-        .car-container {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            align-items: center;
-        }
-
-        .car-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid #ffca28;
-            border-radius: 25px;
-            padding: 20px;
-            max-width: 500px;
-            width: 100%;
-            transition: 0.3s;
-        }
-
-        .car-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-
-        .car-card img {
-            width: 100%;
-            height: auto;
-            max-height: 300px;
-            border-radius: 15px;
-            object-fit: contain;
-            background: #fff;
-            margin-bottom: 15px;
-        }
-
-        .car-title { color: #ffca28; font-size: 1.8em; margin: 10px 0; }
-        .price-tag { font-size: 2.2em; color: #2ecc71; font-weight: bold; margin: 10px 0; }
-        
-        .mainnet-btn {
-            background: #6d1eaf;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
             color: white;
-            border: 2px solid #ffca28;
-            padding: 15px;
-            border-radius: 15px;
-            width: 100%;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1.1em;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
         }
-
-        .status-text { color: #ffca28; font-size: 0.85em; margin-top: 10px; display: block; }
-        
-        .btn-back { display: inline-block; margin-top: 40px; color: #ffca28; text-decoration: none; font-weight: bold; }
+        .header {
+            padding: 30px;
+            background: linear-gradient(135deg, #6a1b9a, #ffd700);
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 10px;
+        }
+        .card {
+            background-color: #2d2d2d;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #444;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd700;
+        }
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .price {
+            color: #ffd700;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .btn-buy {
+            background-color: #6a1b9a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 
-    <h1>🚗 معرض السيارات الكهربائية (GCV)</h1>
-    <p>جميع المقايضات ستفعل آلياً بعد انطلاق الشبكة المفتوحة</p>
+    <div class="header">
+        <h1>معرض السيارات الكهربائية الفاخرة</h1>
+        <p>اشتري سيارة أحلامك الآن باستخدام عملة Pi</p>
+    </div>
 
-    <div class="car-container">
-        
-        <div class="car-card">
-            <img src="tesla1.jpg" alt="Tesla Model S Plaid">
-            <div class="car-title">تسلا موديل S بليد 2026</div>
-            <div class="price-tag">Pi 0.350</div>
-            <button onclick="showNote()" class="mainnet-btn">⚡ مقايضة عبر المحفظة</button>
-            <span class="status-text">
+    <div class="container">
+        <div class="card">
+            <img src="images/tesla1.jpg" alt="Tesla Model S">
+            <div class="card-content">
+                <h3>Tesla Model S 2026</h3>
+                <p class="price">Pi 0.350</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/tesla2.jpg" alt="Tesla Model X">
+            <div class="card-content">
+                <h3>Tesla Model X 2026</h3>
+                <p class="price">Pi 0.382</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/tesla3.jpg" alt="Tesla Cybertruck">
+            <div class="card-content">
+                <h3>Tesla Cybertruck</h3>
+                <p class="price">Pi 0.254</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/mercedes1.jpg" alt="Mercedes EQS">
+            <div class="card-content">
+                <h3>Mercedes EQS Sedan</h3>
+                <p class="price">Pi 0.318</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/mercedes2.jpg" alt="Mercedes SUV">
+            <div class="card-content">
+                <h3>Mercedes EQS SUV</h3>
+                <p class="price">Pi 0.334</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/mercedes3.jpg" alt="Mercedes EQE">
+            <div class="card-content">
+                <h3>Mercedes EQE Sedan</h3>
+                <p class="price">Pi 0.322</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/lucid1.jpg" alt="Lucid Air">
+            <div class="card-content">
+                <h3>Lucid Air Grand Touring</h3>
+                <p class="price">Pi 0.400</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/lucid2.jpg" alt="Lucid Air Pure">
+            <div class="card-content">
+                <h3>Lucid Air Pure</h3>
+                <p class="price">Pi 0.380</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="images/lucid3.jpg" alt="Lucid Dream">
+            <div class="card-content">
+                <h3>Lucid Air Dream Edition</h3>
+                <p class="price">Pi 0.395</p>
+                <a href="#" class="btn-buy">شراء الآن</a>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <a href="index.html" style="color: #ffd700; text-decoration: none;">← العودة للصفحة الرئيسية</a>
+
+</body>
+</html>
