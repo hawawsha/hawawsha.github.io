@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر سوق باي الأردن | GCV</title>
+    <title>متجر سوق باي الأردن</title>
     <style>
         body {
             background-color: #310d5a;
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            margin: 0;
             padding: 20px;
         }
         .header { margin-bottom: 30px; }
         h1 { color: #ffca28; }
-        .gcv-info { font-size: 0.85em; opacity: 0.9; color: #ffca28; margin-bottom: 20px; display: block; }
-
         .product-card {
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid #ffca28;
@@ -28,28 +25,20 @@
         .product-card img {
             width: 100%;
             border-radius: 15px;
-            margin-bottom: 15px;
+            height: 250px;
+            object-fit: cover;
         }
-        .product-name { color: #ffca28; font-size: 1.4em; margin: 10px 0; }
-        .price { font-size: 2em; color: #2ecc71; font-weight: bold; margin: 5px 0; }
-        .price-sub { font-size: 0.7em; opacity: 0.8; margin-bottom: 15px; display: block; }
-
+        .price { font-size: 2em; color: #2ecc71; font-weight: bold; margin: 10px 0; }
         .buy-btn {
             display: block;
-            background: #ffca28;
-            color: #310d5a;
+            background: #25d366; /* لون الواتساب الأخضر */
+            color: white;
             text-decoration: none;
             padding: 15px;
             border-radius: 15px;
             font-weight: bold;
             font-size: 1.1em;
-        }
-        .btn-back {
-            display: inline-block;
-            margin-top: 20px;
-            color: #ffca28;
-            text-decoration: none;
-            font-size: 0.9em;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -57,26 +46,28 @@
 
     <div class="header">
         <h1>🇯🇴 متجر سوق باي الأردن</h1>
-        <span class="gcv-info">ندعم سعر الإجماع العالمي $314,159</span>
+        <p style="color: #ffca28;">سعر الإجماع العالمي $314,159</p>
     </div>
 
     <div class="product-card">
-        <img src="iphone.jpg" alt="آيفون 15 برو ماكس">
-        <div class="product-name">آيفون 15 برو ماكس</div>
+        <img src="iphone.jpg" alt="آيفون">
+        <div style="color: #ffca28; font-size: 1.4em; margin-top:10px;">آيفون 15 برو ماكس</div>
         <div class="price">Pi 0.0038</div>
-        <span class="price-sub">بناءً على سعر الإجماع العالمي</span>
-        <a href="https://wa.me/962778555522" class="buy-btn">اطلب المقايضة الآن</a>
+        <a href="https://wa.me/962778555522?text=أرغب في مقايضة الآيفون بسعر الإجماع" class="buy-btn">
+            💬 اطلب عبر واتساب
+        </a>
     </div>
 
     <div class="product-card">
-        <img src="product2.jpg" alt="ساعة ذكية فاخرة">
-        <div class="product-name">ساعة ذكية فاخرة</div>
+        <img src="product2.jpg" alt="ساعة">
+        <div style="color: #ffca28; font-size: 1.4em; margin-top:10px;">ساعة ذكية فاخرة</div>
         <div class="price">Pi 0.0012</div>
-        <span class="price-sub">بناءً على سعر الإجماع العالمي</span>
-        <a href="https://wa.me/962778555522" class="buy-btn">اطلب المقايضة الآن</a>
+        <a href="https://wa.me/962778555522?text=أرغب في مقايضة الساعة بسعر الإجماع" class="buy-btn">
+            💬 اطلب عبر واتساب
+        </a>
     </div>
 
-    <a href="index.html" class="btn-back">⬅️ العودة للرئيسية</a>
+    <a href="index.html" style="color: #ffca28; text-decoration: none;">⬅️ العودة للرئيسية</a>
 
 </body>
 </html>
