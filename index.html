@@ -24,10 +24,13 @@
             display: flex;
             flex-direction: column;
         }
+
+        /* العنوان العلوي */
         .header-section { margin-bottom: 25px; }
         h1 { color: #ffca28; margin-bottom: 5px; font-size: 1.8em; }
         .sub-title { opacity: 0.8; font-size: 0.9em; margin-top: 0; }
 
+        /* الأزرار */
         .btn {
             display: block;
             text-decoration: none;
@@ -39,7 +42,8 @@
         }
         .btn-gold { background: #ffca28; color: #310d5a; padding: 18px; font-size: 1.2em; }
         .btn-outline { background: rgba(255, 255, 255, 0.05); color: white; padding: 15px; font-size: 1.1em; }
-        
+        .btn:hover { transform: scale(1.02); }
+
         /* العداد في الأسفل */
         .counter-box {
             border: 2px solid #ffca28;
@@ -52,20 +56,24 @@
         .counter-number { font-size: 3em; font-weight: bold; color: #ffca28; display: block; }
         .counter-text { font-size: 0.9em; opacity: 0.9; }
 
-        /* زر التواصل والمشاركة عبر رقمك */
+        /* زر واتساب المطور */
         .share-btn {
             background-color: #2ecc71;
             color: white;
-            padding: 8px 20px;
+            padding: 12px 25px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 0.85em;
+            font-size: 0.95em;
             font-weight: bold;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             margin-bottom: 10px;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
         }
+        .share-btn:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
@@ -89,21 +97,35 @@
         </div>
 
         <div>
-            <a href="https://wa.me/962778555522?text=أهلاً بك في سوق باي الأردن. تفضل بزيارة موقعنا: https://alhawawsheh7611.pinet.com" class="share-btn">
+            <button onclick="openWhatsApp()" class="share-btn">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326z"/>
+                </svg>
                 <span>تواصل عبر واتساب</span>
-            </a>
+            </button>
             <div style="font-size: 0.7em; opacity: 0.4; margin-top: 5px;">SOUQ PI JORDAN © 2026</div>
         </div>
     </div>
 
     <script>
+        // دالة فتح واتساب لضمان الاستجابة داخل Pi Browser
+        function openWhatsApp() {
+            const phone = "962778555522";
+            const text = "أهلاً بك في سوق باي الأردن. تفضل بزيارة موقعنا: https://alhawawsheh7611.pinet.com";
+            const waUrl = "https://wa.me/" + phone + "?text=" + encodeURIComponent(text);
+            
+            // محاولة الفتح المباشر
+            window.location.href = waUrl;
+        }
+
+        // نظام العداد المتغير كل 10 ثواني
         let currentCount = 246;
         const counterElement = document.getElementById('liveCounter');
         setInterval(() => {
             const change = Math.random() > 0.5 ? 1 : -1;
             currentCount += change;
             if(currentCount < 240) currentCount = 240;
-            counterElement.innerText = currentCount;
+            if(counterElement) counterElement.innerText = currentCount;
         }, 10000);
     </script>
 
