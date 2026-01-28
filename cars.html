@@ -3,100 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض السيارات | سوق باي الأردن</title>
+    <title>معرض السيارات الكهربائية | سوق باي الأردن</title>
     <style>
-        body { background-color: #310d5a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 20px; }
-        h1 { color: #ffca28; margin-bottom: 30px; }
-        
+        body {
+            background-color: #310d5a;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            line-height: 1.6;
+        }
+        h1 { color: #ffca28; margin-bottom: 10px; font-size: 2.5em; }
+        p { margin-bottom: 30px; font-size: 1.1em; color: rgba(255, 255, 255, 0.8); }
+
         .car-container {
             display: flex;
             flex-direction: column;
             gap: 30px;
             align-items: center;
+            max-width: 600px; /* لتبدو البطاقات متناسقة على الموبايل */
+            margin: 0 auto;
         }
 
         .car-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.07);
             border: 2px solid #ffca28;
             border-radius: 25px;
-            padding: 20px;
-            max-width: 500px;
+            padding: 25px;
             width: 100%;
             transition: 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            text-align: right; /* لجعل النصوص على اليمين */
         }
 
-        .car-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .car-card:hover { transform: translateY(-7px); box-shadow: 0 12px 25px rgba(0,0,0,0.4); }
 
         .car-card img {
             width: 100%;
             height: auto;
             max-height: 300px;
-            border-radius: 15px;
-            object-fit: contain;
+            border-radius: 18px;
+            object-fit: cover; /* للحفاظ على نسب الصورة */
             background: #fff;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
 
-        .car-title { color: #ffca28; font-size: 1.8em; margin: 10px 0; }
-        .price-tag { font-size: 2.2em; color: #2ecc71; font-weight: bold; margin: 10px 0; }
+        .car-title { color: #ffca28; font-size: 1.9em; margin-bottom: 8px; font-weight: bold; }
+        .car-description { font-size: 0.95em; color: rgba(255, 255, 255, 0.7); margin-bottom: 15px; }
+        .price-tag { font-size: 2.3em; color: #2ecc71; font-weight: bold; margin-bottom: 20px; }
         
         .mainnet-btn {
             background: #6d1eaf;
             color: white;
             border: 2px solid #ffca28;
-            padding: 15px;
+            padding: 18px;
             border-radius: 15px;
             width: 100%;
             font-weight: bold;
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1.2em;
+            transition: 0.3s;
         }
+        .mainnet-btn:hover { background: #ffca28; color: #310d5a; }
 
-        .status-text { color: #ffca28; font-size: 0.85em; margin-top: 10px; display: block; }
+        .status-text {
+            color: rgba(255, 202, 40, 0.8);
+            font-size: 0.9em;
+            margin-top: 15px;
+            display: block;
+            text-align: center;
+        }
         
-        .btn-back { display: inline-block; margin-top: 40px; color: #ffca28; text-decoration: none; font-weight: bold; }
+        .btn-back {
+            display: inline-block;
+            margin-top: 50px;
+            color: #ffca28;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border: 1px solid #ffca28;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        .btn-back:hover {
+            background: rgba(255, 202, 40, 0.1);
+        }
     </style>
 </head>
 <body>
 
     <h1>🚗 معرض السيارات الكهربائية (GCV)</h1>
-    <p>جميع المقايضات ستفعل آلياً بعد انطلاق الشبكة المفتوحة</p>
+    <p>تصفح أحدث موديلات السيارات الكهربائية الفاخرة المتاحة للمقايضة بعد الشبكة المفتوحة</p>
 
     <div class="car-container">
-        
         <div class="car-card">
-            <img src="tesla.jpg" alt="Tesla Model S">
-            <div class="car-title">تسلا موديل S 2026</div>
+            <img src="tesla1.jpg" alt="Tesla Model S 2026">
+            <div class="car-title">تسلا موديل S 2026 (النسخة الفاخرة)</div>
+            <div class="car-description">أداء لا مثيل له وفخامة عصرية. مثالية للمقايضات الكبرى.</div>
             <div class="price-tag">Pi 0.286</div>
-            <button onclick="showNote()" class="mainnet-btn">⚡ مقايضة عبر المحفظة</button>
-            <span class="status-text">⚠️ متاح عند الافتتاح الرسمي للشبكة</span>
+            <button onclick="showMainnetAlert()" class="mainnet-btn">⚡ مقايضة عبر محفظة Pi</button>
+            <span class="status-text">⚠️ سيتم تفعيل الدفع فور انطلاق الشبكة المفتوحة</span>
         </div>
 
         <div class="car-card">
-            <img src="lucid.jpg" alt="Lucid Air">
-            <div class="car-title">لوسيد أير (فخامة فائقة)</div>
-            <div class="price-tag">Pi 0.318</div>
-            <button onclick="showNote()" class="mainnet-btn">⚡ مقايضة عبر المحفظة</button>
-            <span class="status-text">⚠️ متاح عند الافتتاح الرسمي للشبكة</span>
+            <img src="tesla2.jpg" alt="Tesla Model X 2026">
+            <div class="car-title">تسلا موديل X 2026 (الدفع الرباعي)</div>
+            <div class="car-description">سيارة عائلية رياضية متعددة الاستخدامات، بتصميم أبواب Falcon Wings.</div>
+            <div class="price-tag">Pi 0.254</div>
+            <button onclick="showMainnetAlert()" class="mainnet-btn">⚡ مقايضة عبر محفظة Pi</button>
+            <span class="status-text">⚠️ سيتم تفعيل الدفع فور انطلاق الشبكة المفتوحة</span>
         </div>
 
         <div class="car-card">
-            <img src="mercedes.jpg" alt="Mercedes EQS">
-            <div class="car-title">مرسيدس EQS الكهربائية</div>
+            <img src="tesla3.jpg" alt="Tesla Cybertruck 2026">
+            <div class="car-title">تسلا سايبرتراك 2026 (بيك اب المستقبل)</div>
+            <div class="car-description">تصميم ثوري، قوة هائلة، ومتانة لا تضاهى. لرواد الأعمال والمغامرين.</div>
+            <div class="price-tag">Pi 0.191</div>
+            <button onclick="showMainnetAlert()" class="mainnet-btn">⚡ مقايضة عبر محفظة Pi</button>
+            <span class="status-text">⚠️ سيتم تفعيل الدفع فور انطلاق الشبكة المفتوحة</span>
+        </div>
+
+        <div class="car-card">
+            <img src="mercedes1.jpg" alt="Mercedes-Benz EQS 450+ 2026">
+            <div class="car-title">مرسيدس-بنز EQS 450+ 2026</div>
+            <div class="car-description">قمة الفخامة الألمانية والتكنولوجيا الكهربائية المتطورة.</div>
             <div class="price-tag">Pi 0.350</div>
-            <button onclick="showNote()" class="mainnet-btn">⚡ مقايضة عبر المحفظة</button>
-            <span class="status-text">⚠️ متاح عند الافتتاح الرسمي للشبكة</span>
+            <button onclick="showMainnetAlert()" class="mainnet-btn">⚡ مقايضة عبر محفظة Pi</button>
+            <span class="status-text">⚠️ سيتم تفعيل الدفع فور انطلاق الشبكة المفتوحة</span>
         </div>
 
-    </div>
+        <div class="car-card">
+            <img src="mercedes2.jpg" alt="Mercedes-Benz EQE Sedan 2026">
+            <div class="car-title">مرسيدس-بنز EQE سيدان 2026</div>
+            <div class="car-description">تصميم رياضي أنيق مع تجربة قيادة كهربائية ديناميكية ومريحة.</div>
+            <div class="price-tag">Pi 0.222</div>
+            <button onclick="showMainnetAlert()" class="mainnet-btn">⚡ مقايضة عبر محفظة Pi</button>
+            <span class="status-text">⚠️ سيتم تفعيل الدفع فور انطلاق الشبكة المفتوحة</span>
+        </div>
 
-    <script>
-        function showNote() {
-            alert("🔒 التجهيزات البرمجية مكتملة. زر الدفع سيعمل آلياً فور انطلاق الشبكة المفتوحة (Open Mainnet) لضمان أمان عملاتك.");
-        }
-    </script>
+        <div class="car-card">
+            <img src="mercedes3.jpg" alt="Mercedes-Benz EQC SUV 2026">
+            <div class="car-title">مرسيدس-بنز EQC SUV 2026</div>
+            <div class="car-description">مركبة متعددة الاستخدامات تجمع بين القوة والأناقة، مثالية للعائلة.</div>
+            <div class="price-tag">Pi 0.198</div>
+            <button onclick="showMainnetAlert()" class="mainnet-btn">⚡ مقايضة عبر محفظة Pi</button>
+            <span class="status-text">⚠️ سيتم تفعيل الدفع فور انطلاق الشبكة المفتوحة</span>
+        </div>
 
-    <a href="categories.html" class="btn-back">⬅️ العودة إلى الأقسام</a>
-
-</body>
-</html>
+        <div class="car-card">
+            <img src="lucid1.jpg" alt="Lucid Air Dream Edition">
+            <div class="car-title">لوسيد أير دريم إيديشن (إصدار الأحلام)</div>
+            <div class="car-description">سيارة فاخرة بأداء استثنائي ومدى قيادة هو
