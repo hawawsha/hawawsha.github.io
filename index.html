@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOUQ PI JORDAN | سوق باي الأردن</title>
     <style>
+        /* التنسيق العام للتطبيق */
         body {
             background-color: #310d5a; /* اللون الأرجواني الملكي */
             color: white;
@@ -12,47 +13,68 @@
             text-align: center;
             margin: 0;
             padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
         .container {
-            max-width: 600px;
-            margin: auto;
+            max-width: 500px;
+            width: 100%;
         }
         .header-box {
-            border: 2px solid #ffca28;
+            border: 2px solid #ffca28; /* إطار ذهبي */
             border-radius: 20px;
             padding: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
-        h1 { color: #ffca28; }
-        .counter { font-size: 2.5em; font-weight: bold; color: #ffca28; margin: 10px 0; }
+        h1 { color: #ffca28; margin: 10px 0; font-size: 1.8em; }
+        .counter { font-size: 2.8em; font-weight: bold; color: #ffca28; margin: 5px 0; }
         
         /* تصميم الأزرار */
-        .main-btn {
+        .btn {
             display: block;
-            background: #ffca28;
-            color: #310d5a;
-            padding: 15px;
-            margin: 10px 0;
             text-decoration: none;
             border-radius: 12px;
             font-weight: bold;
-            font-size: 1.1em;
             transition: 0.3s;
+            margin-bottom: 12px;
+        }
+        .main-btn {
+            background: #ffca28;
+            color: #310d5a;
+            padding: 18px;
+            font-size: 1.2em;
         }
         .main-btn:hover { background: #ffd54f; transform: scale(1.02); }
+        
         .secondary-btn {
-            display: block;
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            padding: 12px;
-            margin: 10px 0;
-            text-decoration: none;
-            border-radius: 12px;
+            padding: 14px;
             border: 1px solid #ffca28;
-            transition: 0.3s;
+            font-size: 1em;
         }
         .secondary-btn:hover { background: rgba(255, 255, 255, 0.2); }
+
+        /* زر المشاركة الصغير جداً */
+        .share-btn {
+            background-color: #25d366;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 0.75em;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 20px;
+            opacity: 0.9;
+        }
+        .share-btn:hover { opacity: 1; transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -60,27 +82,33 @@
     <div class="container">
         <div class="header-box">
             <h1>SOUQ PI JORDAN 🇯🇴</h1>
-            <p>سوق باي الأردن - نحو الشبكة المفتوحة</p>
+            <p style="margin: 0; opacity: 0.8;">سوق باي الأردن - الإصدار الثاني</p>
             <div class="counter" id="piCounter">245</div>
-            <p>رائد نشط حالياً في السوق</p>
+            <p style="margin: 0; font-size: 0.9em;">رائد متصل الآن</p>
         </div>
 
-        <a href="jordan-pages.html" class="main-btn">🇯🇴 صفحات الأردن (المتجر)</a>
+        <a href="jordan-pages.html" class="btn main-btn">🇯🇴 صفحات الأردن (المتجر)</a>
         
-        <a href="cv.html" class="secondary-btn">📄 السيرة الذاتية (المطور)</a>
+        <a href="cv.html" class="btn secondary-btn">📄 السيرة الذاتية (المطور)</a>
         
-        <a href="projects.html" class="secondary-btn">🏗️ مشاريعنا المستقبلية</a>
+        <a href="projects.html" class="btn secondary-btn">🏗️ مشاريعنا المستقبلية</a>
         
-        <a href="blog.html" class="secondary-btn">📝 مدونة الرواد الأردنيين</a>
+        <a href="blog.html" class="btn secondary-btn">📝 مدونة الرواد</a>
 
-        <p style="margin-top: 30px; opacity: 0.6; font-size: 0.8em;">نسخة مطورة V2 - موثقة في Pi Browser</p>
+        <a href="https://api.whatsapp.com/send?text=يا هلا! جرب تطبيق سوق باي الأردن الجديد، متجر متكامل للرواد: https://eh7611.pinet.com" class="share-btn">
+            <span>Share</span>
+            <svg width="12" height="12" fill="white" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217s.231.001.332.005c.101.004.242-.038.38.297.144.35.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.777 1.394.864.174.087.275.072.376-.043.101-.116.433-.506.548-.68.116-.174.231-.144.39-.087.158.058 1.011.477 1.184.564.173.087.289.129.332.202.043.073.043.423-.101.827z"/></svg>
+        </a>
+
+        <p style="margin-top: 20px; opacity: 0.5; font-size: 0.7em;">2026 © SOUQ PI JORDAN</p>
     </div>
 
     <script>
-        // كود تحريك العداد لإضافة حياة للتطبيق
+        // كود العداد الحي لجعل التطبيق يبدو نشطاً
         let count = 245;
         setInterval(() => {
-            count += Math.floor(Math.random() * 3);
+            // يزيد العداد بشكل عشوائي بسيط كل 5 ثوانٍ
+            count += Math.floor(Math.random() * 2);
             document.getElementById('piCounter').innerText = count;
         }, 5000);
     </script>
