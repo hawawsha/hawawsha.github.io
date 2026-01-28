@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>السيرة الذاتية - مطور سوق باي</title>
+    <title>السيرة الذاتية | مطور سوق باي الأردن</title>
     <style>
         body {
             background-color: #310d5a;
@@ -14,62 +14,116 @@
             padding: 20px;
         }
         .cv-card {
-            background: rgba(255, 255, 255, 0.1);
+            max-width: 450px;
+            margin: 10px auto;
             border: 2px solid #ffca28;
             border-radius: 25px;
-            padding: 30px;
-            max-width: 450px;
-            margin: 20px auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
         }
-        .profile-icon { font-size: 80px; margin-bottom: 10px; color: #3498db; }
-        .title { color: #ffca28; font-size: 1.6em; font-weight: bold; margin-bottom: 15px; }
-        .badge { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 25px; font-size: 1.1em; }
-        .info-item {
-            background: rgba(255, 255, 255, 0.08);
-            margin-bottom: 15px;
-            padding: 18px;
-            border-radius: 15px;
+        .profile-img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px solid #ffca28;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        h2 { color: #ffca28; margin: 10px 0; }
+        
+        .info-box {
+            background: rgba(255, 255, 255, 0.1);
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 12px;
             text-align: right;
-            border-right: 5px solid #ffca28;
-            font-size: 1.05em;
+            border-right: 4px solid #ffca28;
+            font-size: 0.95em;
         }
-        .back-btn {
+
+        /* تصميم معرض الصور */
+        .gallery-title {
+            color: #ffca28;
+            margin-top: 25px;
+            font-size: 1.2em;
+            border-bottom: 1px solid rgba(255,202,40,0.3);
+            padding-bottom: 10px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,202,40,0.2);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-item p {
+            font-size: 0.7em;
+            padding: 5px;
+            margin: 0;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 35px;
             background: #ffca28;
             color: #310d5a;
-            padding: 12px 35px;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 15px;
             font-weight: bold;
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 1.1em;
         }
     </style>
 </head>
 <body>
 
     <div class="cv-card">
-        <div class="profile-icon">👤</div>
-        <div class="title">مطور سوق باي الأردن</div>
+        <img src="my-photo.jpg" alt="مطور سوق باي الأردن" class="profile-img">
         
-        <div class="badge">
-            🛡️ <span>رائد وموثق في شبكة Pi Network</span>
+        <h2>مطور سوق باي الأردن</h2>
+        <p style="font-size: 0.85em; opacity: 0.8;">🛡️ رائد وموثق في شبكة Pi Network</p>
+
+        <div class="info-box">
+            📍 <strong>الموقع:</strong> عمان، الأردن
         </div>
 
-        <div class="info-item">
-            📍 <strong>الموقع:</strong> الأردن
+        <div class="info-box">
+            🚀 <strong>التخصص:</strong> بناء وإدارة المتاجر الرقمية.
         </div>
 
-        <div class="info-item">
-            🚀 <strong>التخصص:</strong> بناء وإدارة المتاجر الرقمية على شبكة Pi.
+        <h3 class="gallery-title">📸 معرض المشاريع والأعمال</h3>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="work1.jpg" alt="مشروع 1">
+                <p>واجهة المتجر الأول</p>
+            </div>
+            <div class="gallery-item">
+                <img src="work2.jpg" alt="مشروع 2">
+                <p>نظام الدفع بالباي</p>
+            </div>
+            <div class="gallery-item">
+                <img src="work3.jpg" alt="مشروع 3">
+                <p>توثيق الحسابات</p>
+            </div>
+            <div class="gallery-item">
+                <img src="work4.jpg" alt="مشروع 4">
+                <p>دعم الرواد</p>
+            </div>
         </div>
 
-        <div class="info-item">
-            💎 <strong>الرؤية:</strong> دعم سعر الإجماع العالمي 314,159$ وتسهيل المقايضة.
-        </div>
-
-        <a href="index.html" class="back-btn">العودة للرئيسية</a>
+        <a href="index.html" class="btn-back">العودة للرئيسية</a>
     </div>
 
 </body>
