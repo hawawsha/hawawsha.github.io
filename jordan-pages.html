@@ -6,7 +6,7 @@
     <title>سوق الأردن - الدفع والطلب</title>
     <style>
         body {
-            background-color: #4a148c; /* الأرجواني الملكي */
+            background-color: #4a148c; 
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
@@ -31,11 +31,9 @@
             font-weight: bold;
             width: 100%;
             font-size: 16px;
-            transition: 0.3s;
         }
-        .btn-pay:hover { background-color: #388e3c; }
 
-        /* نافذة التنبيه (المحفظة) */
+        /* نافذة التنبيه - المحاكاة */
         #wallet-modal {
             display: none;
             position: fixed;
@@ -62,15 +60,14 @@
             background: rgba(0,0,0,0.8);
             z-index: 999;
         }
-        .modal-header { color: #4a148c; font-weight: bold; margin-bottom: 15px; }
-        .modal-msg { background: #fff3e0; padding: 10px; border-right: 5px solid #ff9800; margin: 15px 0; font-size: 0.95em; }
-        .close-btn { background: #4a148c; color: white; padding: 10px 25px; border: none; border-radius: 8px; cursor: pointer; }
+        .modal-header { color: #4a148c; font-weight: bold; margin-bottom: 15px; font-size: 1.2em; }
+        .modal-msg { background: #fff3e0; padding: 15px; border-right: 5px solid #ff9800; margin: 15px 0; font-size: 1em; line-height: 1.5; }
+        .close-btn { background: #4a148c; color: white; padding: 10px 30px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
 
     <h1>سوق الأردن 🇯🇴</h1>
-    <p>اختر منتجك للمقايضة</p>
 
     <div class="product-card">
         <h3>آيفون 15 برومكس</h3>
@@ -88,7 +85,7 @@
             الدفع المباشر يتفعل عند الشبكة المفتوحة (Open Network).
         </div>
 
-        <p style="font-size: 0.9em;">حالياً، يمكنك إتمام المقايضة يدوياً مع البائع لضمان حقك.</p>
+        <p>حالياً، يمكنك إتمام المقايضة يدوياً مع البائع.</p>
         <button class="close-btn" onclick="closeWallet()">موافق</button>
     </div>
 
