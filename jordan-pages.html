@@ -3,99 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوق باي الأردن | GCV 314,159$</title>
+    <title>متجر سوق باي الأردن | GCV</title>
     <style>
         body {
             background-color: #310d5a;
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
             margin: 0;
             padding: 20px;
-            text-align: center;
         }
-        .header { margin-bottom: 30px; border-bottom: 2px solid #ffca28; padding-bottom: 15px; }
-        h1 { color: #ffca28; margin-bottom: 5px; }
-        .gcv-badge { background: #ffca28; color: #310d5a; padding: 5px 15px; border-radius: 50px; font-weight: bold; font-size: 0.9em; }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            max-width: 450px;
-            margin: 20px auto;
-        }
+        .header { margin-bottom: 30px; }
+        h1 { color: #ffca28; }
+        .gcv-info { font-size: 0.85em; opacity: 0.9; color: #ffca28; margin-bottom: 20px; display: block; }
 
         .product-card {
             background: rgba(255, 255, 255, 0.05);
             border: 2px solid #ffca28;
-            border-radius: 20px;
+            border-radius: 25px;
             padding: 20px;
-            position: relative;
+            max-width: 400px;
+            margin: 0 auto 25px auto;
         }
         .product-card img {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
             border-radius: 15px;
+            margin-bottom: 15px;
         }
-        .product-title { font-size: 1.3em; color: #ffca28; margin: 15px 0 5px 0; }
-        
-        /* تنسيق السعر بناءً على الإجماع */
-        .price-tag {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #2ecc71; /* لون أخضر للثقة */
-            margin: 10px 0;
-            display: block;
-        }
-        .price-label { font-size: 0.7em; opacity: 0.7; display: block; margin-top: -5px; }
+        .product-name { color: #ffca28; font-size: 1.4em; margin: 10px 0; }
+        .price { font-size: 2em; color: #2ecc71; font-weight: bold; margin: 5px 0; }
+        .price-sub { font-size: 0.7em; opacity: 0.8; margin-bottom: 15px; display: block; }
 
         .buy-btn {
             display: block;
             background: #ffca28;
             color: #310d5a;
             text-decoration: none;
-            padding: 12px;
-            border-radius: 12px;
+            padding: 15px;
+            border-radius: 15px;
             font-weight: bold;
-            margin-top: 15px;
+            font-size: 1.1em;
         }
-
         .btn-back {
             display: inline-block;
-            margin-top: 40px;
-            padding: 10px 30px;
+            margin-top: 20px;
             color: #ffca28;
             text-decoration: none;
-            border-radius: 10px;
+            font-size: 0.9em;
         }
     </style>
 </head>
 <body>
 
     <div class="header">
-        <h1>🇯🇴 متجر باي الأردن</h1>
-        <span class="gcv-badge">نحن ندعم سعر الإجماع: 314,159$</span>
+        <h1>🇯🇴 متجر سوق باي الأردن</h1>
+        <span class="gcv-info">ندعم سعر الإجماع العالمي $314,159</span>
     </div>
 
-    <div class="products-grid">
-        
-        <div class="product-card">
-            <img src="iphone.jpg" alt="آيفون">
-            <div class="product-title">آيفون 15 برو ماكس</div>
-            <span class="price-tag">0.0038 Pi</span>
-            <span class="price-label">بناءً على سعر الإجماع العالمي</span>
-            <a href="https://wa.me/962778555522" class="buy-btn">اطلب المقايضة الآن</a>
-        </div>
+    <div class="product-card">
+        <img src="iphone.jpg" alt="آيفون 15 برو ماكس">
+        <div class="product-name">آيفون 15 برو ماكس</div>
+        <div class="price">Pi 0.0038</div>
+        <span class="price-sub">بناءً على سعر الإجماع العالمي</span>
+        <a href="https://wa.me/962778555522" class="buy-btn">اطلب المقايضة الآن</a>
+    </div>
 
-        <div class="product-card">
-            <img src="product2.jpg" alt="منتج 2">
-            <div class="product-title">ساعة ذكية فاخرة</div>
-            <span class="price-tag">0.0012 Pi</span>
-            <span class="price-label">بناءً على سعر الإجماع العالمي</span>
-            <a href="https://wa.me/962778555522" class="buy-btn">اطلب المقايضة الآن</a>
-        </div>
-
+    <div class="product-card">
+        <img src="product2.jpg" alt="ساعة ذكية فاخرة">
+        <div class="product-name">ساعة ذكية فاخرة</div>
+        <div class="price">Pi 0.0012</div>
+        <span class="price-sub">بناءً على سعر الإجماع العالمي</span>
+        <a href="https://wa.me/962778555522" class="buy-btn">اطلب المقايضة الآن</a>
     </div>
 
     <a href="index.html" class="btn-back">⬅️ العودة للرئيسية</a>
