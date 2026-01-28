@@ -21,7 +21,6 @@
             padding: 20px;
             background: rgba(255, 255, 255, 0.03);
         }
-        /* تنسيق الصورة الشخصية */
         .profile-img {
             width: 120px;
             height: 120px;
@@ -29,10 +28,8 @@
             border: 3px solid #ffca28;
             object-fit: cover;
             margin-bottom: 15px;
-            background-color: #4a148c;
         }
-        h2 { color: #ffca28; margin: 10px 0; font-size: 1.5em; }
-        
+        h2 { color: #ffca28; margin: 10px 0; }
         .info-box {
             background: rgba(255, 255, 255, 0.1);
             margin: 10px 0;
@@ -40,23 +37,13 @@
             border-radius: 15px;
             text-align: right;
             border-right: 5px solid #ffca28;
-            font-size: 0.95em;
         }
 
-        /* معرض المشاريع والأعمال */
-        .gallery-title {
-            color: #ffca28;
-            margin-top: 25px;
-            font-size: 1.2em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
+        /* تنسيق المعرض المصلح لمنع التداخل */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
+            gap: 15px;
             margin-top: 20px;
         }
         .gallery-item {
@@ -64,29 +51,27 @@
             border-radius: 15px;
             overflow: hidden;
             border: 1px solid rgba(255,202,40,0.3);
-            position: relative;
+            display: flex;
+            flex-direction: column; /* جعل العناصر تحت بعضها لمنع التداخل */
+        }
+        .project-title {
+            font-size: 0.85em;
+            font-weight: bold;
+            padding: 5px;
+            color: #ffca28;
+            background: rgba(0,0,0,0.2);
         }
         .gallery-item img {
             width: 100%;
-            height: 110px;
+            height: 100px;
             object-fit: cover;
             display: block;
-        }
-        .project-tag {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            color: white;
-            font-size: 0.8em;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px black;
         }
         .gallery-item p {
             font-size: 0.75em;
             padding: 8px;
             margin: 0;
             background: #1a0633;
-            color: #ffca28;
         }
 
         .btn-back {
@@ -98,7 +83,6 @@
             text-decoration: none;
             border-radius: 20px;
             font-weight: bold;
-            font-size: 1.1em;
         }
     </style>
 </head>
@@ -106,38 +90,30 @@
 
     <div class="cv-card">
         <img src="my-photo.jpg" alt="مطور سوق باي الأردن" class="profile-img">
-        
         <h2>مطور سوق باي الأردن</h2>
-        <p style="font-size: 0.9em; opacity: 0.8; margin-bottom: 20px;">🛡️ رائد وموثق في شبكة Pi Network</p>
+        <div class="info-box">📍 <strong>الموقع:</strong> عمان، الأردن</div>
+        <div class="info-box">🚀 <strong>التخصص:</strong> بناء وإدارة المتاجر الرقمية.</div>
 
-        <div class="info-box">
-            📍 <strong>الموقع:</strong> عمان، الأردن
-        </div>
-
-        <div class="info-box">
-            🚀 <strong>التخصص:</strong> بناء وإدارة المتاجر الرقمية.
-        </div>
-
-        <h3 class="gallery-title">📸 معرض المشاريع والأعمال</h3>
+        <h3 style="color: #ffca28; margin-top: 25px;">📸 معرض المشاريع والأعمال</h3>
         
         <div class="gallery-grid">
             <div class="gallery-item">
-                <span class="project-tag">مشروع 1</span>
+                <div class="project-title">مشروع 1</div>
                 <img src="work1.jpg" alt="مشروع 1">
                 <p>واجهة المتجر الأول</p>
             </div>
             <div class="gallery-item">
-                <span class="project-tag">مشروع 2</span>
+                <div class="project-title">مشروع 2</div>
                 <img src="work2.jpg" alt="مشروع 2">
                 <p>نظام الدفع بالباي</p>
             </div>
             <div class="gallery-item">
-                <span class="project-tag">مشروع 3</span>
+                <div class="project-title">مشروع 3</div>
                 <img src="work3.jpg" alt="مشروع 3">
                 <p>توثيق الحسابات</p>
             </div>
             <div class="gallery-item">
-                <span class="project-tag">مشروع 4</span>
+                <div class="project-title">مشروع 4</div>
                 <img src="work4.jpg" alt="مشروع 4">
                 <p>دعم الرواد</p>
             </div>
