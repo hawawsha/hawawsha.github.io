@@ -3,72 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مشاريعنا - سوق باي</title>
-    <link rel="stylesheet" href="style.css">
+    <title>مشاريع سوق باي المستقبلية 🏗️</title>
+    <style>
+        body {
+            background-color: #310d5a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container { max-width: 500px; margin: auto; }
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ffca28;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: right;
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card::before {
+            content: "قريباً";
+            position: absolute;
+            top: 10px;
+            left: -30px;
+            background: #ffca28;
+            color: #310d5a;
+            padding: 5px 40px;
+            transform: rotate(-45deg);
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        h1 { color: #ffca28; margin-bottom: 30px; }
+        h3 { color: #ffca28; margin-top: 0; }
+        p { font-size: 0.95em; line-height: 1.6; opacity: 0.9; }
+        .back-btn {
+            display: inline-block;
+            background: #ffca28;
+            color: #310d5a;
+            padding: 10px 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <div class="logo">سوق باي</div>
-            <ul id="nav-links">
-                <li><a href="index.html">الرئيسية</a></li>
-                <li><a href="projects.html" class="active">المشاريع</a></li>
-                <li><a href="blog.html">المدونة</a></li>
-                <li><a href="cv.html">السيرة الذاتية</a></li>
-            </ul>
-            <button id="lang-switch">English</button>
-        </nav>
-    </header>
+    <div class="container">
+        <h1>مشاريعنا القادمة 🏗️</h1>
 
-    <main>
-        <section class="content">
-            <h1>المشاريع</h1>
-            <p>هنا ستعرض قائمة بمشاريع "سوق باي" المبتكرة قريباً.</p>
-        </section>
-    </main>
+        <div class="project-card">
+            <h3>💳 منصة الدفع المباشر</h3>
+            <p>تفعيل نظام السحب والإيداع التلقائي فور إطلاق الشبكة المفتوحة (Open Network) لسهولة البيع والشراء.</p>
+        </div>
 
-    <script>
-        const langSwitch = document.getElementById('lang-switch');
-        const translations = {
-            ar: {
-                logo: "سوق باي",
-                home: "الرئيسية",
-                projects: "المشاريع",
-                blog: "المدونة",
-                cv: "السيرة الذاتية",
-                title: "المشاريع",
-                desc: "هنا ستعرض قائمة بمشاريع سوق باي المبتكرة قريباً."
-            },
-            en: {
-                logo: "Souq Pi",
-                home: "Home",
-                projects: "Projects",
-                blog: "Blog",
-                cv: "CV",
-                title: "Projects",
-                desc: "Here the list of innovative Souq Pi projects will be displayed soon."
-            }
-        };
+        <div class="project-card">
+            <h3>🚚 خدمة شحن "باي"</h3>
+            <p>توفير خدمة توصيل من الباب إلى الباب داخل كافة محافظات الأردن مقابل رسوم رمزية بعملة Pi.</p>
+        </div>
 
-        langSwitch.addEventListener('click', () => {
-            const isAr = document.documentElement.lang === 'ar';
-            const nextLang = isAr ? 'en' : 'ar';
-            const dir = isAr ? 'ltr' : 'rtl';
+        <div class="project-card">
+            <h3>📱 تطبيق الموبايل (APK)</h3>
+            <p>تحويل المتجر إلى تطبيق مستقل يعمل على أندرويد وآيفون مع تنبيهات فورية لأحدث العروض والمقايضات.</p>
+        </div>
 
-            document.documentElement.lang = nextLang;
-            document.documentElement.dir = dir;
-            langSwitch.textContent = isAr ? 'العربية' : 'English';
+        <a href="index.html" class="back-btn">العودة للرئيسية</a>
+    </div>
 
-            const links = document.querySelectorAll('#nav-links a');
-            links[0].textContent = translations[nextLang].home;
-            links[1].textContent = translations[nextLang].projects;
-            links[2].textContent = translations[nextLang].blog;
-            links[3].textContent = translations[nextLang].cv;
-            document.querySelector('.logo').textContent = translations[nextLang].logo;
-            document.querySelector('h1').textContent = translations[nextLang].title;
-            document.querySelector('p').textContent = translations[nextLang].desc;
-        });
-    </script>
 </body>
 </html>
