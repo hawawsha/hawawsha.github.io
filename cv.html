@@ -3,72 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>السيرة الذاتية - سوق باي</title>
-    <link rel="stylesheet" href="style.css">
+    <title>السيرة الذاتية - سوق باي الأردن 🇯🇴</title>
+    <style>
+        body {
+            background-color: #310d5a; /* اللون الأرجواني الملكي */
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .cv-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #ffca28; /* الإطار الذهبي */
+            border-radius: 20px;
+            padding: 25px;
+            max-width: 400px;
+            margin: 20px auto;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+        }
+        .header-title { color: #ffca28; font-size: 1.5em; margin-bottom: 10px; }
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: right;
+            border-right: 4px solid #ffca28;
+        }
+        .back-btn {
+            background: #ffca28;
+            color: #310d5a;
+            padding: 10px 25px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-    <header>
-        <nav>
-            <div class="logo">سوق باي</div>
-            <ul id="nav-links">
-                <li><a href="index.html">الرئيسية</a></li>
-                <li><a href="projects.html">المشاريع</a></li>
-                <li><a href="blog.html">المدونة</a></li>
-                <li><a href="cv.html" class="active">السيرة الذاتية</a></li>
-            </ul>
-            <button id="lang-switch">English</button>
-        </nav>
-    </header>
+    <div class="cv-card">
+        <div style="font-size: 50px;">👤</div>
+        <div class="header-title">مطور سوق باي الأردن</div>
+        <p>رائد وموثق في شبكة Pi Network 🛡️</p>
 
-    <main>
-        <section class="content">
-            <h1>السيرة الذاتية</h1>
-            <p>هنا يمكنك إضافة معلوماتك الشخصية، خبراتك، ومهاراتك في تطوير المشاريع.</p>
-        </section>
-    </main>
+        <div class="info-box">
+            <strong>📍 الموقع:</strong> عمان، الأردن
+        </div>
+        <div class="info-box">
+            <strong>🚀 التخصص:</strong> بناء وإدارة المتاجر الرقمية على شبكة Pi.
+        </div>
+        <div class="info-box">
+            <strong>💎 الرؤية:</strong> دعم سعر الإجماع العالمي 314,159$ وتسهيل المقايضة.
+        </div>
 
-    <script>
-        const langSwitch = document.getElementById('lang-switch');
-        const translations = {
-            ar: {
-                logo: "سوق باي",
-                home: "الرئيسية",
-                projects: "المشاريع",
-                blog: "المدونة",
-                cv: "السيرة الذاتية",
-                title: "السيرة الذاتية",
-                desc: "هنا يمكنك إضافة معلوماتك الشخصية، خبراتك، ومهاراتك في تطوير المشاريع."
-            },
-            en: {
-                logo: "Souq Pi",
-                home: "Home",
-                projects: "Projects",
-                blog: "Blog",
-                cv: "CV",
-                title: "Curriculum Vitae",
-                desc: "Here you can add your personal information, experiences, and skills in project development."
-            }
-        };
+        <a href="index.html" class="back-btn">العودة للرئيسية</a>
+    </div>
 
-        langSwitch.addEventListener('click', () => {
-            const isAr = document.documentElement.lang === 'ar';
-            const nextLang = isAr ? 'en' : 'ar';
-            const dir = isAr ? 'ltr' : 'rtl';
-
-            document.documentElement.lang = nextLang;
-            document.documentElement.dir = dir;
-            langSwitch.textContent = isAr ? 'العربية' : 'English';
-
-            const links = document.querySelectorAll('#nav-links a');
-            links[0].textContent = translations[nextLang].home;
-            links[1].textContent = translations[nextLang].projects;
-            links[2].textContent = translations[nextLang].blog;
-            links[3].textContent = translations[nextLang].cv;
-            document.querySelector('.logo').textContent = translations[nextLang].logo;
-            document.querySelector('h1').textContent = translations[nextLang].title;
-            document.querySelector('p').textContent = translations[nextLang].desc;
-        });
-    </script>
 </body>
 </html>
