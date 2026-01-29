@@ -5,23 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>سوق هوواشة - الإصدار الثاني</title>
     <style>
-        :root { --main: #2c3e50; --accent: #e67e22; --bg: #f4f7f6; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 0; color: #333; }
-        header { background: var(--main); color: white; padding: 25px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        nav { background: #fff; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        :root { --main: #2c3e50; --accent: #e67e22; --bg: #f4f7f6; --white: #ffffff; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 0; color: #333; scroll-behavior: smooth; }
+        
+        header { background: var(--main); color: var(--white); padding: 30px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        
+        nav { background: var(--white); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         nav a { color: var(--main); text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 1.1em; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
-        .section-header { text-align: center; padding: 50px 0 20px; color: var(--main); position: relative; }
-        .section-header::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent); margin: 10px auto; }
+
+        .section-header { text-align: center; padding: 60px 0 20px; color: var(--main); }
+        .section-header::after { content: ''; display: block; width: 50px; height: 3px; background: var(--accent); margin: 10px auto; }
+
         .container { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 20px; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; text-align: center; border: 1px solid #eee; display: flex; flex-direction: column; }
+        
+        .card { background: var(--white); border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; text-align: center; border: 1px solid #eee; display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        
+        /* تأكد من مسار الصور images/ قبل اسم الملف */
         .card img { width: 100%; height: 220px; object-fit: contain; background: #fff; padding: 10px; box-sizing: border-box; }
+        
         .card-info { padding: 20px; flex-grow: 1; }
         .card-info h3 { margin: 10px 0; font-size: 1.2em; }
         .price { color: var(--accent); font-weight: bold; font-size: 1.4em; display: block; margin-bottom: 15px; }
-        .btn { background: var(--main); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; }
+        
+        .btn { background: var(--main); color: var(--white); border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.3s; font-size: 1em; }
         .btn:hover { background: var(--accent); }
+        .btn-green { background: #27ae60; }
     </style>
 </head>
 <body>
@@ -58,11 +68,11 @@
 <div class="container">
     <div class="card">
         <img src="images/iphone1.jpg" alt="iPhone 1">
-        <div class="card-info"><h3>iPhone 15 Pro Max</h3><span class="price">900 دينار</span><button class="btn">شراء الآن</button></div>
+        <div class="card-info"><h3>iPhone 15 Pro Max</h3><span class="price">950 دينار</span><button class="btn">شراء الآن</button></div>
     </div>
     <div class="card">
         <img src="images/iphone2.jpg" alt="iPhone 2">
-        <div class="card-info"><h3>iPhone 15 Plus</h3><span class="price">800 دينار</span><button class="btn">شراء الآن</button></div>
+        <div class="card-info"><h3>iPhone 15 Plus</h3><span class="price">820 دينار</span><button class="btn">شراء الآن</button></div>
     </div>
     <div class="card">
         <img src="images/iphone3.jpg" alt="iPhone 3">
@@ -72,26 +82,25 @@
 
 <h2 id="appliances" class="section-header">🔌 الأجهزة الكهربائية</h2>
 <div class="container">
-    <div class="card"><img src="images/air_conditioner.jpg" alt="AC"><div class="card-info"><h3>مكيف هواء جداري</h3><span class="price">450 دينار</span><button class="btn">إضافة للسلة</button></div></div>
+    <div class="card"><img src="images/air_conditioner.jpg" alt="AC"><div class="card-info"><h3>مكيف هواء حديث</h3><span class="price">450 دينار</span><button class="btn">إضافة للسلة</button></div></div>
+    <div class="card"><img src="images/coffee_machine.jpg" alt="Coffee"><div class="card-info"><h3>ماكينة قهوة</h3><span class="price">180 دينار</span><button class="btn">إضافة للسلة</button></div></div>
     <div class="card"><img src="images/electric_oven.jpg" alt="Oven"><div class="card-info"><h3>فرن كهربائي مدمج</h3><span class="price">320 دينار</span><button class="btn">إضافة للسلة</button></div></div>
     <div class="card"><img src="images/dishwasher.jpg" alt="Dishwasher"><div class="card-info"><h3>غسالة أطباق</h3><span class="price">520 دينار</span><button class="btn">إضافة للسلة</button></div></div>
-    <div class="card"><img src="images/robot_vacuum.jpg" alt="Vacuum"><div class="card-info"><h3>مكنسة روبوت ذكية</h3><span class="price">210 دينار</span><button class="btn">إضافة للسلة</button></div></div>
+    <div class="card"><img src="images/robot_vacuum.jpg" alt="Vacuum"><div class="card-info"><h3>مكنسة روبوت</h3><span class="price">210 دينار</span><button class="btn">إضافة للسلة</button></div></div>
     <div class="card"><img src="images/microwave_oven.jpg" alt="Microwave"><div class="card-info"><h3>ميكروويف ديجيتال</h3><span class="price">95 دينار</span><button class="btn">إضافة للسلة</button></div></div>
-    <div class="card"><img src="images/coffee_machine.jpg" alt="Coffee"><div class="card-info"><h3>ماكينة قهوة</h3><span class="price">180 دينار</span><button class="btn">إضافة للسلة</button></div></div>
-    <div class="card"><img src="images/kitchen_blender.jpg" alt="Blender"><div class="card-info"><h3>خلاط احترافي</h3><span class="price">65 دينار</span><button class="btn">إضافة للسلة</button></div></div>
+    <div class="card"><img src="images/blender.jpg" alt="Blender"><div class="card-info"><h3>خلاط فواكه</h3><span class="price">65 دينار</span><button class="btn">إضافة للسلة</button></div></div>
     <div class="card"><img src="images/stand_mixer.jpg" alt="Mixer"><div class="card-info"><h3>عجانة كهربائية</h3><span class="price">140 دينار</span><button class="btn">إضافة للسلة</button></div></div>
-    <div class="card"><img src="images/robot_vacuum.jpg" alt="Vacuum 2"><div class="card-info"><h3>مكنسة يدوية لاسلكية</h3><span class="price">115 دينار</span><button class="btn">إضافة للسلة</button></div></div>
-    <div class="card"><img src="images/dishwasher.jpg" alt="Dishwasher 2"><div class="card-info"><h3>غسالة أوتوماتيك</h3><span class="price">500 دينار</span><button class="btn">إضافة للسلة</button></div></div>
 </div>
 
 <h2 id="realestate" class="section-header">🏡 العقارات</h2>
 <div class="container" style="justify-content: center;">
-    <div class="card" style="max-width: 400px; margin: auto;">
-        <img src="images/residential_land.jpg" alt="Land">
+    <div class="card" style="max-width: 450px;">
+        <img src="images/land_plot.jpg" alt="Land" onerror="this.src='https://via.placeholder.com/300x200?text=أرض+سكنية'">
         <div class="card-info">
             <h3>أرض سكنية للبيع</h3>
+            <p>موقع مميز وجاهز للبناء الفوري</p>
             <span class="price">80,000 دينار</span>
-            <button class="btn" style="background:#27ae60;">تواصل معنا</button>
+            <button class="btn btn-green">تواصل معنا الآن</button>
         </div>
     </div>
 </div>
