@@ -3,128 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOUQ PI JORDAN | الواجهة الخلفية</title>
+    <title>متجر الأجهزة الكهربائية | الاستوديو</title>
     <style>
-        /* التنسيق العام */
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #121212; color: white; display: flex; flex-direction: column; min-height: 100vh; }
-        
-        /* الهوية وصورتك الشخصية */
-        .header-section { background: linear-gradient(180deg, #2d135c 0%, #121212 100%); padding: 50px 20px; text-align: center; border-bottom: 2px solid #ffd700; }
-        .profile-img { width: 130px; height: 130px; border-radius: 50%; border: 3px solid #ffd700; object-fit: cover; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
-        .header-section h1 { color: #ffd700; margin-top: 15px; font-size: 26px; }
-        .header-section p { color: #888; font-size: 16px; }
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e67e22;
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+        }
 
-        /* شبكة الأزرار الرئيسية */
-        .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 600px; margin: 0 auto; padding: 25px; flex-grow: 1; }
-        .menu-card { background: #1e1e1e; border: 2px solid #333; border-radius: 20px; padding: 30px 10px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .menu-card:hover { border-color: #ffd700; background: #2d135c; transform: translateY(-5px); }
-        .menu-card i { font-size: 40px; margin-bottom: 10px; font-style: normal; }
-        .menu-card span { font-size: 18px; font-weight: bold; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            color: var(--primary-color);
+        }
 
-        /* واجهة عرض المنتجات */
-        .products-display { display: none; padding: 20px; background: #121212; min-height: 100vh; }
-        .products-display.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: var(--primary-color);
+            color: white;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
 
-        /* أزرار التحكم */
-        .back-btn { background: #ffd700; color: #121212; border: none; padding: 12px 25px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-bottom: 30px; font-size: 16px; }
-        
-        /* شبكة المنتجات */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding-bottom: 50px; }
-        .item-card { background: #1e1e1e; border: 1px solid #444; border-radius: 15px; overflow: hidden; text-align: center; transition: 0.3s; }
-        .item-card:hover { border-color: #ffd700; }
-        .item-card img { width: 100%; height: 200px; object-fit: cover; }
-        .info { padding: 15px; }
-        .info h3 { margin: 10px 0; font-size: 18px; }
-        .price { color: #ffd700; font-size: 22px; font-weight: bold; }
-        .buy-btn { background: #6a1b9a; color: white; border: none; padding: 10px; width: 100%; border-radius: 8px; margin-top: 10px; cursor: pointer; font-weight: bold; }
+        h1 { margin: 0; font-size: 2.5rem; }
+        p.subtitle { opacity: 0.8; margin-top: 10px; }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eee;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 250px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .info {
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .info h3 {
+            margin: 10px 0;
+            font-size: 1.25rem;
+        }
+
+        .price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .btn-buy {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-buy:hover {
+            background-color: var(--accent-color);
+        }
     </style>
 </head>
 <body>
 
-    <div id="main-view">
-        <header class="header-section">
-            <img src="my-photo.jpg" alt="المطور" class="profile-img">
-            <h1>سوق باي الأردن 🇯🇴</h1>
-            <p>Backend Interface - Studio 2026</p>
-        </header>
+    <header>
+        <h1>قسم الأجهزة الكهربائية</h1>
+        <p class="subtitle">أحدث التقنيات لمنزلك العصري</p>
+    </header>
 
-        <div class="menu-grid">
-            <div class="menu-card" onclick="openSection('cars')"><i>🚗</i><span>السيارات</span></div>
-            <div class="menu-card" onclick="openSection('phones')"><i>📱</i><span>الخلويات</span></div>
-            <div class="menu-card" onclick="openSection('electric')"><i>📺</i><span>الأجهزة</span></div>
-            <div class="menu-card" onclick="openSection('realestate')"><i>🏠</i><span>العقارات</span></div>
+    <div class="container">
+        <div class="card">
+            <div class="image-container"><img src="air_conditioner.jpg" alt="مكيف هواء"></div>
+            <div class="info">
+                <h3>مكيف هواء جداري حديث</h3>
+                <span class="price">450 دينار</span>
+                <button class="btn-buy">إضافة للسلة</button>
+            </div>
         </div>
-        
-        <footer style="text-align: center; padding: 20px; color: #444;">247 متصل الآن</footer>
+
+        <div class="card">
+            <div class="image-container"><img src="built_in_oven.jpg" alt="فرن كهربائي"></div>
+            <div class="info">
+                <h3>فرن كهربائي مدمج</h3>
+                <span class="price">320 دينار</span>
+                <button class="btn-buy">إضافة للسلة</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="image-container"><img src="dishwasher_silver.jpg" alt="غسالة أطباق"></div>
+            <div class="info">
+                <h3>غسالة أطباق ستانلس</h3>
+                <span class="price">580 دينار</span>
+                <button class="btn-buy">إضافة للسلة</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="image-container"><img src="robot_vacuum.jpg" alt="مكنسة روبوت"></div>
+            <div class="info">
+                <h3>مكنسة روبوت ذكية</h3>
+                <span class="price">210 دينار</span>
+                <button class="btn-buy">إضافة للسلة</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="image-container"><img src="dishwasher_open.jpg" alt="غسالة أطباق مفتوحة"></div>
+            <div class="info">
+                <h3>غسالة أطباق (منظور داخلي)</h3>
+                <span class="price">550 دينار</span>
+                <button class="btn-buy">إضافة للسلة</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="image-container"><img src="espresso_machine.jpg" alt="ماكينة قهوة"></div>
+            <div class="info">
+                <h3>ماكينة قهوة إسبريسو</h3>
+                <span class="price">180 دينار</span>
+                <button class="btn-buy">إضافة للسلة</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="image-container"><img src="kitchen_blender.jpg" alt="خلاط"></div>
+            <div class="info">
+                <h3>خلاط فواكه كهربائي</h3>
+                <span class="price">65 دينار</span>
+                <button class="btn-buy">إضافة للسلة</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="image-container"><img src="stand_mixer.jpg" alt="عجانة"></div>
+            <div class="info">
+                <h3>عجانة كهربائية احترافية</h3>
+                <span class="price">140 دينار</span>
+                <button class="btn-buy">إضافة للسلة</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="image-container"><img src="microwave_oven.jpg" alt="ميكروويف"></div>
+            <div class="info">
+                <h3>ميكروويف ديجيتال</h3>
+                <span class="price">95 دينار</span>
+                <button class="btn-buy">إضافة للسلة</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="image-container"><img src="cordless_vacuum.jpg" alt="مكنسة لاسلكية"></div>
+            <div class="info">
+                <h3>مكنسة لاسلكية يدوية</h3>
+                <span class="price">120 دينار</span>
+                <button class="btn-buy">إضافة للسلة</button>
+            </div>
+        </div>
     </div>
 
-    <div id="section-view" class="products-display">
-        <button class="back-btn" onclick="goBack()">⬅️ العودة للقائمة الرئيسية</button>
-        <h2 id="section-title" style="color: #ffd700; border-right: 4px solid #ffd700; padding-right: 15px; margin-bottom: 30px;"></h2>
-        <div id="items-grid" class="grid"></div>
-    </div>
-
-    <script>
-        function openSection(type) {
-            document.getElementById('main-view').style.display = 'none';
-            const view = document.getElementById('section-view');
-            const grid = document.getElementById('items-grid');
-            const title = document.getElementById('section-title');
-            view.classList.add('active');
-            grid.innerHTML = '';
-
-            if(type === 'cars') {
-                title.innerText = 'معرض السيارات (9 موديلات)';
-                const cars = [
-                    {n:'Tesla Model S', p:'0.350', img:'tesla1.jpg'}, {n:'Tesla Model X', p:'0.382', img:'tesla2.jpg'}, {n:'Tesla Roadster', p:'0.450', img:'tesla3.jpg'},
-                    {n:'Lucid Air Pure', p:'0.395', img:'lucid1.jpg'}, {n:'Lucid Touring', p:'0.410', img:'lucid2.jpg'}, {n:'Lucid Sapphire', p:'0.520', img:'lucid3.jpg'},
-                    {n:'Mercedes EQS', p:'0.415', img:'mercedes1.jpg'}, {n:'Mercedes EQE', p:'0.385', img:'mercedes2.jpg'}, {n:'Mercedes SUV', p:'0.430', img:'mercedes3.jpg'}
-                ];
-                cars.forEach(c => {
-                    grid.innerHTML += `<div class="item-card"><img src="images/${c.img}"><div class="info"><h3>${c.n}</h3><div class="price">Pi ${c.p}</div><button class="buy-btn">طلب شراء</button></div></div>`;
-                });
-            } else if(type === 'phones') {
-                title.innerText = 'قسم الخلويات (3 موديلات)';
-                const phones = [
-                    {n:'iPhone 17 Pro Max', p:'0.0038', img:'iphone1.jpg'},
-                    {n:'iPhone 17 Pro Silver', p:'0.0035', img:'iphone2.jpg'},
-                    {n:'iPhone 17 Ultra Black', p:'0.0042', img:'iphone3.jpg'}
-                ];
-                phones.forEach(p => {
-                    grid.innerHTML += `<div class="item-card"><img src="images/${p.img}"><div class="info"><h3>${p.n}</h3><div class="price">Pi ${p.p}</div><button class="buy-btn">طلب شراء</button></div></div>`;
-                });
-            } else if(type === 'electric') {
-                title.innerText = 'الأجهزة الكهربائية (10 منتجات)';
-                const items = [
-                    {n:'شاشة Samsung 75"', p:'0.0015', img:'tv.jpg'}, {n:'ثلاجة LG Smart', p:'0.0028', img:'fridge.jpg'},
-                    {n:'غسالة Bosch', p:'0.0012', img:'wash.jpg'}, {n:'مكيف Daikin', p:'0.0011', img:'ac.jpg'},
-                    {n:'فرن إيطالي', p:'0.0009', img:'oven.jpg'}, {n:'ماكينة قهوة', p:'0.0004', img:'coffee.jpg'},
-                    {n:'مكنسة ربوت', p:'0.0005', img:'vacuum.jpg'}, {n:'مايكرويف حاد', p:'0.0003', img:'micro.jpg'},
-                    {n:'جلاية صحون', p:'0.0013', img:'dish.jpg'}, {n:'خلاط احترافي', p:'0.0002', img:'blender.jpg'}
-                ];
-                items.forEach(i => {
-                    grid.innerHTML += `<div class="item-card"><img src="images/${i.img}"><div class="info"><h3>${i.n}</h3><div class="price">Pi ${i.p}</div><button class="buy-btn">طلب شراء</button></div></div>`;
-                });
-            } else if(type === 'realestate') {
-                title.innerText = 'العقارات والأراضي (5 عروض)';
-                const homes = [
-                    {n:'فيلا مودرن - عمان', p:'5.500', img:'villa.jpg'}, {n:'شقة فاخرة - العبدلي', p:'2.100', img:'apt1.jpg'},
-                    {n:'أرض سكنية - جرش', p:'1.200', img:'land1.jpg'}, {n:'مزرعة خاصة - الغور', p:'3.500', img:'farm.jpg'},
-                    {n:'بنتهاوس - دابوق', p:'4.800', img:'pent.jpg'}
-                ];
-                homes.forEach(h => {
-                    grid.innerHTML += `<div class="item-card"><img src="images/${h.img}"><div class="info"><h3>${h.n}</h3><div class="price">Pi ${h.p}</div><button class="buy-btn">طلب شراء</button></div></div>`;
-                });
-            }
-            window.scrollTo(0,0);
-        }
-
-        function goBack() {
-            document.getElementById('section-view').classList.remove('active');
-            document.getElementById('main-view').style.display = 'block';
-            window.scrollTo(0,0);
-        }
-    </script>
 </body>
 </html>
