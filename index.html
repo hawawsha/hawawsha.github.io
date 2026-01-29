@@ -3,208 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر الأجهزة الكهربائية | الاستوديو</title>
+    <title>متجر الأجهزة الكهربائية</title>
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --accent-color: #e67e22;
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            margin: 0;
-            padding: 20px;
-            color: var(--primary-color);
-        }
-
-        header {
-            text-align: center;
-            padding: 40px 0;
-            background: var(--primary-color);
-            color: white;
-            margin-bottom: 30px;
-            border-radius: 10px;
-        }
-
-        h1 { margin: 0; font-size: 2.5rem; }
-        p.subtitle { opacity: 0.8; margin-top: 10px; }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #eee;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-        }
-
-        .image-container {
-            width: 100%;
-            height: 250px;
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-        }
-
-        .card img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .info {
-            padding: 20px;
-            text-align: center;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        .info h3 {
-            margin: 10px 0;
-            font-size: 1.25rem;
-        }
-
-        .price {
-            color: var(--accent-color);
-            font-weight: bold;
-            font-size: 1.4rem;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        .btn-buy {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .btn-buy:hover {
-            background-color: var(--accent-color);
-        }
+        :root { --primary: #2c3e50; --accent: #e67e22; }
+        body { font-family: sans-serif; background-color: #f8f9fa; margin: 0; padding: 20px; }
+        header { text-align: center; background: var(--primary); color: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; }
+        .container { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: center; padding: 15px; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 15px; }
+        .price { color: var(--accent); font-weight: bold; font-size: 1.3em; display: block; margin: 10px 0; }
+        .btn { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; width: 100%; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>قسم الأجهزة الكهربائية</h1>
-        <p class="subtitle">أحدث التقنيات لمنزلك العصري</p>
-    </header>
+<header>
+    <h1>قسم الأجهزة الكهربائية</h1>
+    <p>أحدث التقنيات لمنزلك العصري</p>
+</header>
 
-    <div class="container">
-        <div class="card">
-            <div class="image-container"><img src="air_conditioner.jpg" alt="مكيف هواء"></div>
-            <div class="info">
-                <h3>مكيف هواء جداري حديث</h3>
-                <span class="price">450 دينار</span>
-                <button class="btn-buy">إضافة للسلة</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="image-container"><img src="built_in_oven.jpg" alt="فرن كهربائي"></div>
-            <div class="info">
-                <h3>فرن كهربائي مدمج</h3>
-                <span class="price">320 دينار</span>
-                <button class="btn-buy">إضافة للسلة</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="image-container"><img src="dishwasher_silver.jpg" alt="غسالة أطباق"></div>
-            <div class="info">
-                <h3>غسالة أطباق ستانلس</h3>
-                <span class="price">580 دينار</span>
-                <button class="btn-buy">إضافة للسلة</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="image-container"><img src="robot_vacuum.jpg" alt="مكنسة روبوت"></div>
-            <div class="info">
-                <h3>مكنسة روبوت ذكية</h3>
-                <span class="price">210 دينار</span>
-                <button class="btn-buy">إضافة للسلة</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="image-container"><img src="dishwasher_open.jpg" alt="غسالة أطباق مفتوحة"></div>
-            <div class="info">
-                <h3>غسالة أطباق (منظور داخلي)</h3>
-                <span class="price">550 دينار</span>
-                <button class="btn-buy">إضافة للسلة</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="image-container"><img src="espresso_machine.jpg" alt="ماكينة قهوة"></div>
-            <div class="info">
-                <h3>ماكينة قهوة إسبريسو</h3>
-                <span class="price">180 دينار</span>
-                <button class="btn-buy">إضافة للسلة</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="image-container"><img src="kitchen_blender.jpg" alt="خلاط"></div>
-            <div class="info">
-                <h3>خلاط فواكه كهربائي</h3>
-                <span class="price">65 دينار</span>
-                <button class="btn-buy">إضافة للسلة</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="image-container"><img src="stand_mixer.jpg" alt="عجانة"></div>
-            <div class="info">
-                <h3>عجانة كهربائية احترافية</h3>
-                <span class="price">140 دينار</span>
-                <button class="btn-buy">إضافة للسلة</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="image-container"><img src="microwave_oven.jpg" alt="ميكروويف"></div>
-            <div class="info">
-                <h3>ميكروويف ديجيتال</h3>
-                <span class="price">95 دينار</span>
-                <button class="btn-buy">إضافة للسلة</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="image-container"><img src="cordless_vacuum.jpg" alt="مكنسة لاسلكية"></div>
-            <div class="info">
-                <h3>مكنسة لاسلكية يدوية</h3>
-                <span class="price">120 دينار</span>
-                <button class="btn-buy">إضافة للسلة</button>
-            </div>
-        </div>
+<div class="container">
+    <div class="card">
+        <img src="images/air_conditioner.jpg" alt="مكيف هواء">
+        <h3>مكيف هواء جداري حديث</h3>
+        <span class="price">450 دينار</span>
+        <button class="btn">إضافة للسلة</button>
     </div>
+
+    <div class="card">
+        <img src="images/electric_oven.jpg" alt="فرن">
+        <h3>فرن كهربائي مدمج</h3>
+        <span class="price">320 دينار</span>
+        <button class="btn">إضافة للسلة</button>
+    </div>
+
+    <div class="card">
+        <img src="images/dishwasher.jpg" alt="غسالة أطباق">
+        <h3>غسالة أطباق ستانلس</h3>
+        <span class="price">580 دينار</span>
+        <button class="btn">إضافة للسلة</button>
+    </div>
+
+    <div class="card">
+        <img src="images/robot_vacuum.jpg" alt="مكنسة روبوت">
+        <h3>مكنسة روبوت ذكية</h3>
+        <span class="price">210 دينار</span>
+        <button class="btn">إضافة للسلة</button>
+    </div>
+
+    <div class="card">
+        <img src="images/microwave_oven.jpg" alt="ميكروويف">
+        <h3>ميكروويف ديجيتال</h3>
+        <span class="price">95 دينار</span>
+        <button class="btn">إضافة للسلة</button>
+    </div>
+
+    <div class="card">
+        <img src="images/coffee_machine.jpg" alt="ماكينة قهوة">
+        <h3>ماكينة قهوة إسبريسو</h3>
+        <span class="price">180 دينار</span>
+        <button class="btn">إضافة للسلة</button>
+    </div>
+
+    <div class="card">
+        <img src="images/blender.jpg" alt="خلاط">
+        <h3>خلاط فواكه كهربائي</h3>
+        <span class="price">65 دينار</span>
+        <button class="btn">إضافة للسلة</button>
+    </div>
+
+    <div class="card">
+        <img src="images/stand_mixer.jpg" alt="عجانة">
+        <h3>عجانة كهربائية احترافية</h3>
+        <span class="price">140 دينار</span>
+        <button class="btn">إضافة للسلة</button>
+    </div>
+
+    <div class="card">
+        <img src="images/robot_vacuum.jpg" alt="مكنسة">
+        <h3>مكنسة تنظيف متطورة</h3>
+        <span class="price">130 دينار</span>
+        <button class="btn">إضافة للسلة</button>
+    </div>
+
+    <div class="card">
+        <img src="images/dishwasher.jpg" alt="غسالة">
+        <h3>غسالة أطباق أوتوماتيك</h3>
+        <span class="price">520 دينار</span>
+        <button class="btn">إضافة للسلة</button>
+    </div>
+</div>
 
 </body>
 </html>
