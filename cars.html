@@ -6,26 +6,43 @@
     <title>معرض سيارات الهواوشة | 9 موديلات</title>
     <style>
         :root { --dark: #1a1a1a; --accent: #e67e22; --bg: #fdfdfd; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding-bottom: 60px; }
-        header { background: var(--dark); color: white; padding: 20px; text-align: center; border-bottom: 3px solid var(--accent); }
         
-        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 30px; max-width: 1100px; margin: auto; }
+        /* أهم تعديل: السماح بالنزول لأسفل الصفحة لرؤية كل السيارات */
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: var(--bg); 
+            margin: 0; 
+            padding: 0;
+            overflow-y: auto !important; /* لضمان القدرة على النزول للأسفل */
+            min-height: 100vh;
+        }
+
+        header { background: var(--dark); color: white; padding: 20px; text-align: center; border-bottom: 3px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
         
-        .car-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #eee; }
-        .car-card:hover { transform: translateY(-8px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+        /* توزيع السيارات بشكل يضمن ظهورها كلها عند النزول */
+        .container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 25px; 
+            padding: 30px; 
+            max-width: 1200px; 
+            margin: auto; 
+        }
+        
+        .car-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #eee; width: 300px; }
         
         .img-box { width: 100%; height: 200px; background: #fff; padding: 15px; box-sizing: border-box; }
         .img-box img { width: 100%; height: 100%; object-fit: contain; }
         
-        .info { padding: 20px; text-align: center; border-top: 1px solid #f9f9f9; }
+        .info { padding: 20px; text-align: center; }
         .car-name { font-weight: bold; color: var(--dark); font-size: 1.1em; margin-bottom: 10px; display: block; }
         .price { color: var(--accent); font-weight: bold; font-size: 1.4em; display: block; margin-bottom: 15px; }
         
-        .btn-reserve { background: var(--dark); color: white; padding: 12px; text-decoration: none; border-radius: 10px; display: block; font-weight: bold; transition: 0.3s; }
-        .btn-reserve:hover { background: var(--accent); }
+        .btn-reserve { background: var(--dark); color: white; padding: 12px; text-decoration: none; border-radius: 10px; display: block; font-weight: bold; }
 
-        .back-btn { display: inline-block; margin: 20px; color: #666; text-decoration: none; font-weight: bold; }
-        .cart-mini { position: fixed; bottom: 15px; left: 15px; background: var(--dark); color: white; padding: 8px 18px; border-radius: 30px; font-size: 0.8em; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .back-btn { display: block; text-align: center; margin: 20px; color: #666; text-decoration: none; font-weight: bold; }
+        .cart-mini { position: fixed; bottom: 15px; left: 15px; background: var(--dark); color: white; padding: 8px 18px; border-radius: 30px; font-size: 0.8em; z-index: 2000; }
     </style>
 </head>
 <body>
