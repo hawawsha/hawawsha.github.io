@@ -5,82 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOUQ PI JORDAN | الواجهة الخلفية</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #121212; color: white; scroll-behavior: smooth; }
+        /* التنسيقات العامة */
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #121212; color: white; display: flex; flex-direction: column; min-height: 100vh; }
         
-        /* تصميم مقدمة المطور */
-        .dev-header { background-color: #2d135c; padding: 50px 20px; text-align: center; border-bottom: 3px solid #ffd700; }
-        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid #ffd700; object-fit: cover; margin-bottom: 15px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
-        .dev-header h1 { color: #ffd700; margin: 10px 0; font-size: 28px; }
-        .dev-header p { color: #ddd; font-size: 18px; }
+        /* قسم المطور (الهوية) */
+        .header-section { background: linear-gradient(180deg, #2d135c 0%, #121212 100%); padding: 60px 20px; text-align: center; }
+        .profile-img { width: 130px; height: 130px; border-radius: 50%; border: 3px solid #ffd700; object-fit: cover; box-shadow: 0 0 25px rgba(255, 215, 0, 0.3); }
+        .header-section h1 { color: #ffd700; margin-top: 15px; font-size: 28px; letter-spacing: 1px; }
 
-        /* قائمة الأقسام */
-        .nav-menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 600px; margin: 30px auto 0; }
-        .nav-item { background: rgba(255, 215, 0, 0.1); border: 2px solid #ffd700; color: white; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: bold; transition: 0.3s; }
-        .nav-item:hover { background: #ffd700; color: #2d135c; transform: translateY(-3px); }
+        /* شبكة الأقسام الرئيسية */
+        .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 600px; margin: 0 auto; padding: 20px; flex-grow: 1; }
+        .menu-card { background: #1e1e1e; border: 2px solid #333; border-radius: 20px; padding: 30px 10px; cursor: pointer; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; }
+        .menu-card:hover { border-color: #ffd700; background: #2d135c; transform: translateY(-10px); }
+        .menu-card i { font-size: 40px; margin-bottom: 15px; }
+        .menu-card span { font-size: 18px; font-weight: bold; color: #fff; }
 
-        /* الأقسام */
-        .section-container { padding: 40px 20px; }
-        .section-title { color: #ffd700; border-right: 5px solid #6a1b9a; padding-right: 15px; margin-bottom: 30px; }
+        /* حاوية المنتجات (تظهر فقط عند الضغط) */
+        .products-display { display: none; padding: 30px; background: #121212; }
+        .products-display.active { display: block; animation: slideUp 0.5s ease; }
+
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* تصميم الكروت داخل الأقسام */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { background-color: #1e1e1e; border-radius: 15px; border: 1px solid #444; overflow: hidden; text-align: center; }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
-        .card-info { padding: 15px; }
-        .price { color: #ffd700; font-size: 22px; font-weight: bold; }
-        .buy-btn { background-color: #6a1b9a; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; cursor: pointer; font-weight: bold; margin-top: 10px; }
-
-        .counter { background: #ffd700; color: #2d135c; padding: 8px 20px; border-radius: 20px; display: inline-block; margin-top: 20px; font-weight: bold; }
+        .item-card { background: #1e1e1e; border-radius: 15px; overflow: hidden; border: 1px solid #444; }
+        .item-card img { width: 100%; height: 200px; object-fit: cover; }
+        .price { color: #ffd700; font-size: 22px; font-weight: bold; padding: 10px; }
+        
+        .back-btn { background: #ffd700; color: #121212; border: none; padding: 10px 25px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
-    <header class="dev-header">
-        <img src="my-photo.jpg" alt="مطور سوق باي الأردن" class="profile-img">
-        <h1>مطور سوق باي الأردن 🇯🇴</h1>
-        <p>الواجهة الخلفية للتطبيق الأصلي - استوديو 2026</p>
+    <div id="main-view">
+        <header class="header-section">
+            <img src="my-photo.jpg" alt="المطور" class="profile-img">
+            <h1>سوق باي الأردن 🇯🇴</h1>
+            <p style="color: #888;">الواجهة الخلفية للتطبيق الأصلي</p>
+        </header>
+
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openSection('cars')"><i>🚗</i><span>السيارات</span></div>
+            <div class="menu-card" onclick="openSection('phones')"><i>📱</i><span>الخلويات</span></div>
+            <div class="menu-card" onclick="openSection('electric')"><i>📺</i><span>الأجهزة</span></div>
+            <div class="menu-card" onclick="openSection('realestate')"><i>🏠</i><span>العقارات</span></div>
+        </div>
+    </div>
+
+    <div id="section-view" class="products-display">
+        <button class="back-btn" onclick="goBack()">⬅️ العودة للرئيسية</button>
+        <h2 id="section-title" style="color: #ffd700; margin-bottom: 30px; border-right: 4px solid #ffd700; padding-right: 15px;"></h2>
         
-        <div class="nav-menu">
-            <a href="#cars" class="nav-item">🚗 قسم السيارات</a>
-            <a href="#phones" class="nav-item">📱 قسم الخلويات</a>
-            <a href="#electric" class="nav-item">📺 الأجهزة الكهربائية</a>
-            <a href="#realestate" class="nav-item">🏠 قسم العقارات</a>
-        </div>
-        
-        <div class="counter">247 متصل الآن</div>
-    </header>
-
-    <div id="cars" class="section-container">
-        <h2 class="section-title">معرض السيارات</h2>
-        <div class="grid">
-            <div class="card"><img src="images/tesla1.jpg"><div class="card-info"><h3>Tesla Model S</h3><p class="price">Pi 0.350</p><button class="buy-btn">شراء الآن</button></div></div>
-            <div class="card"><img src="images/mercedes1.jpg"><div class="card-info"><h3>Mercedes EQS</h3><p class="price">Pi 0.415</p><button class="buy-btn">شراء الآن</button></div></div>
-        </div>
+        <div id="items-grid" class="grid">
+            </div>
     </div>
 
-    <div id="phones" class="section-container">
-        <h2 class="section-title">الهواتف الذكية</h2>
-        <div class="grid">
-            <div class="card"><img src="images/iphone1.jpg"><div class="card-info"><h3>iPhone 17 Pro Max</h3><p class="price">Pi 0.0038</p><button class="buy-btn">شراء الآن</button></div></div>
-            <div class="card"><img src="images/iphone2.jpg"><div class="card-info"><h3>iPhone 17 Pro</h3><p class="price">Pi 0.0035</p><button class="buy-btn">شراء الآن</button></div></div>
-        </div>
-    </div>
+    <script>
+        function openSection(type) {
+            document.getElementById('main-view').style.display = 'none';
+            const view = document.getElementById('section-view');
+            const grid = document.getElementById('items-grid');
+            const title = document.getElementById('section-title');
+            view.classList.add('active');
+            grid.innerHTML = ''; // تنظيف الشبكة
 
-    <div id="electric" class="section-container">
-        <h2 class="section-title">الأجهزة الكهربائية</h2>
-        <div class="grid">
-            <div class="card"><img src="images/tv.jpg"><div class="card-info"><h3>شاشة 4K ذكية</h3><p class="price">Pi 0.0012</p><button class="buy-btn">شراء الآن</button></div></div>
-        </div>
-    </div>
+            if(type === 'cars') {
+                title.innerText = 'معرض السيارات الكهربائية';
+                grid.innerHTML = `
+                    <div class="item-card"><img src="images/tesla1.jpg"><div class="price">Pi 0.350</div></div>
+                    <div class="item-card"><img src="images/tesla2.jpg"><div class="price">Pi 0.382</div></div>
+                `;
+            } else if(type === 'phones') {
+                title.innerText = 'قسم الهواتف الذكية';
+                grid.innerHTML = `
+                    <div class="item-card"><img src="images/iphone1.jpg"><div class="price">Pi 0.0038</div></div>
+                `;
+            }
+            // سنضيف العقارات والأجهزة هنا لاحقاً
+        }
 
-    <div id="realestate" class="section-container">
-        <h2 class="section-title">العقارات والأراضي</h2>
-        <div class="grid">
-            <div class="card"><img src="images/villa.jpg"><div class="card-info"><h3>فيلا في عمان</h3><p class="price">Pi 5.500</p><button class="buy-btn">شراء الآن</button></div></div>
-        </div>
-    </div>
-
-    <footer style="text-align: center; padding: 40px; color: #666;">
-        <p>SOUQ PI JORDAN &copy; 2026</p>
-    </footer>
+        function goBack() {
+            document.getElementById('section-view').classList.remove('active');
+            document.getElementById('main-view').style.display = 'block';
+        }
+    </script>
 
 </body>
 </html>
