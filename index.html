@@ -3,91 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مركز الاستوديو التجاري</title>
+    <title>متجر هوواشة الشامل</title>
     <style>
-        :root { --primary: #1a1a1a; --accent: #c0392b; --bg: #f4f4f4; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding: 0; }
-        
-        header { background: var(--primary); color: white; padding: 20px; text-align: center; }
-        nav { background: #333; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 100; }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; }
+        :root { --main: #2c3e50; --accent: #e67e22; --bg: #f4f7f6; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 0; color: #333; }
+        header { background: var(--main); color: white; padding: 25px; text-align: center; shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        nav { background: #fff; padding: 15px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        nav a { color: var(--main); text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 1.1em; transition: 0.3s; }
         nav a:hover { color: var(--accent); }
-
-        .section-title { text-align: center; padding: 40px 10px 20px; color: var(--primary); border-bottom: 2px solid var(--accent); width: fit-content; margin: auto; }
-        
-        .container { max-width: 1200px; margin: 20px auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 10px; }
-        
-        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: 0.3s; position: relative; }
-        .card:hover { transform: scale(1.03); }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
-        
-        .card-body { padding: 15px; text-align: center; }
-        .price { color: var(--accent); font-weight: bold; font-size: 1.2rem; display: block; margin: 10px 0; }
-        .category-tag { position: absolute; top: 10px; right: 10px; background: var(--accent); color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem; }
+        .section-header { text-align: center; padding: 50px 0 20px; color: var(--main); position: relative; }
+        .section-header::after { content: ''; display: block; width: 60px; height: 3px; background: var(--accent); margin: 10px auto; }
+        .container { max-width: 1200px; margin: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; padding: 20px; }
+        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; text-align: center; border: 1px solid #eee; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+        .card img { width: 100%; height: 220px; object-fit: contain; background: #fff; padding: 10px; box-sizing: border-box; }
+        .card-info { padding: 20px; }
+        .card-info h3 { margin: 10px 0; font-size: 1.2em; }
+        .price { color: var(--accent); font-weight: bold; font-size: 1.4em; display: block; margin-bottom: 15px; }
+        .btn { background: var(--main); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; }
+        .btn:hover { background: var(--accent); }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>منصة الاستوديو التجارية</h1>
-    <p>واجهة الربط بين الموقع وقاعدة البيانات</p>
+    <h1>سوق هوواشة - الإصدار الثاني</h1>
+    <p>بوابتك لأفضل المنتجات العصرية</p>
 </header>
 
 <nav>
-    <a href="#real-estate">العقارات</a>
-    <a href="#automobiles">السيارات</a>
+    <a href="#cars">السيارات</a>
+    <a href="#phones">الهواتف</a>
     <a href="#appliances">الأجهزة الكهربائية</a>
+    <a href="#realestate">العقارات</a>
 </nav>
 
-<h2 id="real-estate" class="section-title">🏘️ قسم العقارات</h2>
+<h2 id="cars" class="section-header">🏎️ السيارات الحديثة</h2>
 <div class="container">
     <div class="card">
-        <span class="category-tag">للبيع</span>
-        <img src="images/residential_land.jpg" alt="أرض سكنية">
-        <div class="card-body">
-            <h3>أرض سكنية مميزة</h3>
-            <span class="price">75,000 دينار</span>
-        </div>
+        <img src="images/tesla1.jpg" alt="Tesla">
+        <div class="card-info"><h3>Tesla Model S</h3><span class="price">60,000 دينار</span><button class="btn">عرض التفاصيل</button></div>
+    </div>
+    <div class="card">
+        <img src="images/lucid1.jpg" alt="Lucid">
+        <div class="card-info"><h3>Lucid Air Pure</h3><span class="price">65,000 دينار</span><button class="btn">عرض التفاصيل</button></div>
+    </div>
+    <div class="card">
+        <img src="images/mercedes1.jpg" alt="Mercedes">
+        <div class="card-info"><h3>Mercedes EQS</h3><span class="price">70,000 دينار</span><button class="btn">عرض التفاصيل</button></div>
     </div>
 </div>
 
-<h2 id="automobiles" class="section-title">🚗 قسم السيارات الحديثة</h2>
+<h2 id="phones" class="section-header">📱 الهواتف الذكية</h2>
 <div class="container">
-    <div class="card">
-        <img src="images/Tesla.jpg" alt="تسلا">
-        <div class="card-body">
-            <h3>Tesla Model S</h3>
-            <span class="price">60,000 دينار</span>
-        </div>
-    </div>
-    <div class="card">
-        <img src="images/Lucid.jpg" alt="لوسيد">
-        <div class="card-body">
-            <h3>Lucid Air Pure</h3>
-            <span class="price">65,000 دينار</span>
-        </div>
-    </div>
-    <div class="card">
-        <img src="images/Mercedes.jpg" alt="مرسيدس">
-        <div class="card-body">
-            <h3>Mercedes EQS</h3>
-            <span class="price">70,000 دينار</span>
-        </div>
-    </div>
+    <div class="card"><img src="images/iphone1.jpg" alt="iPhone 1"><div class="card-info"><h3>iPhone 15 Pro</h3><span class="price">900 دينار</span><button class="btn">شراء الآن</button></div></div>
+    <div class="card"><img src="images/iphone2.jpg" alt="iPhone 2"><div class="card-info"><h3>iPhone 15 Plus</h3><span class="price">800 دينار</span><button class="btn">شراء الآن</button></div></div>
+    <div class="card"><img src="images/iphone3.jpg" alt="iPhone 3"><div class="card-info"><h3>iPhone 14 Pro</h3><span class="price">700 دينار</span><button class="btn">شراء الآن</button></div></div>
 </div>
 
-<h2 id="appliances" class="section-title">🔌 قسم الأجهزة الكهربائية</h2>
+<h2 id="appliances" class="section-header">🔌 الأجهزة الكهربائية</h2>
 <div class="container">
-    <div class="card"><img src="images/air_conditioner.jpg" alt="مكيف"><div class="card-body"><h3>مكيف هواء</h3><span class="price">450 د.أ</span></div></div>
-    <div class="card"><img src="images/electric_oven.jpg" alt="فرن"><div class="card-body"><h3>فرن كهربائي</h3><span class="price">320 د.أ</span></div></div>
-    <div class="card"><img src="images/dishwasher.jpg" alt="غسالة صحون"><div class="card-body"><h3>غسالة صحون</h3><span class="price">580 د.أ</span></div></div>
-    <div class="card"><img src="images/robot_vacuum.jpg" alt="مكنسة روبوت"><div class="card-body"><h3>مكنسة روبوت</h3><span class="price">210 د.أ</span></div></div>
-    <div class="card"><img src="images/coffee_machine.jpg" alt="قهوة"><div class="card-body"><h3>ماكينة قهوة</h3><span class="price">180 د.أ</span></div></div>
-    <div class="card"><img src="images/blender.jpg" alt="خلاط"><div class="card-body"><h3>خلاط احترافي</h3><span class="price">65 د.أ</span></div></div>
-    <div class="card"><img src="images/stand_mixer.jpg" alt="عجانة"><div class="card-body"><h3>عجانة كهربائية</h3><span class="price">140 د.أ</span></div></div>
-    <div class="card"><img src="images/microwave_oven.jpg" alt="ميكروويف"><div class="card-body"><h3>ميكروويف ديجيتال</h3><span class="price">95 د.أ</span></div></div>
-    <div class="card"><img src="images/robot_vacuum.jpg" alt="مكنسة"><div class="card-body"><h3>مكنسة يدوية</h3><span class="price">115 د.أ</span></div></div>
-    <div class="card"><img src="images/dishwasher.jpg" alt="غسالة"><div class="card-body"><h3>غسالة أوتوماتيك</h3><span class="price">500 د.أ</span></div></div>
+    <div class="card"><img src="images/air_conditioner.jpg" alt="AC"><div class="card-info"><h3>مكيف هواء جداري</h3><span class="price">450 دينار</span><button class="btn">إضافة للسلة</button></div></div>
+    <div class="card"><img src="images/dishwasher.jpg" alt="Dishwasher"><div class="card-info"><h3>غسالة أطباق</h3><span class="price">520 دينار</span><button class="btn">إضافة للسلة</button></div></div>
+    <div class="card"><img src="images/microwave_oven.jpg" alt="Microwave"><div class="card-info"><h3>ميكروويف ديجيتال</h3><span class="price">95 دينار</span><button class="btn">إضافة للسلة</button></div></div>
+    <div class="card"><img src="images/robot_vacuum.jpg" alt="Vacuum"><div class="card-info"><h3>مكنسة روبوت</h3><span class="price">210 دينار</span><button class="btn">إضافة للسلة</button></div></div>
+    <div class="card"><img src="images/stand_mixer.jpg" alt="Mixer"><div class="card-info"><h3>عجانة احترافية</h3><span class="price">140 دينار</span><button class="btn">إضافة للسلة</button></div></div>
+    <div class="card"><img src="images/coffee_machine.jpg" alt="Coffee"><div class="card-info"><h3>ماكينة قهوة</h3><span class="price">180 دينار</span><button class="btn">إضافة للسلة</button></div></div>
+</div>
+
+<h2 id="realestate" class="section-header">🏡 العقارات</h2>
+<div class="container">
+    <div class="card">
+        <img src="images/land_plot.jpg" alt="Land">
+        <div class="card-info"><h3>أرض سكنية للبيع</h3><span class="price">80,000 دينار</span><button class="btn">تواصل معنا</button></div>
+    </div>
 </div>
 
 </body>
