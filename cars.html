@@ -3,158 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معرض السيارات الفاخرة | سوق باي الأردن</title>
+    <title>معرض سيارات الهواوشة</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a1a1a;
-            color: white;
-            margin: 0;
-            padding: 20px;
-            text-align: center;
-        }
-        .header {
-            padding: 30px;
-            background: linear-gradient(135deg, #6a1b9a, #ffd700);
-            border-radius: 15px;
-            margin-bottom: 30px;
-        }
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 10px;
-        }
-        .card {
-            background-color: #2d2d2d;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid #444;
-            transition: transform 0.3s;
-        }
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: #ffd700;
-        }
-        .card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .card-content {
-            padding: 20px;
-        }
-        .price {
-            color: #ffd700;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        .btn-buy {
-            background-color: #6a1b9a;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 10px;
-        }
+        :root { --dark: #111; --accent: #e67e22; --bg: #f8f9fa; }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding-bottom: 60px; }
+        header { background: var(--dark); color: white; padding: 20px; text-align: center; }
+        
+        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: auto; }
+        
+        .car-card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eee; transition: 0.3s; }
+        .car-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        
+        .img-box { width: 100%; height: 200px; background: #fff; }
+        .img-box img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
+        
+        .info { padding: 15px; text-align: center; }
+        .car-name { font-size: 1.1em; font-weight: bold; margin-bottom: 10px; color: var(--dark); }
+        .price { color: var(--accent); font-weight: bold; font-size: 1.3em; display: block; margin-bottom: 15px; }
+        
+        .btn-buy { background: var(--dark); color: white; padding: 10px 20px; text-decoration: none; border-radius: 8px; display: block; font-weight: bold; font-size: 0.9em; }
+        .back-link { display: inline-block; margin: 20px; color: #666; text-decoration: none; font-size: 0.9em; }
+
+        /* سلة المشتريات المصغرة كما طلبت */
+        .cart-mini { position: fixed; bottom: 10px; left: 10px; background: var(--dark); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.7em; z-index: 1000; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>معرض السيارات الكهربائية الفاخرة</h1>
-        <p>اشتري سيارة أحلامك الآن باستخدام عملة Pi</p>
-    </div>
+<header>معرض سيارات الهواوشة - 10 موديلات</header>
 
-    <div class="container">
-        <div class="card">
-            <img src="https://hawawsha.github.io/images/tesla1.jpg" alt="Tesla Model S">
-            <div class="card-content">
-                <h3>Tesla Model S 2026</h3>
-                <p class="price">Pi 0.350</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-        </div>
+<a href="index.html" class="back-link">← العودة للرئيسية</a>
 
-        <div class="card">
-            <img src="https://hawawsha.github.io/images/tesla2.jpg" alt="Tesla Model X">
-            <div class="card-content">
-                <h3>Tesla Model X 2026</h3>
-                <p class="price">Pi 0.382</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-        </div>
+<div class="container">
+    <div class="car-card"><div class="img-box"><img src="images/tesla1.jpg"></div><div class="info"><div class="car-name">Tesla Model S</div><span class="price">60,000 د.أ</span><a href="#" class="btn-buy">حجز تجريبي</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/tesla1.jpg"></div><div class="info"><div class="car-name">Tesla Model 3</div><span class="price">45,000 د.أ</span><a href="#" class="btn-buy">حجز تجريبي</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/tesla1.jpg"></div><div class="info"><div class="car-name">Tesla Model X</div><span class="price">75,000 د.أ</span><a href="#" class="btn-buy">حجز تجريبي</a></div></div>
 
-        <div class="card">
-            <img src="https://hawawsha.github.io/images/tesla3.jpg" alt="Tesla Cybertruck">
-            <div class="card-content">
-                <h3>Tesla Cybertruck</h3>
-                <p class="price">Pi 0.254</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-        </div>
+    <div class="car-card"><div class="img-box"><img src="images/lucid1.jpg"></div><div class="info"><div class="car-name">Lucid Air Pure</div><span class="price">65,000 د.أ</span><a href="#" class="btn-buy">حجز تجريبي</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/lucid1.jpg"></div><div class="info"><div class="car-name">Lucid Air Grand</div><span class="price">85,000 د.أ</span><a href="#" class="btn-buy">حجز تجريبي</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/lucid1.jpg"></div><div class="info"><div class="car-name">Lucid Sapphire</div><span class="price">120,000 د.أ</span><a href="#" class="btn-buy">حجز تجريبي</a></div></div>
 
-        <div class="card">
-            <img src="https://hawawsha.github.io/images/mercedes1.jpg" alt="Mercedes EQS">
-            <div class="card-content">
-                <h3>Mercedes EQS Sedan</h3>
-                <p class="price">Pi 0.318</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-        </div>
+    <div class="car-card"><div class="img-box"><img src="images/mercedes1.jpg"></div><div class="info"><div class="car-name">Mercedes EQS</div><span class="price">90,000 د.أ</span><a href="#" class="btn-buy">حجز تجريبي</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/mercedes1.jpg"></div><div class="info"><div class="car-name">Mercedes EQE</div><span class="price">70,000 د.أ</span><a href="#" class="btn-buy">حجز تجريبي</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/mercedes1.jpg"></div><div class="info"><div class="car-name">Mercedes EQB</div><span class="price">55,000 د.أ</span><a href="#" class="btn-buy">حجز تجريبي</a></div></div>
+    
+    <div class="car-card"><div class="img-box"><img src="images/mercedes1.jpg"></div><div class="info"><div class="car-name">Mercedes E-Class</div><span class="price">65,000 د.أ</span><a href="#" class="btn-buy">حجز تجريبي</a></div></div>
+</div>
 
-        <div class="card">
-            <img src="https://hawawsha.github.io/images/mercedes2.jpg" alt="Mercedes SUV">
-            <div class="card-content">
-                <h3>Mercedes EQS SUV</h3>
-                <p class="price">Pi 0.334</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://hawawsha.github.io/images/mercedes3.jpg" alt="Mercedes EQE">
-            <div class="card-content">
-                <h3>Mercedes EQE Sedan</h3>
-                <p class="price">Pi 0.322</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://hawawsha.github.io/images/lucid1.jpg" alt="Lucid Air">
-            <div class="card-content">
-                <h3>Lucid Air Grand Touring</h3>
-                <p class="price">Pi 0.400</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://hawawsha.github.io/images/lucid2.jpg" alt="Lucid Air Pure">
-            <div class="card-content">
-                <h3>Lucid Air Pure</h3>
-                <p class="price">Pi 0.380</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="https://hawawsha.github.io/images/lucid3.jpg" alt="Lucid Dream">
-            <div class="card-content">
-                <h3>Lucid Air Dream Edition</h3>
-                <p class="price">Pi 0.395</p>
-                <a href="#" class="btn-buy">شراء الآن</a>
-            </div>
-        </div>
-    </div>
-
-    <br>
-    <a href="index.html" style="color: #ffd700; text-decoration: none;">← العودة للصفحة الرئيسية</a>
+<div class="cart-mini">🛒 السلة: 0 د.أ</div>
 
 </body>
 </html>
