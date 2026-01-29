@@ -3,53 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قسم العقارات - الهواوشة</title>
+    <title>عقارات الهواوشة</title>
     <style>
-        :root { --main: #1a1a1a; --accent: #27ae60; --bg: #fdfdfd; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 0; }
-        header { background: var(--main); color: white; padding: 20px; text-align: center; }
+        :root { --dark: #1a1a1a; --green: #27ae60; --gray: #f4f4f4; }
+        body { font-family: sans-serif; background: var(--gray); margin: 0; padding: 0; text-align: center; }
+        header { background: var(--dark); color: white; padding: 15px; font-size: 1.2em; }
         
-        .container { max-width: 600px; margin: 30px auto; padding: 15px; }
+        .card { background: white; width: 90%; max-width: 400px; margin: 20px auto; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #ddd; }
         
-        /* الكرت الاحترافي */
-        .property-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border: 1px solid #eee; }
+        /* إطار الصورة لضمان الوضوح */
+        .img-container { width: 100%; height: 250px; background: #fff; display: flex; align-items: center; justify-content: center; }
+        .img-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
         
-        /* تصحيح عرض الصورة */
-        .image-box { width: 100%; height: auto; min-height: 250px; background: #eee; }
-        .image-box img { width: 100%; height: auto; display: block; object-fit: cover; }
-        
-        .details { padding: 25px; text-align: center; }
-        .price { color: #e67e22; font-weight: bold; font-size: 1.8em; display: block; margin: 15px 0; }
-        
-        .btn-whatsapp { background: var(--accent); color: white; padding: 12px 30px; border-radius: 12px; text-decoration: none; display: inline-block; font-weight: bold; transition: 0.3s; }
-        .back-link { display: block; margin-top: 20px; color: #888; text-decoration: none; font-size: 0.9em; }
+        .info { padding: 20px; }
+        .price { color: #e67e22; font-weight: bold; font-size: 1.5em; margin: 10px 0; display: block; }
+        .btn { background: var(--green); color: white; padding: 12px 25px; text-decoration: none; border-radius: 8px; display: inline-block; font-weight: bold; }
+        .back { display: block; margin-top: 15px; color: #777; text-decoration: none; font-size: 0.8em; }
 
-        /* سلة مصغرة جداً كما طلبت */
-        .cart-tiny { position: fixed; bottom: 15px; left: 15px; background: rgba(26, 26, 26, 0.9); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.8em; z-index: 2000; }
+        /* سلة مصغرة جداً في الزاوية */
+        .basket { position: fixed; bottom: 10px; left: 10px; background: var(--dark); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.75em; opacity: 0.9; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>عقارات هوواشة</h1>
-</header>
+<header>سوق هوواشة - العقارات</header>
 
-<div class="container">
-    <div class="property-card">
-        <div class="image-box">
-            <img src="images/land_plot.jpg" alt="أرض سكنية للبيع" onerror="this.src='https://placehold.co/600x400?text=جاري+تحميل+الصورة'">
-        </div>
-        <div class="details">
-            <h2>أرض سكنية للبيع</h2>
-            <p>أرض مميزة بموقع استراتيجي في منطقة الهواوشة.</p>
-            <span class="price">80,000 د.أ</span>
-            <a href="https://wa.me/962XXXXXXXXX" class="btn-whatsapp">تواصل عبر واتساب</a>
-            <a href="index.html" class="back-link">← العودة للرئيسية</a>
-        </div>
+<div class="card">
+    <div class="img-container">
+        <img src="images/land_plot.jpg" alt="أرض سكنية">
+    </div>
+    <div class="info">
+        <h3>أرض سكنية للبيع</h3>
+        <p>منطقة مميزة وهادئة</p>
+        <span class="price">80,000 د.أ</span>
+        <a href="https://wa.me/962XXXXXXXXX" class="btn">تواصل للمعاينة</a>
+        <a href="index.html" class="back">← عودة للرئيسية</a>
     </div>
 </div>
 
-<div class="cart-tiny">🛒 السلة: 0 د.أ</div>
+<div class="basket">🛒 السلة: 0 د.أ</div>
 
 </body>
 </html>
