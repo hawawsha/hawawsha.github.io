@@ -15,29 +15,28 @@
             background: linear-gradient(45deg, #4b0082, #ffd700);
             padding: 40px 20px;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
         .section-title {
             padding: 20px;
             background-color: #1a1a1a;
             border-bottom: 2px solid #ffd700;
-            margin-top: 20px;
             text-align: center;
         }
         .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
             gap: 25px;
-            padding: 40px 20px;
         }
         .card {
             background-color: #1e1e1e;
             border-radius: 20px;
-            border: 2px solid #ffd700; /* الحواف الذهبية التي كانت في تصميمك */
+            border: 2px solid #ffd700;
             overflow: hidden;
-            transition: transform 0.3s;
             text-align: center;
-            margin-bottom: 20px;
+            width: 100%;
+            max-width: 400px;
         }
         .card img {
             width: 100%;
@@ -49,7 +48,7 @@
         }
         .price {
             color: #ffd700;
-            font-size: 26px;
+            font-size: 28px;
             font-weight: bold;
             margin: 15px 0;
         }
@@ -61,8 +60,8 @@
             border-radius: 10px;
             font-size: 18px;
             cursor: pointer;
-            width: 90%;
-            margin-bottom: 15px;
+            width: 80%;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -79,7 +78,7 @@
     
     <section class="container">
         <div class="card">
-            <img src="images/car1.jpg" alt="Tesla Model S 2026">
+            <img src="car1.jpg" alt="Tesla Model S 2026">
             <div class="card-content">
                 <h3>Tesla Model S - 2026</h3>
                 <p class="price">Pi 0.350</p>
@@ -88,59 +87,33 @@
         </div>
 
         <div class="card">
-            <img src="images/car2.jpg" alt="Tesla Model X 2026">
+            <img src="car2.jpg" alt="Tesla Model X 2026">
             <div class="card-content">
                 <h3>Tesla Model X 2026</h3>
                 <p class="price">Pi 0.382</p>
                 <button class="buy-btn">شراء الآن</button>
             </div>
         </div>
-
-        <div class="card">
-            <img src="images/car3.jpg" alt="Lucid Air Dream Edition">
-            <div class="card-content">
-                <h3>Lucid Air Dream Edition</h3>
-                <p class="price">Pi 0.395</p>
-                <button class="buy-btn">شراء الآن</button>
-            </div>
-        </div>
     </section>
 
     <div class="section-title">
-        <h2>أحدث الهواتف الذكية 2026</h2>
+        <h2>قسم الإلكترونيات</h2>
     </div>
 
     <section class="container">
         <div class="card">
-            <img src="images/iphone1.jpg" alt="iPhone 17 Pro Max">
+            <img src="iphone1.jpg" alt="iPhone 17 Pro Max">
             <div class="card-content">
                 <h3>iPhone 17 Pro Max</h3>
-                <p class="price">Pi 0.0045</p>
-                <button class="buy-btn">شراء الآن</button>
-            </div>
-        </div>
-        <div class="card">
-            <img src="images/iphone2.jpg" alt="iPhone 17 Pro Gold">
-            <div class="card-content">
-                <h3>iPhone 17 Pro Gold</h3>
-                <p class="price">Pi 0.0040</p>
-                <button class="buy-btn">شراء الآن</button>
-            </div>
-        </div>
-        <div class="card">
-            <img src="images/iphone3.jpg" alt="iPhone 17 Future">
-            <div class="card-content">
-                <h3>iPhone 17 Future Display</h3>
-                <p class="price">Pi 0.0042</p>
+                <p class="price">Pi 0.0038</p>
                 <button class="buy-btn">شراء الآن</button>
             </div>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 40px; color: #666; background-color: #1a1a1a;">
-        <p>&copy; 2026 سوق باي الأردن - جميع الحقوق محفوظة</p>
-        <p style="color: #ffd700;">نحن نجهز الكود البرمجي بانتظار الشبكة المفتوحة</p>
-    </footer|
+    <footer style="text-align: center; padding: 40px; color: #888;">
+        <p>نحن نجهز الكود البرمجي بانتظار الشبكة المفتوحة</p>
+    </footer>
 
 </body>
 </html>
