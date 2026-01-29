@@ -3,83 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوق باي الأردن | Pi Market Jordan</title>
+    <title>SOUQ PI JORDAN | سوق باي الأردن</title>
     <style>
-        body { margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121212; color: white; }
-        .header { background: linear-gradient(45deg, #4b0082, #ffd700); padding: 40px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        .section-title { padding: 20px; background-color: #1a1a1a; border-bottom: 2px solid #ffd700; text-align: center; margin-top: 20px; }
-        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 30px; }
-        .card { background-color: #1e1e1e; border-radius: 20px; border: 2px solid #ffd700; overflow: hidden; text-align: center; transition: 0.3s; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(106, 27, 154, 0.3); }
-        .card img { width: 100%; height: 250px; object-fit: cover; display: block; }
-        .card-content { padding: 20px; }
-        .price { color: #ffd700; font-size: 26px; font-weight: bold; margin: 15px 0; }
-        .buy-btn { background-color: #6a1b9a; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; width: 85%; margin-bottom: 20px; font-weight: bold; font-size: 16px; }
-        .buy-btn:hover { background-color: #8e24aa; }
-        footer { text-align: center; padding: 40px; color: #888; background-color: #1a1a1a; margin-top: 50px; }
+        body { margin: 0; font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #2d135c; color: white; text-align: center; }
+        
+        /* تصميم الواجهة الأمامية (الأزرار) */
+        .main-header { padding: 40px 20px; }
+        .main-header h1 { color: #ffd700; font-size: 32px; margin-bottom: 10px; }
+        .menu-container { display: flex; flex-direction: column; gap: 15px; padding: 20px; max-width: 500px; margin: 0 auto; }
+        .menu-btn { background-color: rgba(255, 215, 0, 0.1); border: 2px solid #ffd700; color: white; padding: 20px; border-radius: 15px; text-decoration: none; font-size: 18px; font-weight: bold; transition: 0.3s; }
+        .menu-btn.active { background-color: #ffd700; color: #2d135c; }
+        .menu-btn:hover { transform: scale(1.05); background-color: #ffd700; color: #2d135c; }
+
+        /* تصميم المتجر (السيارات والهواتف) */
+        .store-section { background-color: #121212; margin-top: 50px; padding-bottom: 50px; }
+        .section-title { padding: 25px; background-color: #1a1a1a; border-bottom: 2px solid #ffd700; margin-bottom: 30px; }
+        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 20px; }
+        .card { background-color: #1e1e1e; border-radius: 20px; border: 2px solid #ffd700; overflow: hidden; }
+        .card img { width: 100%; height: 250px; object-fit: cover; }
+        .price { color: #ffd700; font-size: 24px; font-weight: bold; margin: 15px 0; }
+        .buy-btn { background-color: #6a1b9a; color: white; border: none; padding: 12px 30px; border-radius: 10px; cursor: pointer; width: 80%; margin-bottom: 20px; font-weight: bold; }
+        
+        .counter-badge { background-color: #ffd700; color: #2d135c; padding: 10px 20px; border-radius: 30px; display: inline-block; font-weight: bold; margin-top: 20px; }
     </style>
 </head>
 <body>
 
-    <header class="header">
-        <h1>سوق باي الأردن 🇯🇴</h1>
-        <p>المنصة المتطورة للبيع والشراء باستخدام عملة Pi</p>
+    <header class="main-header">
+        <h1>SOUQ PI JORDAN 🇯🇴</h1>
+        <p>سوق باي الأردن - الإصدار الثاني</p>
+        
+        <div class="menu-container">
+            <a href="jordan-pages.html" class="menu-btn active">🇯🇴 صفحات الأردن (المتجر)</a>
+            <a href="cv.html" class="menu-btn">📄 السيرة الذاتية (المطور)</a>
+            <a href="projects.html" class="menu-btn">🏗️ مشاريعنا المستقبلية</a>
+            <a href="blog.html" class="menu-btn">📝 مدونة الرواد</a>
+        </div>
+
+        <div class="counter-badge">247 متصل الآن</div>
     </header>
 
-    <div class="section-title">
-        <h2>معرض السيارات الكهربائية الفاخرة</h2>
-    </div>
-    
-    <section class="container">
-        <div class="card"><img src="images/tesla1.jpg" alt="Tesla"><div class="card-content"><h3>Tesla Model S</h3><p class="price">Pi 0.350</p><button class="buy-btn">شراء الآن</button></div></div>
-        <div class="card"><img src="images/tesla2.jpg" alt="Tesla"><div class="card-content"><h3>Tesla Model X</h3><p class="price">Pi 0.382</p><button class="buy-btn">شراء الآن</button></div></div>
-        <div class="card"><img src="images/tesla3.jpg" alt="Tesla"><div class="card-content"><h3>Tesla Roadster</h3><p class="price">Pi 0.450</p><button class="buy-btn">شراء الآن</button></div></div>
+    <div class="store-section">
+        <div class="section-title"><h2>معرض السيارات الكهربائية</h2></div>
+        <section class="container">
+            <div class="card"><img src="images/tesla1.jpg"><div class="card-content"><h3>Tesla Model S</h3><p class="price">Pi 0.350</p><button class="buy-btn">شراء الآن</button></div></div>
+            <div class="card"><img src="images/tesla2.jpg"><div class="card-content"><h3>Tesla Model X</h3><p class="price">Pi 0.382</p><button class="buy-btn">شراء الآن</button></div></div>
+            <div class="card"><img src="images/lucid1.jpg"><div class="card-content"><h3>Lucid Air Pure</h3><p class="price">Pi 0.395</p><button class="buy-btn">شراء الآن</button></div></div>
+            </section>
 
-        <div class="card"><img src="images/lucid1.jpg" alt="Lucid"><div class="card-content"><h3>Lucid Air Pure</h3><p class="price">Pi 0.395</p><button class="buy-btn">شراء الآن</button></div></div>
-        <div class="card"><img src="images/lucid2.jpg" alt="Lucid"><div class="card-content"><h3>Lucid Air Touring</h3><p class="price">Pi 0.410</p><button class="buy-btn">شراء الآن</button></div></div>
-        <div class="card"><img src="images/lucid3.jpg" alt="Lucid"><div class="card-content"><h3>Lucid Sapphire</h3><p class="price">Pi 0.520</p><button class="buy-btn">شراء الآن</button></div></div>
-
-        <div class="card"><img src="images/mercedes1.jpg" alt="Mercedes"><div class="card-content"><h3>Mercedes EQS</h3><p class="price">Pi 0.415</p><button class="buy-btn">شراء الآن</button></div></div>
-        <div class="card"><img src="images/mercedes2.jpg" alt="Mercedes"><div class="card-content"><h3>Mercedes EQE</h3><p class="price">Pi 0.385</p><button class="buy-btn">شراء الآن</button></div></div>
-        <div class="card"><img src="images/mercedes3.jpg" alt="Mercedes"><div class="card-content"><h3>Mercedes SUV Electric</h3><p class="price">Pi 0.430</p><button class="buy-btn">شراء الآن</button></div></div>
-    </section>
-
-    <div class="section-title">
-        <h2>قسم الإلكترونيات والهواتف الذكية</h2>
+        <div class="section-title"><h2>قسم الإلكترونيات الحديثة</h2></div>
+        <section class="container">
+            <div class="card"><img src="images/iphone1.jpg"><div class="card-content"><h3>iPhone 17 Pro Max</h3><p class="price">Pi 0.0038</p><button class="buy-btn">شراء الآن</button></div></div>
+            <div class="card"><img src="images/iphone2.jpg"><div class="card-content"><h3>iPhone 17 Pro Silver</h3><p class="price">Pi 0.0035</p><button class="buy-btn">شراء الآن</button></div></div>
+            <div class="card"><img src="images/iphone3.jpg"><div class="card-content"><h3>iPhone 17 Ultra Black</h3><p class="price">Pi 0.0042</p><button class="buy-btn">شراء الآن</button></div></div>
+        </section>
     </div>
 
-    <section class="container">
-        <div class="card">
-            <img src="images/iphone1.jpg" alt="iPhone 17 Pro Max">
-            <div class="card-content">
-                <h3>iPhone 17 Pro Max</h3>
-                <p class="price">Pi 0.0038</p>
-                <button class="buy-btn">شراء الآن</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="images/iphone2.jpg" alt="iPhone 17 Pro">
-            <div class="card-content">
-                <h3>iPhone 17 Pro Silver</h3>
-                <p class="price">Pi 0.0035</p>
-                <button class="buy-btn">شراء الآن</button>
-            </div>
-        </div>
-
-        <div class="card">
-            <img src="images/iphone3.jpg" alt="iPhone 17 Ultra">
-            <div class="card-content">
-                <h3>iPhone 17 Ultra Black</h3>
-                <p class="price">Pi 0.0042</p>
-                <button class="buy-btn">شراء الآن</button>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 جميع الحقوق محفوظة لـ "سوق باي الأردن"</p>
-        <p style="color: #ffd700; font-size: 14px; margin-top: 10px;">بانتظار إطلاق الشبكة المفتوحة لعملة Pi</p>
+    <footer style="padding: 30px; color: #888;">
+        <p>SOUQ PI JORDAN &copy; 2026</p>
     </footer>
 
 </body>
