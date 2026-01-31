@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>سوق هوواشة - الدفع التجريبي</title>
+  <title>سوق هوواشة v2 - دفع Pi</title>
   <script src="https://sdk.minepi.com/pi-sdk.js"></script>
   <style>
     body { font-family: sans-serif; text-align: center; padding: 50px; background: #f4f4f4; }
@@ -16,13 +16,13 @@
 
 <div class="card">
   <h2>سوق هوواشة v2</h2>
-  <p>اضغط للبدء في عملية الدفع التجريبي</p>
-  <button id="payBtn">ادفع 1 Pi (Sandbox Test)</button>
+  <p>اضغط للبدء في عملية الدفع</p>
+  <button id="payBtn">ادفع 1 Pi</button>
   <div id="status">جاهز..</div>
 </div>
 
 <script>
-  // تهيئة Pi SDK
+  // تهيئة Pi SDK للعمل على Mainnet
   Pi.init({ version: "2.0", sandbox: false });
 
   document.getElementById("payBtn").onclick = async () => {
@@ -32,16 +32,16 @@
       
       const payment = await Pi.createPayment({
         amount: 1,
-        memo: "Sandbox Test Payment"
+        memo: "دفع حقيقي - سوق هوواشة v2"
       }, {
         onReadyForServerApproval: async (paymentId) => {
           statusDiv.innerText = "جاري التأكيد من السيرفر...";
-          // لاحقًا سنربط approve endpoint إذا كان موجود
           console.log("Payment ID جاهز:", paymentId);
+          // إذا لديك approve endpoint على السيرفر يمكنك ربطه هنا
         },
         onReadyForServerCompletion: (paymentId, txid) => {
           statusDiv.innerText = "✅ تمت العملية بنجاح!";
-          alert("تم الدفع التجريبي! رقم العملية: " + txid);
+          alert("تم الدفع! رقم العملية: " + txid);
         },
         onCancel: (paymentId) => { statusDiv.innerText = "❌ تم إلغاء العملية"; },
         onError: (error) => { statusDiv.innerText = "⚠️ خطأ في الدفع: " + error.message; }
