@@ -3,81 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سوق هوواشة - النسخة الاحترافية</title>
+    <title>سوق هوواشة - v2</title>
     <script src="https://sdk.minepi.com/pi-sdk.js"></script>
     <style>
         :root { --main: #1a1a1a; --accent: #e67e22; --bg: #fdfdfd; }
-        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; }
-        header { background: var(--main); color: white; padding: 25px; text-align: center; }
-        nav { background: #fff; padding: 12px; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .nav-link { color: var(--main); text-decoration: none; margin: 0 6px; font-weight: bold; cursor: pointer; padding: 10px 18px; border-radius: 25px; display: inline-block; transition: 0.3s; border: 1px solid #eee; font-size: 0.9em; }
-        .nav-link.active { background: var(--main); color: white; border-color: var(--main); }
-        .section { display: none; padding: 30px 15px; max-width: 1200px; margin: auto; }
-        .section.active { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .container { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-        .card { background: white; border-radius: 18px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.04); transition: 0.4s; border: 1px solid #f0f0f0; display: flex; flex-direction: column; }
-        .card img { width: 100%; height: 220px; object-fit: contain; padding: 15px; box-sizing: border-box; }
-        .card-info { padding: 15px; text-align: center; }
-        .price { color: var(--accent); font-weight: bold; font-size: 1.3em; display: block; margin-bottom: 12px; }
-        .btn { background: #f8f8f8; color: var(--main); border: none; padding: 12px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; transition: 0.2s; border: 1px solid #eee; }
-        .btn:hover { background: var(--main); color: white; }
-        .cart-mini { position: fixed; bottom: 20px; left: 20px; background: var(--main); color: white; padding: 10px 20px; border-radius: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); z-index: 2000; font-size: 0.9em; display: flex; align-items: center; gap: 8px; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding-bottom: 80px; text-align: center; }
+        header { background: var(--main); color: white; padding: 25px; border-bottom: 4px solid var(--accent); }
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 30px; }
+        .card { background: white; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 280px; padding: 20px; border: 1px solid #eee; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .price { color: var(--accent); font-weight: bold; font-size: 1.5em; display: block; margin: 15px 0; }
+        .btn { background: #27ae60; color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; width: 100%; font-weight: bold; font-size: 1.1em; }
+        #status { background: #fff3e0; color: #e67e22; padding: 10px; font-weight: bold; display: block; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>سوق هوواشة التجاري</h1>
+    <h1>سوق هوواشة التجاري v2</h1>
 </header>
 
-<nav>
-    <div class="nav-link active" onclick="showSection('appliances', this)">الأجهزة</div>
-    <div class="nav-link" onclick="showSection('cars', this)">السيارات</div>
-    <div class="nav-link" onclick="showSection('phones', this)">الهواتف</div>
-    <div class="nav-link" onclick="showSection('realestate', this)">العقارات</div>
-</nav>
+<div id="status">جاهز للربط مع المحفظة.. يرجى التجربة</div>
 
-<div id="appliances" class="section active">
-    <div class="container">
-        <div class="card"><img src="images/air_conditioner.jpg"><div class="card-info"><h3>مكيف هواء</h3><span class="price">0.01 Pi</span><button class="btn" onclick="onBuy(0.01, 'مكيف هواء')">شراء تجريبي</button></div></div>
-        <div class="card"><img src="images/coffee_machine.jpg"><div class="card-info"><h3>ماكينة قهوة</h3><span class="price">0.01 Pi</span><button class="btn" onclick="onBuy(0.01, 'ماكينة قهوة')">شراء تجريبي</button></div></div>
+<div class="container">
+    <div class="card">
+        <h3>مكيف هواء ميديا</h3>
+        <span class="price">0.01 Pi</span>
+        <button class="btn" onclick="onBuy(0.01, 'مكيف ميديا')">شراء تجريبي</button>
+    </div>
+    <div class="card">
+        <h3>ماكينة قهوة احترافية</h3>
+        <span class="price">0.01 Pi</span>
+        <button class="btn" onclick="onBuy(0.01, 'ماكينة قهوة')">شراء تجريبي</button>
     </div>
 </div>
 
-<div class="cart-mini">🛒 الحالة: <span id="status">جاهز للاختبار</span></div>
-
 <script>
-    // تهيئة Pi SDK في وضع التجربة
+    // تهيئة التطبيق باستخدام المفتاح الذي أرسلته
+    const Pi = window.Pi;
     Pi.init({ version: "2.0", sandbox: true });
-
-    function showSection(id, el) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        el.classList.add('active');
-    }
 
     async function onBuy(amount, itemName) {
         try {
-            document.getElementById('status').innerText = "جاري الاتصال بالمحفظة...";
+            document.getElementById('status').innerText = "جاري فتح محفظة Pi...";
+            
             const payment = await Pi.createPayment({
                 amount: amount,
-                memo: "تجربة شراء: " + itemName,
+                memo: "شراء تجريبي: " + itemName,
                 metadata: { item: itemName }
             }, {
-                onReadyForServerApproval: (paymentId) => { console.log("Payment Ready:", paymentId); },
-                onReadyForServerCompletion: (paymentId, txid) => {
-                    document.getElementById('status').innerText = "تمت العملية!";
-                    alert("شكراً لك! رقم المعاملة: " + txid);
+                onReadyForServerApproval: (paymentId) => {
+                    console.log("تم التجهيز:", paymentId);
                 },
-                onCancel: (paymentId) => { document.getElementById('status').innerText = "تم الإلغاء"; },
-                onError: (error, payment) => { document.getElementById('status').innerText = "خطأ في الدفع"; }
+                onReadyForServerCompletion: (paymentId, txid) => {
+                    document.getElementById('status').innerText = "✅ تمت العملية بنجاح!";
+                    alert("مبروك! تمت أول عملية تجريبية بنجاح.\nرقم المعاملة: " + txid);
+                },
+                onCancel: (paymentId) => {
+                    document.getElementById('status').innerText = "❌ تم إلغاء العملية";
+                },
+                onError: (error, payment) => {
+                    document.getElementById('status').innerText = "⚠️ خطأ: " + error.message;
+                }
             });
         } catch (err) {
-            alert("يرجى فتح الموقع من متصفح Pi Browser فقط.");
+            document.getElementById('status').innerText = "تأكد من فتح الموقع داخل Pi Browser";
+            console.error(err);
         }
     }
 </script>
+
 </body>
 </html>
