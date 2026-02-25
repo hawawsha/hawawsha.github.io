@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شروط الخدمة | سوق Pi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .terms-card { background: white; border-radius: 15px; padding: 30px; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        h1 { color: #4a00e0; font-size: 28px; margin-bottom: 10px; text-align: center; }
+        .lang-toggle { text-align: center; margin-bottom: 20px; }
+        .lang-toggle button { background: #f0b90b; color: #4a00e0; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; margin: 0 5px; }
+        .lang-toggle button.active { background: #4a00e0; color: white; }
+        .terms-content { text-align: justify; line-height: 1.8; color: #333; }
+        .terms-content h2 { color: #4a00e0; font-size: 22px; margin: 25px 0 10px; border-bottom: 2px solid #f0b90b; padding-bottom: 5px; }
+        .terms-content p { margin-bottom: 15px; }
+        .terms-content ul { margin-right: 20px; margin-bottom: 15px; }
+        .terms-content li { margin-bottom: 5px; }
+        .footer { text-align: center; margin-top: 30px; font-size: 14px; color: #666; }
+        .arabic { display: block; }
+        .english { display: none; }
+        .english[dir="ltr"] { display: block; }
+        .arabic[dir="rtl"] { display: block; }
+    </style>
+</head>
+<body>
+    <div class="terms-card">
+        <h1>سوق Pi - شروط الخدمة</h1>
+        <div class="lang-toggle">
+            <button id="arabicBtn" class="active" onclick="switchLanguage('ar')">🇸🇦 العربية</button>
+            <button id="englishBtn" onclick="switchLanguage('en')">🇬🇧 English</button>
+        </div>
+
+        <!-- المحتوى العربي -->
+        <div id="arabicContent" class="terms-content arabic" dir="rtl">
+            <h2>1. القبول بالشروط</h2>
+            <p>باستخدامك لتطبيق "سوق Pi"، فإنك توافق على الالتزام بهذه الشروط. إذا كنت لا توافق على أي جزء من هذه الشروط، يجب عليك عدم استخدام التطبيق.</p>
+
+            <h2>2. وصف الخدمة</h2>
+            <p>تطبيق "سوق Pi" هو سوق إلكتروني متعدد البائعين يتيح للمستخدمين شراء وبيع السلع والخدمات باستخدام عملة Pi cryptocurrency. يتم تنفيذ جميع المعاملات عبر شبكة Pi Blockchain.</p>
+
+            <h2>3. الدفع والمبالغ</h2>
+            <p>جميع المبالغ المعروضة في التطبيق هي بعملة Pi. عند إتمام عملية شراء، سيتم خصم المبلغ من محفظة Pi الخاصة بالمشتري وتحويله إلى محفظة التطبيق مؤقتاً حتى يتم تحرير الدفعة للبائع. في حال إلغاء الطلب أو وجود نزاع، يتم التعامل وفق سياسة الاسترجاع المذكورة أدناه.</p>
+
+            <h2>4. سياسة الاسترجاع والنزاعات</h2>
+            <p>يتمتع المشتري بحق إلغاء الطلب خلال 24 ساعة من إتمام الدفع، على ألا يكون المنتج قد تم شحنه أو تقديم الخدمة بعد. في حال النزاع، يمكن للبائع والمشتري التواصل مع إدارة التطبيق عبر صفحة "اتصل بنا". سيتم البت في النزاع خلال 7 أيام عمل بناءً على الأدلة المقدمة.</p>
+
+            <h2>5. مسؤولية البائعين</h2>
+            <p>البائعون وحدهم مسؤولون عن دقة وصف المنتجات، جودتها، وتوافرها. يلتزم البائع بشحن المنتج أو تقديم الخدمة خلال المدة المحددة في الإعلان. في حال عدم الالتزام، يحق للمشتري طلب استرداد كامل المبلغ.</p>
+
+            <h2>6. مسؤولية التطبيق</h2>
+            <p>يعمل التطبيق كوسيط تقني فقط ولا يتحمل مسؤولية جودة المنتجات أو الخدمات. مع ذلك، نبذل قصارى جهدنا لحل النزاعات بشكل عادل وضمان أمن المعاملات عبر تقنية البلوكتشين.</p>
+
+            <h2>7. تعديل الشروط</h2>
+            <p>نحتفظ بالحق في تعديل هذه الشروط في أي وقت. سيتم إخطار المستخدمين بأي تغييرات جوهرية عبر الإشعارات داخل التطبيق أو البريد الإلكتروني. استمرار استخدام التطبيق بعد التعديل يعني موافقتك على الشروط الجديدة.</p>
+
+            <h2>8. التواصل</h2>
+            <p>للاستفسارات أو النزاعات، يمكنك التواصل معنا عبر صفحة "اتصل بنا" في التطبيق، أو عبر البريد الإلكتروني: <strong>support@souqpi.com</strong>.</p>
+
+            <p class="footer">آخر تحديث: 25 فبراير 2026</p>
+        </div>
+
+        <!-- المحتوى الإنجليزي -->
+        <div id="englishContent" class="terms-content english" dir="ltr" style="display: none;">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By using the "Souq Pi" application, you agree to be bound by these terms. If you do not agree to any part of these terms, you must not use the application.</p>
+
+            <h2>2. Service Description</h2>
+            <p>"Souq Pi" is a multi-vendor e-commerce platform that enables users to buy and sell goods and services using Pi cryptocurrency. All transactions are executed on the Pi Blockchain.</p>
+
+            <h2>3. Payments and Amounts</h2>
+            <p>All prices displayed are in Pi. When a purchase is completed, the amount is deducted from the buyer's Pi wallet and held in the app's wallet temporarily until the payment is released to the seller. In case of cancellation or dispute, the refund policy below applies.</p>
+
+            <h2>4. Refund and Dispute Policy</h2>
+            <p>The buyer has the right to cancel the order within 24 hours of payment, provided the product has not been shipped or the service rendered. In case of dispute, the seller and buyer can contact app administration via the "Contact Us" page. Disputes will be resolved within 7 business days based on the evidence provided.</p>
+
+            <h2>5. Seller Responsibilities</h2>
+            <p>Sellers are solely responsible for the accuracy of product descriptions, quality, and availability. Sellers must ship products or deliver services within the timeframe specified in the listing. Failure to do so entitles the buyer to a full refund.</p>
+
+            <h2>6. App Responsibility</h2>
+            <p>The app acts solely as a technical intermediary and is not responsible for the quality of products or services. However, we strive to resolve disputes fairly and ensure transaction security via blockchain technology.</p>
+
+            <h2>7. Changes to Terms</h2>
+            <p>We reserve the right to modify these terms at any time. Users will be notified of any material changes via in-app notifications or email. Continued use of the app after changes constitutes acceptance of the new terms.</p>
+
+            <h2>8. Contact</h2>
+            <p>For inquiries or disputes, please contact us via the "Contact Us" page in the app, or by email: <strong>support@souqpi.com</strong>.</p>
+
+            <p class="footer">Last updated: February 25, 2026</p>
+        </div>
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                document.getElementById('arabicContent').style.display = 'block';
+                document.getElementById('englishContent').style.display = 'none';
+                document.getElementById('arabicBtn').classList.add('active');
+                document.getElementById('englishBtn').classList.remove('active');
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.getElementById('arabicContent').style.display = 'none';
+                document.getElementById('englishContent').style.display = 'block';
+                document.getElementById('arabicBtn').classList.remove('active');
+                document.getElementById('englishBtn').classList.add('active');
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+            }
+        }
+    </script>
+</body>
+</html>
