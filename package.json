@@ -1,52 +1,15 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شروط الخدمة - سوق بي</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 { color: #5e35b1; border-bottom: 2px solid #5e35b1; padding-bottom: 10px; }
-        h2 { color: #333; margin-top: 20px; }
-        p { margin-bottom: 15px; }
-        .footer { margin-top: 30px; font-size: 0.9em; color: #777; text-align: center; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>شروط الخدمة لمتجر سوق بي (souq pi-v2)</h1>
-        
-        <p>مرحباً بكم في متجرنا. باستخدامكم لهذا التطبيق على شبكة Pi الرئيسية (Mainnet)، فإنكم توافقون على الالتزام بالشروط التالية:</p>
-
-        <h2>1. عمليات الدفع والعملة</h2>
-        <p>جميع المعاملات تتم حصراً باستخدام عملة Pi الرقمية. يتم استقبال الأموال عبر المحفظة الواردة (Incoming Multisig Wallet) الموثقة في التطبيق لضمان الأمان.</p>
-
-        <h2>2. تسليم المنتجات</h2>
-        <p>بما أننا نعرض منتجات متنوعة (سيارات، إلكترونيات، عقارات)، فإن المتجر يلتزم بتنسيق عملية التسليم بعد تأكيد وصول الدفعة إلى المحفظة بنجاح.</p>
-
-        <h2>3. سياسة الأمان (Multisig)</h2>
-        <p>نستخدم تقنية التوقيعات المتعددة (Multisig) لإدارة أموال المتجر، مما يعني أن العمليات المالية تتطلب موافقة الإدارة لضمان عدم حدوث أي تلاعب.</p>
-
-        <h2>4. عمليات الاسترجاع</h2>
-        <p>في حال استحقاق المستخدم لاسترداد أمواله، يتم ذلك عبر المحفظة الصادرة (Outgoing Wallet) المخصصة للتطبيق.</p>
-
-        <div class="footer">
-            &copy; 2026 سوق بي - جميع الحقوق محفوظة
-        </div>
-    </div>
-</body>
-</html>
+{
+  "name": "souq-pi-v3",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.2.10",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "axios": "1.6.0"
+  }
+}
