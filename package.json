@@ -1,5 +1,5 @@
 {
-  "name": "souq-pi",
+  "name": "souq-pi-v3",
   "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
