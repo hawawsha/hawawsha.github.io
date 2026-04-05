@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المدونة - سوق باي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">سوق باي</div>
+            <ul id="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="projects.html">المشاريع</a></li>
+                <li><a href="blog.html" class="active">المدونة</a></li>
+                <li><a href="cv.html">السيرة الذاتية</a></li>
+            </ul>
+            <button id="lang-switch">English</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="content">
+            <h1>المدونة</h1>
+            <p>قريباً سننشر هنا مقالات تعليمية وتحديثات حول مشروع "سوق باي".</p>
+        </section>
+    </main>
+
+    <script>
+        const langSwitch = document.getElementById('lang-switch');
+        const translations = {
+            ar: {
+                logo: "سوق باي",
+                home: "الرئيسية",
+                projects: "المشاريع",
+                blog: "المدونة",
+                cv: "السيرة الذاتية",
+                title: "المدونة",
+                desc: "قريباً سننشر هنا مقالات تعليمية وتحديثات حول مشروع سوق باي."
+            },
+            en: {
+                logo: "Souq Pi",
+                home: "Home",
+                projects: "Projects",
+                blog: "Blog",
+                cv: "CV",
+                title: "Blog",
+                desc: "Soon we will publish educational articles and updates about the Souq Pi project here."
+            }
+        };
+
+        langSwitch.addEventListener('click', () => {
+            const isAr = document.documentElement.lang === 'ar';
+            const nextLang = isAr ? 'en' : 'ar';
+            const dir = isAr ? 'ltr' : 'rtl';
+
+            document.documentElement.lang = nextLang;
+            document.documentElement.dir = dir;
+            langSwitch.textContent = isAr ? 'العربية' : 'English';
+
+            const links = document.querySelectorAll('#nav-links a');
+            links[0].textContent = translations[nextLang].home;
+            links[1].textContent = translations[nextLang].projects;
+            links[2].textContent = translations[nextLang].blog;
+            links[3].textContent = translations[nextLang].cv;
+            document.querySelector('.logo').textContent = translations[nextLang].logo;
+            document.querySelector('h1').textContent = translations[nextLang].title;
+            document.querySelector('p').textContent = translations[nextLang].desc;
+        });
+    </script>
+</body>
+</html>
