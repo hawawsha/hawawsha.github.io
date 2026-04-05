@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爻賷丕爻丞 丕賱禺氐賵氐賷丞 | 爻賵賯 Pi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .terms-card { background: white; border-radius: 15px; padding: 30px; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; }
+        h1 { color: #4a00e0; font-size: 28px; margin-bottom: 10px; text-align: center; }
+        .lang-toggle { text-align: center; margin-bottom: 20px; }
+        .lang-toggle button { background: #f0b90b; color: #4a00e0; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; margin: 0 5px; transition: 0.3s; }
+        .lang-toggle button.active { background: #4a00e0; color: white; }
+        .copy-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .copy-btn { background: #4a00e0; color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: 0.3s; }
+        .copy-btn:hover { background: #f0b90b; color: #4a00e0; }
+        .terms-content { text-align: justify; line-height: 1.8; color: #333; }
+        .terms-content h2 { color: #4a00e0; font-size: 22px; margin: 25px 0 10px; border-bottom: 2px solid #f0b90b; padding-bottom: 5px; }
+        .terms-content p { margin-bottom: 15px; }
+        .terms-content ul { margin-right: 20px; margin-bottom: 15px; }
+        .terms-content li { margin-bottom: 5px; }
+        .footer { text-align: center; margin-top: 30px; font-size: 14px; color: #666; }
+        .arabic { display: block; }
+        .english { display: none; }
+        .english[dir="ltr"] { display: block; }
+        .arabic[dir="rtl"] { display: block; }
+        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #27ae60; color: white; padding: 10px 20px; border-radius: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: none; z-index: 1000; }
+    </style>
+</head>
+<body>
+    <div class="terms-card">
+        <div class="copy-header">
+            <div class="lang-toggle">
+                <button id="arabicBtn" class="active" onclick="switchLanguage('ar')">馃嚫馃嚘 丕賱毓乇亘賷丞</button>
+                <button id="englishBtn" onclick="switchLanguage('en')">馃嚞馃嚙 English</button>
+            </div>
+            <button class="copy-btn" onclick="copyContent()">馃搵 賳爻禺 丕賱賲丨鬲賵賶</button>
+        </div>
+
+        <h1>爻賵賯 Pi - 爻賷丕爻丞 丕賱禺氐賵氐賷丞</h1>
+
+        <!-- 丕賱賲丨鬲賵賶 丕賱毓乇亘賷 -->
+        <div id="arabicContent" class="terms-content arabic" dir="rtl">
+            <h2>1. 丕賱賲賯丿賲丞</h2>
+            <p>賳丨賳 賮賷 "爻賵賯 Pi" 賳賱鬲夭賲 亘丨賲丕賷丞 禺氐賵氐賷丞 賲爻鬲禺丿賲賷賳丕. 鬲賵囟丨 賴匕賴 丕賱爻賷丕爻丞 賰賷賮賷丞 噩賲毓 賵丕爻鬲禺丿丕賲 賵丨賲丕賷丞 賲毓賱賵賲丕鬲賰 丕賱卮禺氐賷丞 毓賳丿 丕爻鬲禺丿丕賲賰 賱鬲胤亘賷賯賳丕.</p>
+
+            <h2>2. 丕賱賲毓賱賵賲丕鬲 丕賱鬲賷 賳噩賲毓賴丕</h2>
+            <p>賯丿 賳噩賲毓 丕賱賲毓賱賵賲丕鬲 丕賱鬲丕賱賷丞:</p>
+            <ul>
+                <li>賲毓賱賵賲丕鬲 丕賱丨爻丕亘: 丕爻賲 丕賱賲爻鬲禺丿賲貙 毓賳賵丕賳 賲丨賮馗丞 Pi貙 賵賲毓乇賮 丕賱賲爻鬲禺丿賲 丕賱賮乇賷丿.</li>
+                <li>賲毓賱賵賲丕鬲 丕賱丕爻鬲禺丿丕賲: 丕賱氐賮丨丕鬲 丕賱鬲賷 鬲夭賵乇賴丕貙 丕賱賲賳鬲噩丕鬲 丕賱鬲賷 鬲卮丕賴丿賴丕貙 賵鬲賮丕氐賷賱 丕賱賲毓丕賲賱丕鬲.</li>
+                <li>賲毓賱賵賲丕鬲 丕賱鬲賯賳賷丞: 毓賳賵丕賳 IP貙 賳賵毓 丕賱賲鬲氐賮丨貙 賵廿氐丿丕乇 賳馗丕賲 丕賱鬲卮睾賷賱.</li>
+            </ul>
+
+            <h2>3. 賰賷賮賷丞 丕爻鬲禺丿丕賲 丕賱賲毓賱賵賲丕鬲</h2>
+            <p>賳爻鬲禺丿賲 賲毓賱賵賲丕鬲賰 賲賳 兀噩賱:</p>
+            <ul>
+                <li>鬲賯丿賷賲 賵鬲卮睾賷賱 禺丿賲丕鬲 丕賱鬲胤亘賷賯.</li>
+                <li>鬲丨爻賷賳 鬲噩乇亘丞 丕賱賲爻鬲禺丿賲 賵鬲禺氐賷氐 丕賱賲丨鬲賵賶.</li>
+                <li>賲毓丕賱噩丞 丕賱賲毓丕賲賱丕鬲 賵丕賱賲丿賮賵毓丕鬲 毓亘乇 卮亘賰丞 Pi.</li>
+                <li>丕賱鬲賵丕氐賱 賲毓賰 亘卮兀賳 丕賱鬲丨丿賷孬丕鬲 賵丕賱毓乇賵囟 (廿匕丕 賵丕賮賯鬲 毓賱賶 匕賱賰).</li>
+                <li>丕賱丕賲鬲孬丕賱 賱賱丕賱鬲夭丕賲丕鬲 丕賱賯丕賳賵賳賷丞.</li>
+            </ul>
+
+            <h2>4. 賲卮丕乇賰丞 丕賱賲毓賱賵賲丕鬲</h2>
+            <p>賳丨賳 賱丕 賳亘賷毓 兀賵 賳丐噩乇 賲毓賱賵賲丕鬲賰 丕賱卮禺氐賷丞 賱兀胤乇丕賮 孬丕賱孬丞. 賯丿 賳卮丕乇賰 丕賱賲毓賱賵賲丕鬲 賮賷 丕賱丨丕賱丕鬲 丕賱鬲丕賱賷丞:</p>
+            <ul>
+                <li>賲毓 丕賱亘丕卅毓賷賳 賱廿鬲賲丕賲 丕賱賲毓丕賲賱丕鬲 (賲孬賱 毓賳賵丕賳 丕賱卮丨賳).</li>
+                <li>毓賳丿賲丕 賷鬲胤賱亘 丕賱賯丕賳賵賳 匕賱賰 (亘兀賲乇 賲賳 丕賱爻賱胤丕鬲 丕賱賯囟丕卅賷丞).</li>
+                <li>賱丨賲丕賷丞 丨賯賵賯賳丕 賵賲賲鬲賱賰丕鬲賳丕 賵爻賱丕賲丞 賲爻鬲禺丿賲賷賳丕.</li>
+            </ul>
+
+            <h2>5. 兀賲丕賳 丕賱賲毓賱賵賲丕鬲</h2>
+            <p>賳鬲禺匕 廿噩乇丕亍丕鬲 兀賲賳賷丞 賲賳丕爻亘丞 賱丨賲丕賷丞 賲毓賱賵賲丕鬲賰 賲賳 丕賱賵氐賵賱 睾賷乇 丕賱賲氐乇丨 亘賴 兀賵 丕賱鬲毓丿賷賱 兀賵 丕賱廿賮氐丕丨. 噩賲賷毓 丕賱賲毓丕賲賱丕鬲 賲卮賮乇丞 毓亘乇 卮亘賰丞 Pi Blockchain.</p>
+
+            <h2>6. 賲賱賮丕鬲 鬲毓乇賷賮 丕賱丕乇鬲亘丕胤 (Cookies)</h2>
+            <p>賯丿 賳爻鬲禺丿賲 賲賱賮丕鬲 鬲毓乇賷賮 丕賱丕乇鬲亘丕胤 賱鬲丨爻賷賳 鬲噩乇亘鬲賰. 賷賲賰賳賰 囟亘胤 賲鬲氐賮丨賰 賱乇賮囟 噩賲賷毓 賲賱賮丕鬲 鬲毓乇賷賮 丕賱丕乇鬲亘丕胤貙 賵賱賰賳 賯丿 賱丕 鬲毓賲賱 亘毓囟 兀噩夭丕亍 丕賱鬲胤亘賷賯 亘卮賰賱 氐丨賷丨.</p>
+
+            <h2>7. 丨賯賵賯賰</h2>
+            <p>賱丿賷賰 丕賱丨賯 賮賷 丕賱賵氐賵賱 廿賱賶 賲毓賱賵賲丕鬲賰 丕賱卮禺氐賷丞 兀賵 鬲氐丨賷丨賴丕 兀賵 丨匕賮賴丕. 賷賲賰賳賰 丕賱賯賷丕賲 亘匕賱賰 賲賳 禺賱丕賱 廿毓丿丕丿丕鬲 丨爻丕亘賰 兀賵 亘丕賱鬲賵丕氐賱 賲毓賳丕 賲亘丕卮乇丞.</p>
+
+            <h2>8. 鬲睾賷賷乇丕鬲 毓賱賶 丕賱爻賷丕爻丞</h2>
+            <p>賯丿 賳賯賵賲 亘鬲丨丿賷孬 賴匕賴 丕賱爻賷丕爻丞 賲賳 賵賯鬲 賱丌禺乇. 爻賳禺胤乇賰 亘兀賷 鬲睾賷賷乇丕鬲 噩賵賴乇賷丞 毓亘乇 丕賱亘乇賷丿 丕賱廿賱賰鬲乇賵賳賷 兀賵 賲賳 禺賱丕賱 廿卮毓丕乇 丿丕禺賱 丕賱鬲胤亘賷賯.</p>
+
+            <h2>9. 丕賱鬲賵丕氐賱</h2>
+            <p>廿匕丕 賰丕賳 賱丿賷賰 兀賷 丕爻鬲賮爻丕乇丕鬲 亘禺氐賵氐 爻賷丕爻丞 丕賱禺氐賵氐賷丞貙 賷乇噩賶 丕賱鬲賵丕氐賱 賲毓賳丕 毓亘乇 氐賮丨丞 "丕鬲氐賱 亘賳丕" 賮賷 丕賱鬲胤亘賷賯貙 兀賵 毓賱賶 丕賱亘乇賷丿 丕賱廿賱賰鬲乇賵賳賷: <strong>ahmadalhawawsha@gmail.com</strong>.</p>
+
+            <p class="footer">丌禺乇 鬲丨丿賷孬: 25 賮亘乇丕賷乇 2026</p>
+        </div>
+
+        <!-- 丕賱賲丨鬲賵賶 丕賱廿賳噩賱賷夭賷 -->
+        <div id="englishContent" class="terms-content english" dir="ltr" style="display: none;">
+            <h2>1. Introduction</h2>
+            <p>At "Souq Pi", we are committed to protecting your privacy. This policy explains how we collect, use, and safeguard your personal information when you use our application.</p>
+
+            <h2>2. Information We Collect</h2>
+            <p>We may collect the following information:</p>
+            <ul>
+                <li>Account information: username, Pi wallet address, and unique user ID.</li>
+                <li>Usage information: pages you visit, products you view, and transaction details.</li>
+                <li>Technical information: IP address, browser type, and operating system version.</li>
+            </ul>
+
+            <h2>3. How We Use Information</h2>
+            <p>We use your information to:</p>
+            <ul>
+                <li>Provide and operate the app's services.</li>
+                <li>Improve user experience and personalize content.</li>
+                <li>Process transactions and payments via the Pi Network.</li>
+                <li>Communicate with you about updates and offers (if you opt in).</li>
+                <li>Comply with legal obligations.</li>
+            </ul>
+
+            <h2>4. Information Sharing</h2>
+            <p>We do not sell or rent your personal information to third parties. We may share information in these cases:</p>
+            <ul>
+                <li>With sellers to complete transactions (e.g., shipping address).</li>
+                <li>When required by law (by court order or legal process).</li>
+                <li>To protect our rights, property, and the safety of our users.</li>
+            </ul>
+
+            <h2>5. Data Security</h2>
+            <p>We take appropriate security measures to protect your information from unauthorized access, alteration, or disclosure. All transactions are encrypted via the Pi Blockchain.</p>
+
+            <h2>6. Cookies</h2>
+            <p>We may use cookies to enhance your experience. You can set your browser to refuse all cookies, but some parts of the app may not function properly.</p>
+
+            <h2>7. Your Rights</h2>
+            <p>You have the right to access, correct, or delete your personal information. You can do this through your account settings or by contacting us directly.</p>
+
+            <h2>8. Changes to This Policy</h2>
+            <p>We may update this policy from time to time. We will notify you of any material changes via email or in-app notification.</p>
+
+            <h2>9. Contact Us</h2>
+            <p>If you have any questions about this privacy policy, please contact us via the "Contact Us" page in the app, or at: <strong>ahmadalhawawsha@gmail.com</strong>.</p>
+
+            <p class="footer">Last updated: February 25, 2026</p>
+        </div>
+    </div>
+
+    <!-- 乇爻丕賱丞 丕賱鬲兀賰賷丿 丕賱賲賳亘孬賯丞 -->
+    <div id="toastMessage" class="toast">鉁� 鬲賲 賳爻禺 丕賱賲丨鬲賵賶</div>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                document.getElementById('arabicContent').style.display = 'block';
+                document.getElementById('englishContent').style.display = 'none';
+                document.getElementById('arabicBtn').classList.add('active');
+                document.getElementById('englishBtn').classList.remove('active');
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.getElementById('arabicContent').style.display = 'none';
+                document.getElementById('englishContent').style.display = 'block';
+                document.getElementById('arabicBtn').classList.remove('active');
+                document.getElementById('englishBtn').classList.add('active');
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+            }
+        }
+
+        function copyContent() {
+            // 鬲丨丿賷丿 丕賱賲丨鬲賵賶 丕賱賳卮胤 丨丕賱賷丕賸 (丕賱毓乇亘賷 兀賵 丕賱廿賳噩賱賷夭賷)
+            const isArabic = document.getElementById('arabicContent').style.display !== 'none';
+            const contentElement = isArabic ? document.getElementById('arabicContent') : document.getElementById('englishContent');
+            
+            // 賳爻禺 丕賱賳氐
+            const textToCopy = contentElement.innerText;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // 廿馗賴丕乇 乇爻丕賱丞 鬲兀賰賷丿
+                const toast = document.getElementById('toastMessage');
+                toast.style.display = 'block';
+                setTimeout(() => { toast.style.display = 'none'; }, 2000);
+            }).catch(err => {
+                alert('賮卮賱 丕賱賳爻禺貙 丨丕賵賱 賲乇丞 兀禺乇賶');
+                console.error(err);
+            });
+        }
+    </script>
+</body>
+</html>
