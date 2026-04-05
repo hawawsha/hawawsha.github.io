@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>معرض سيارات الهواوشة | 9 موديلات</title>
+    <style>
+        :root { --dark: #1a1a1a; --accent: #e67e22; --bg: #fdfdfd; }
+        
+        /* أهم تعديل: السماح بالنزول لأسفل الصفحة لرؤية كل السيارات */
+        body { 
+            font-family: 'Segoe UI', Tahoma, sans-serif; 
+            background: var(--bg); 
+            margin: 0; 
+            padding: 0;
+            overflow-y: auto !important; /* لضمان القدرة على النزول للأسفل */
+            min-height: 100vh;
+        }
+
+        header { background: var(--dark); color: white; padding: 20px; text-align: center; border-bottom: 3px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
+        
+        /* توزيع السيارات بشكل يضمن ظهورها كلها عند النزول */
+        .container { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 25px; 
+            padding: 30px; 
+            max-width: 1200px; 
+            margin: auto; 
+        }
+        
+        .car-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.05); border: 1px solid #eee; width: 300px; }
+        
+        .img-box { width: 100%; height: 200px; background: #fff; padding: 15px; box-sizing: border-box; }
+        .img-box img { width: 100%; height: 100%; object-fit: contain; }
+        
+        .info { padding: 20px; text-align: center; }
+        .car-name { font-weight: bold; color: var(--dark); font-size: 1.1em; margin-bottom: 10px; display: block; }
+        .price { color: var(--accent); font-weight: bold; font-size: 1.4em; display: block; margin-bottom: 15px; }
+        
+        .btn-reserve { background: var(--dark); color: white; padding: 12px; text-decoration: none; border-radius: 10px; display: block; font-weight: bold; }
+
+        .back-btn { display: block; text-align: center; margin: 20px; color: #666; text-decoration: none; font-weight: bold; }
+        .cart-mini { position: fixed; bottom: 15px; left: 15px; background: var(--dark); color: white; padding: 8px 18px; border-radius: 30px; font-size: 0.8em; z-index: 2000; }
+    </style>
+</head>
+<body>
+
+<header>معرض الهواوشة: تسلا - مرسيدس - لوسيد</header>
+<a href="index.html" class="back-btn">← العودة للرئيسية</a>
+
+<div class="container">
+    <div class="car-card"><div class="img-box"><img src="images/tesla1.jpg"></div><div class="info"><span class="car-name">Tesla Model 3</span><span class="price">42,000 د.أ</span><a href="#" class="btn-reserve">طلب حجز</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/tesla1.jpg"></div><div class="info"><span class="car-name">Tesla Model X</span><span class="price">75,000 د.أ</span><a href="#" class="btn-reserve">طلب حجز</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/tesla1.jpg"></div><div class="info"><span class="car-name">Tesla Model Y</span><span class="price">50,000 د.أ</span><a href="#" class="btn-reserve">طلب حجز</a></div></div>
+
+    <div class="car-card"><div class="img-box"><img src="images/mercedes1.jpg"></div><div class="info"><span class="car-name">Mercedes Benz EQS</span><span class="price">90,000 د.أ</span><a href="#" class="btn-reserve">طلب حجز</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/mercedes1.jpg"></div><div class="info"><span class="car-name">Mercedes Benz EQE</span><span class="price">70,000 د.أ</span><a href="#" class="btn-reserve">طلب حجز</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/mercedes1.jpg"></div><div class="info"><span class="car-name">Mercedes Benz C-Class</span><span class="price">55,000 د.أ</span><a href="#" class="btn-reserve">طلب حجز</a></div></div>
+
+    <div class="car-card"><div class="img-box"><img src="images/lucid1.jpg"></div><div class="info"><span class="car-name">Lucid Air Pure</span><span class="price">65,000 د.أ</span><a href="#" class="btn-reserve">طلب حجز</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/lucid1.jpg"></div><div class="info"><span class="car-name">Lucid Air Touring</span><span class="price">80,000 د.أ</span><a href="#" class="btn-reserve">طلب حجز</a></div></div>
+    <div class="car-card"><div class="img-box"><img src="images/lucid1.jpg"></div><div class="info"><span class="car-name">Lucid Air Grand</span><span class="price">100,000 د.أ</span><a href="#" class="btn-reserve">طلب حجز</a></div></div>
+</div>
+
+<div class="cart-mini">🛒 السلة: 0 د.أ</div>
+
+</body>
+</html>
