@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منتجات سوق باي الأردن | تجهيز الشبكة المفتوحة</title>
+    <style>
+        body {
+            background-color: #310d5a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #ffca28;
+            border-radius: 25px;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto 25px auto;
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: contain;
+            border-radius: 15px;
+            background-color: #fff;
+            margin-bottom: 15px;
+        }
+        .price { font-size: 2.2em; color: #2ecc71; font-weight: bold; }
+        
+        .btn-container { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        
+        /* أزرار العرض فقط */
+        .info-btn {
+            background: #6d1eaf;
+            color: white;
+            border: 2px solid #ffca28;
+            padding: 15px;
+            border-radius: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+        .status-badge {
+            color: #ffca28;
+            font-size: 0.9em;
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🇯🇴 قائمة مقايضات المستقبل</h1>
+    <p style="color: #ffca28;">نحن نجهز الكود البرمجي بانتظار الشبكة المفتوحة</p>
+
+    <div class="product-card">
+        <img src="iphone.jpg" alt="آيفون 15 برو ماكس">
+        <div style="color: #ffca28; font-size: 1.5em;">آيفون 15 برو ماكس</div>
+        <div class="price">Pi 0.0038</div>
+        
+        <div class="btn-container">
+            <button onclick="showMainnetAlert()" class="info-btn">
+                ⚡ اطلب عبر محفظة Pi (قريباً)
+            </button>
+            <span class="status-badge">⚠️ المقايضة متاحة فقط بعد الشبكة المفتوحة</span>
+        </div>
+    </div>
+
+    <script>
+        function showMainnetAlert() {
+            alert("نحن نعمل حالياً على تجهيز الأنظمة البرمجية. ميزة المقايضة والدفع الآلي عبر المحفظة سيتم تفعيلها فور إطلاق الشبكة المفتوحة (Open Mainnet) رسمياً لضمان الامتثال التام لقوانين شبكة Pi.");
+        }
+    </script>
+
+    <a href="index.html" style="color: #ffca28; text-decoration: none; margin-top: 20px; display: inline-block;">⬅️ العودة للرئيسية</a>
+
+</body>
+</html>
