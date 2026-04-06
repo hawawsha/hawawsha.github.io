@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+٨import { useState, useEffect } from 'react'
 import Head from 'next/head';
 import { usePiPrice } from '../context/PiPriceContext';
 
@@ -423,7 +423,8 @@ export default function Home() {
                   {imgUrl ? <img className="pimg" src={imgUrl} alt={r.fields.name} onError={e=>e.target.style.display='none'}/> : <div className="pph">{currentSection.icon}</div>}
                   <div className="pinfo">
                     <div className="pname">{r.fields.name}</div>
-                    <div className="pprice">π {(r.fields.price_pi / CONSENSUS_PRICE).toFixed(4)}</div>
+                    
+                    <div className="pprice">π {Number(r.fields.price_pi).toFixed(2)}</div>
                     <div className="pdesc">{r.fields.description}</div>
                     <div className={`pst ${r.fields.status==='Sold'?'sl':'av'}`}>{r.fields.status==='Sold'?'● مباع':'● متاح'}</div>
                     {r.fields.status!=='Sold' && (
