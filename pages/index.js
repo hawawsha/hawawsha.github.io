@@ -44,7 +44,7 @@ export default function Home() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (typeof window !== 'undefined' && window.Pi) {
-      window.Pi.init({ version: "2.0", sandbox: true }, {
+      window.Pi.init({ version: "2.0", sandbox: false }, {
           onIncompletePaymentFound: async (payment) => {
             try {
               await fetch('/api/payment', {
