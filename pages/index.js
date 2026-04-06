@@ -1,4 +1,4 @@
-٨import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { usePiPrice } from '../context/PiPriceContext';
 
