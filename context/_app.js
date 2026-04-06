@@ -1,4 +1,3 @@
-
 import { PiPriceProvider } from '../context/PiPriceContext';
 
 export default function App({ Component, pageProps }) {
