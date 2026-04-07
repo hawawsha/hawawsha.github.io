@@ -1,1 +1,184 @@
-٢
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سياسة الخصوصية | سوق Pi</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .terms-card { background: white; border-radius: 15px; padding: 30px; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; }
+        h1 { color: #4a00e0; font-size: 28px; margin-bottom: 10px; text-align: center; }
+        .lang-toggle { text-align: center; margin-bottom: 20px; }
+        .lang-toggle button { background: #f0b90b; color: #4a00e0; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; margin: 0 5px; transition: 0.3s; }
+        .lang-toggle button.active { background: #4a00e0; color: white; }
+        .copy-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
+        .copy-btn { background: #4a00e0; color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: 0.3s; }
+        .copy-btn:hover { background: #f0b90b; color: #4a00e0; }
+        .terms-content { text-align: justify; line-height: 1.8; color: #333; }
+        .terms-content h2 { color: #4a00e0; font-size: 22px; margin: 25px 0 10px; border-bottom: 2px solid #f0b90b; padding-bottom: 5px; }
+        .terms-content p { margin-bottom: 15px; }
+        .terms-content ul { margin-right: 20px; margin-bottom: 15px; }
+        .terms-content li { margin-bottom: 5px; }
+        .footer { text-align: center; margin-top: 30px; font-size: 14px; color: #666; }
+        .arabic { display: block; }
+        .english { display: none; }
+        .english[dir="ltr"] { display: block; }
+        .arabic[dir="rtl"] { display: block; }
+        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #27ae60; color: white; padding: 10px 20px; border-radius: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: none; z-index: 1000; }
+    </style>
+</head>
+<body>
+    <div class="terms-card">
+        <div class="copy-header">
+            <div class="lang-toggle">
+                <button id="arabicBtn" class="active" onclick="switchLanguage('ar')">🇸🇦 العربية</button>
+                <button id="englishBtn" onclick="switchLanguage('en')">🇬🇧 English</button>
+            </div>
+            <button class="copy-btn" onclick="copyContent()">📋 نسخ المحتوى</button>
+        </div>
+
+        <h1>سوق Pi - سياسة الخصوصية</h1>
+
+        <!-- المحتوى العربي -->
+        <div id="arabicContent" class="terms-content arabic" dir="rtl">
+            <h2>1. المقدمة</h2>
+            <p>نحن في "سوق Pi" نلتزم بحماية خصوصية مستخدمينا. توضح هذه السياسة كيفية جمع واستخدام وحماية معلوماتك الشخصية عند استخدامك لتطبيقنا.</p>
+
+            <h2>2. المعلومات التي نجمعها</h2>
+            <p>قد نجمع المعلومات التالية:</p>
+            <ul>
+                <li>معلومات الحساب: اسم المستخدم، عنوان محفظة Pi، ومعرف المستخدم الفريد.</li>
+                <li>معلومات الاستخدام: الصفحات التي تزورها، المنتجات التي تشاهدها، وتفاصيل المعاملات.</li>
+                <li>معلومات التقنية: عنوان IP، نوع المتصفح، وإصدار نظام التشغيل.</li>
+            </ul>
+
+            <h2>3. كيفية استخدام المعلومات</h2>
+            <p>نستخدم معلوماتك من أجل:</p>
+            <ul>
+                <li>تقديم وتشغيل خدمات التطبيق.</li>
+                <li>تحسين تجربة المستخدم وتخصيص المحتوى.</li>
+                <li>معالجة المعاملات والمدفوعات عبر شبكة Pi.</li>
+                <li>التواصل معك بشأن التحديثات والعروض (إذا وافقت على ذلك).</li>
+                <li>الامتثال للالتزامات القانونية.</li>
+            </ul>
+
+            <h2>4. مشاركة المعلومات</h2>
+            <p>نحن لا نبيع أو نؤجر معلوماتك الشخصية لأطراف ثالثة. قد نشارك المعلومات في الحالات التالية:</p>
+            <ul>
+                <li>مع البائعين لإتمام المعاملات (مثل عنوان الشحن).</li>
+                <li>عندما يتطلب القانون ذلك (بأمر من السلطات القضائية).</li>
+                <li>لحماية حقوقنا وممتلكاتنا وسلامة مستخدمينا.</li>
+            </ul>
+
+            <h2>5. أمان المعلومات</h2>
+            <p>نتخذ إجراءات أمنية مناسبة لحماية معلوماتك من الوصول غير المصرح به أو التعديل أو الإفصاح. جميع المعاملات مشفرة عبر شبكة Pi Blockchain.</p>
+
+            <h2>6. ملفات تعريف الارتباط (Cookies)</h2>
+            <p>قد نستخدم ملفات تعريف الارتباط لتحسين تجربتك. يمكنك ضبط متصفحك لرفض جميع ملفات تعريف الارتباط، ولكن قد لا تعمل بعض أجزاء التطبيق بشكل صحيح.</p>
+
+            <h2>7. حقوقك</h2>
+            <p>لديك الحق في الوصول إلى معلوماتك الشخصية أو تصحيحها أو حذفها. يمكنك القيام بذلك من خلال إعدادات حسابك أو بالتواصل معنا مباشرة.</p>
+
+            <h2>8. تغييرات على السياسة</h2>
+            <p>قد نقوم بتحديث هذه السياسة من وقت لآخر. سنخطرك بأي تغييرات جوهرية عبر البريد الإلكتروني أو من خلال إشعار داخل التطبيق.</p>
+
+            <h2>9. التواصل</h2>
+            <p>إذا كان لديك أي استفسارات بخصوص سياسة الخصوصية، يرجى التواصل معنا عبر صفحة "اتصل بنا" في التطبيق، أو على البريد الإلكتروني: <strong>privacy@souqpi.com</strong>.</p>
+
+            <p class="footer">آخر تحديث: 25 فبراير 2026</p>
+        </div>
+
+        <!-- المحتوى الإنجليزي -->
+        <div id="englishContent" class="terms-content english" dir="ltr" style="display: none;">
+            <h2>1. Introduction</h2>
+            <p>At "Souq Pi", we are committed to protecting your privacy. This policy explains how we collect, use, and safeguard your personal information when you use our application.</p>
+
+            <h2>2. Information We Collect</h2>
+            <p>We may collect the following information:</p>
+            <ul>
+                <li>Account information: username, Pi wallet address, and unique user ID.</li>
+                <li>Usage information: pages you visit, products you view, and transaction details.</li>
+                <li>Technical information: IP address, browser type, and operating system version.</li>
+            </ul>
+
+            <h2>3. How We Use Information</h2>
+            <p>We use your information to:</p>
+            <ul>
+                <li>Provide and operate the app's services.</li>
+                <li>Improve user experience and personalize content.</li>
+                <li>Process transactions and payments via the Pi Network.</li>
+                <li>Communicate with you about updates and offers (if you opt in).</li>
+                <li>Comply with legal obligations.</li>
+            </ul>
+
+            <h2>4. Information Sharing</h2>
+            <p>We do not sell or rent your personal information to third parties. We may share information in these cases:</p>
+            <ul>
+                <li>With sellers to complete transactions (e.g., shipping address).</li>
+                <li>When required by law (by court order or legal process).</li>
+                <li>To protect our rights, property, and the safety of our users.</li>
+            </ul>
+
+            <h2>5. Data Security</h2>
+            <p>We take appropriate security measures to protect your information from unauthorized access, alteration, or disclosure. All transactions are encrypted via the Pi Blockchain.</p>
+
+            <h2>6. Cookies</h2>
+            <p>We may use cookies to enhance your experience. You can set your browser to refuse all cookies, but some parts of the app may not function properly.</p>
+
+            <h2>7. Your Rights</h2>
+            <p>You have the right to access, correct, or delete your personal information. You can do this through your account settings or by contacting us directly.</p>
+
+            <h2>8. Changes to This Policy</h2>
+            <p>We may update this policy from time to time. We will notify you of any material changes via email or in-app notification.</p>
+
+            <h2>9. Contact Us</h2>
+            <p>If you have any questions about this privacy policy, please contact us via the "Contact Us" page in the app, or at: <strong>privacy@souqpi.com</strong>.</p>
+
+            <p class="footer">Last updated: February 25, 2026</p>
+        </div>
+    </div>
+
+    <!-- رسالة التأكيد المنبثقة -->
+    <div id="toastMessage" class="toast">✅ تم نسخ المحتوى</div>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'ar') {
+                document.getElementById('arabicContent').style.display = 'block';
+                document.getElementById('englishContent').style.display = 'none';
+                document.getElementById('arabicBtn').classList.add('active');
+                document.getElementById('englishBtn').classList.remove('active');
+                document.documentElement.lang = 'ar';
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.getElementById('arabicContent').style.display = 'none';
+                document.getElementById('englishContent').style.display = 'block';
+                document.getElementById('arabicBtn').classList.remove('active');
+                document.getElementById('englishBtn').classList.add('active');
+                document.documentElement.lang = 'en';
+                document.documentElement.dir = 'ltr';
+            }
+        }
+
+        function copyContent() {
+            // تحديد المحتوى النشط حالياً (العربي أو الإنجليزي)
+            const isArabic = document.getElementById('arabicContent').style.display !== 'none';
+            const contentElement = isArabic ? document.getElementById('arabicContent') : document.getElementById('englishContent');
+            
+            // نسخ النص
+            const textToCopy = contentElement.innerText;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // إظهار رسالة تأكيد
+                const toast = document.getElementById('toastMessage');
+                toast.style.display = 'block';
+                setTimeout(() => { toast.style.display = 'none'; }, 2000);
+            }).catch(err => {
+                alert('فشل النسخ، حاول مرة أخرى');
+                console.error(err);
+            });
+        }
+    </script>
+</body>
+</html>
