@@ -32,7 +32,7 @@ export default function Home() {
   useEffect(() => {
     const initPi = () => {
       if (typeof window !== 'undefined' && window.Pi) {
-        window.Pi.init({ version: "2.0", sandbox: true }, {
+        window.Pi.init({ version: "2.0", sandbox: false }, {
           onIncompletePaymentFound: async (p) => {
             try {
               await fetch('/api/payment', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ action: 'approve', paymentId: p.identifier }) });
