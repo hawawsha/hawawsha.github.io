@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { usePiPrice } from '../context/PiPriceContext';
@@ -28,6 +29,7 @@ export default function Home() {
   const [paying, setPaying] = useState(null);
   const [calcPi, setCalcPi] = useState('');
   const [featuredIdx, setFeaturedIdx] = useState(0);
+  const [balance, setBalance] = useState(null);
 
   useEffect(() => {
     const initPi = () => {
@@ -60,6 +62,12 @@ export default function Home() {
       const auth = await window.Pi.authenticate(['username', 'payments', 'wallet_address']);
       setUser(auth.user);
       showToast(`مرحباً @${auth.user.username}`);
+      const wallet = auth.user.wallet_address;
+      if (wallet) {
+        const balRes = await fetch(`/api/balance?walletAddress=${wallet}`);
+        const balData = await balRes.json();
+        setBalance(balData.balance);
+      }
     } catch(e) { showToast('فشل الدخول'); }
   }
 
@@ -83,7 +91,6 @@ export default function Home() {
         body: JSON.stringify({ action: 'approve', paymentId: id })
       }),
       onReadyForServerCompletion: (id, tx) => {
-        // ✅ يحفظ الطلب في Orders
         fetch('/api/payment', {
           method: 'POST',
           headers: {'Content-Type':'application/json'},
@@ -115,7 +122,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Souq Pi - V3</title>
+        <title>Souq Pi - V2</title>
         <script src="https://sdk.minepi.com/pi-sdk.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
@@ -138,16 +145,23 @@ export default function Home() {
         .buybtn{background:linear-gradient(135deg,#6a0dad,#d4af37);color:#fff;border:none;padding:8px;border-radius:10px;width:100%;font-weight:700;cursor:pointer;font-family:'Cairo';}
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#1a0b2e;display:flex;justify-content:space-around;padding:12px;border-top:1px solid #6a0dad;z-index:1000;}
         .nav-item{text-align:center;font-size:0.7em;cursor:pointer;color:#b0b0b0;flex:1;}
-        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#6a0dad;padding:10px 20px;border-radius:20px;z-index:2000;}
+        .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#6a0dad;padding:10px 20px;border-radius:20px;z-index:2000;max-width:90%;text-align:center;font-size:0.8em;}
         .sell-banner{margin-top:20px;background:rgba(212,175,55,0.1);border:1px solid #d4af37;border-radius:15px;padding:15px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
       `}</style>
 
       <nav className="navbar">
         <div onClick={() => {setPage('home'); setSection(null);}} style={{display:'flex', gap:'8px', alignItems:'center', cursor:'pointer'}}>
           <div className="navbar-logo">π</div>
-          <div style={{fontWeight:900}}>Souq Pi <small style={{color:'#d4af37'}}>V3</small></div>
+          <div style={{fontWeight:900}}>Souq Pi <small style={{color:'#d4af37'}}>V2</small></div>
         </div>
-        {user ? <div style={{color:'#d4af37', fontSize:'0.8em'}}>@{user.username}</div> : <button onClick={loginWithPi} style={{background:'#d4af37', border:'none', padding:'6px 15px', borderRadius:'20px', fontWeight:700, fontFamily:'Cairo', cursor:'pointer'}}>دخول</button>}
+        {user ? (
+          <div style={{textAlign:'left'}}>
+            <div style={{color:'#d4af37', fontSize:'0.8em'}}>@{user.username}</div>
+            {balance && <div style={{color:'#4ade80', fontSize:'0.7em'}}>π {parseFloat(balance).toFixed(2)}</div>}
+          </div>
+        ) : (
+          <button onClick={loginWithPi} style={{background:'#d4af37', border:'none', padding:'6px 15px', borderRadius:'20px', fontWeight:700, fontFamily:'Cairo', cursor:'pointer'}}>دخول</button>
+        )}
       </nav>
 
       {page === 'home' ? (
