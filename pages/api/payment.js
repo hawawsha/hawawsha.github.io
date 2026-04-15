@@ -1,65 +1,70 @@
-// كود السيرفر المطور لربط Pi مع Airtable
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
 
-  const { action, paymentId, txid, amount, username } = req.body;
+  const { action, paymentId, txid, username, productId, productName, amountPi, tableName } = req.body;
   const API_KEY = process.env.PI_API_KEY;
-  
-  // بيانات Airtable من إعدادات Vercel
-  const AIRTABLE_KEY = process.env.AIRTABLE_API_KEY;
-  const BASE_ID = process.env.AIRTABLE_BASE_ID;
-  const TABLE_NAME = process.env.AIRTABLE_TABLE_NAME;
+  const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
+  const AIRTABLE_BASE = process.env.AIRTABLE_BASE_ID;
 
-  if (!API_KEY) return res.status(500).json({ error: "Pi API Key missing" });
+  if (!API_KEY) {
+    console.error("خطأ: PI_API_KEY غير موجود");
+    return res.status(500).json({ error: "API Key missing" });
+  }
 
   try {
-    // 1. عملية الموافقة (Approve)
     if (action === 'approve') {
       const approveRes = await fetch(`https://api.minepi.com/v2/payments/${paymentId}/approve`, {
         method: 'POST',
         headers: { 'Authorization': `Key ${API_KEY}`, 'Content-Type': 'application/json' }
       });
+      if (!approveRes.ok) {
+        const errData = await approveRes.json();
+        return res.status(400).json(errData);
+      }
       return res.status(200).json({ message: "Approved" });
-    } 
+    }
 
-    // 2. عملية الإكمال (Complete) + الحفظ في Airtable
     if (action === 'complete') {
       const completeRes = await fetch(`https://api.minepi.com/v2/payments/${paymentId}/complete`, {
         method: 'POST',
         headers: { 'Authorization': `Key ${API_KEY}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({ txid })
       });
+      if (!completeRes.ok) {
+        const errData = await completeRes.json();
+        return res.status(400).json(errData);
+      }
 
-      if (completeRes.ok) {
-        // --- الجزء الجديد: الإرسال لـ Airtable بعد نجاح الدفع ---
-        if (AIRTABLE_KEY && BASE_ID) {
-          await fetch(`https://api.airtable.com/v0/${BASE_ID}/${TABLE_NAME}`, {
+      if (username && productId && AIRTABLE_TOKEN && AIRTABLE_BASE) {
+        try {
+          await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/Orders`, {
             method: 'POST',
             headers: {
-              'Authorization': `Bearer ${AIRTABLE_KEY}`,
+              'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
               fields: {
-                "Order_ID": paymentId,
-                "Transaction_ID": txid,
-                "User": username || "Unknown",
-                "Amount": parseFloat(amount) || 0,
-                "Status": "Paid",
-                "Date": new Date().toISOString()
+                username,
+                product_id: productId,
+                product_name: productName || '',
+                amount_pi: Number(amountPi) || 0,
+                payment_id: paymentId,
+                table_name: tableName || '',
+                purchased_at: new Date().toISOString().split('T')[0]
               }
             })
           });
-          console.log("تم حفظ البيانات في Airtable بنجاح!");
+        } catch(e) {
+          console.error('فشل حفظ الطلب في Airtable:', e);
         }
-        return res.status(200).json({ message: "Completed and Saved to Airtable" });
-      } else {
-        return res.status(400).json({ error: "Failed to complete payment" });
       }
+
+      return res.status(200).json({ message: "Completed" });
     }
 
   } catch (error) {
-    console.error("خطأ:", error);
+    console.error("خطأ في الاتصال بسيرفر Pi:", error);
     return res.status(500).json({ error: "Internal Server Error" });
   }
 }
