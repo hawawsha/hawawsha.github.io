@@ -3,119 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سياسة الخصوصية | سوق Pi</title>
+    <title>سياسة الخصوصية | سوق Pi Mainnet v2</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
-        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .terms-card { background: white; border-radius: 15px; padding: 30px; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; }
-        h1 { color: #4a00e0; font-size: 28px; margin-bottom: 10px; text-align: center; }
+        body { background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .terms-card { background: white; border-radius: 15px; padding: 30px; max-width: 800px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); position: relative; }
+        h1 { color: #182848; font-size: 26px; margin-bottom: 10px; text-align: center; border-bottom: 3px solid #f0b90b; padding-bottom: 10px; }
         .lang-toggle { text-align: center; margin-bottom: 20px; }
-        .lang-toggle button { background: #f0b90b; color: #4a00e0; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; margin: 0 5px; transition: 0.3s; }
-        .lang-toggle button.active { background: #4a00e0; color: white; }
-        .copy-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px; }
-        .copy-btn { background: #4a00e0; color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; transition: 0.3s; }
-        .copy-btn:hover { background: #f0b90b; color: #4a00e0; }
-        .terms-content { text-align: justify; line-height: 1.8; color: #333; }
-        .terms-content h2 { color: #4a00e0; font-size: 22px; margin: 25px 0 10px; border-bottom: 2px solid #f0b90b; padding-bottom: 5px; }
-        .terms-content p { margin-bottom: 15px; }
-        .terms-content ul { margin-right: 20px; margin-bottom: 15px; }
-        .terms-content li { margin-bottom: 5px; }
-        .footer { text-align: center; margin-top: 30px; font-size: 14px; color: #666; }
-        .arabic { display: block; }
-        .english { display: none; }
-        .english[dir="ltr"] { display: block; }
-        .arabic[dir="rtl"] { display: block; }
-        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #27ae60; color: white; padding: 10px 20px; border-radius: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: none; z-index: 1000; }
+        .lang-toggle button { background: #f4f4f4; color: #182848; border: 1px solid #ddd; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .lang-toggle button.active { background: #182848; color: white; border-color: #182848; }
+        .copy-btn { background: #27ae60; color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; transition: 0.3s; float: left; }
+        .terms-content { text-align: justify; line-height: 1.8; color: #333; margin-top: 20px; }
+        .terms-content h2 { color: #182848; font-size: 20px; margin: 20px 0 10px; }
+        .security-box { background: #fff3cd; border: 1px solid #ffeeba; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-weight: bold; color: #856404; }
+        .footer { text-align: center; margin-top: 30px; font-size: 13px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
+        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #333; color: white; padding: 10px 25px; border-radius: 30px; display: none; }
     </style>
 </head>
 <body>
     <div class="terms-card">
-        <div class="copy-header">
-            <div class="lang-toggle">
-                <button id="arabicBtn" class="active" onclick="switchLanguage('ar')">🇸🇦 العربية</button>
-                <button id="englishBtn" onclick="switchLanguage('en')">🇬🇧 English</button>
+        <button class="copy-btn" onclick="copyText()">نسخ</button>
+        <div class="lang-toggle">
+            <button id="arBtn" class="active" onclick="setLang('ar')">العربية</button>
+            <button id="enBtn" onclick="setLang('en')">English</button>
+        </div>
+
+        <h1 id="title">سوق Pi - سياسة الخصوصية (Mainnet v2)</h1>
+
+        <div id="content" class="terms-content">
+            <div class="security-box" id="secBox">
+                درع الأمان: نحن لا نطلب إدخال "كلمة السر" (Passphrase) الخاصة بك أبداً. الدفع يتم فقط عبر نافذة Pi SDK الرسمية.
             </div>
-            <button class="copy-btn" onclick="copyContent()">📋 نسخ المحتوى</button>
+            <div id="textBody">
+                </div>
         </div>
 
-        <h1>سوق Pi - سياسة الخصوصية</h1>
-
-        <div id="arabicContent" class="terms-content arabic" dir="rtl">
-            <h2>1. المقدمة</h2>
-            <p>نحن في "سوق Pi" نلتزم بحماية خصوصية مستخدمينا. توضح هذه السياسة كيفية جمع واستخدام وحماية معلوماتك الشخصية عند استخدامك لتطبيقنا.</p>
-
-            <h2>2. المعلومات التي نجمعها</h2>
-            <p>قد نجمع المعلومات التالية: معلومات الحساب (اسم المستخدم، عنوان محفظة Pi)، معلومات الاستخدام، والمعلومات التقنية.</p>
-
-            <h2>3. كيفية استخدام المعلومات</h2>
-            <p>نستخدم معلوماتك لتقديم خدمات التطبيق، معالجة المعاملات عبر شبكة Pi، وتحسين تجربة المستخدم.</p>
-
-            <h2>4. مشاركة المعلومات</h2>
-            <p>نحن لا نبيع معلوماتك الشخصية. قد نشارك المعلومات فقط لإتمام المعاملات أو للامتثال للالتزامات القانونية.</p>
-
-            <h2>5. أمان المعلومات</h2>
-            <p>نتخذ إجراءات أمنية مشددة لحماية بياناتك، وجميع المعاملات تتم عبر تقنية البلوكشين الخاصة بـ Pi Network.</p>
-
-            <h2>6. التواصل</h2>
-            <p>إذا كان لديك أي استفسار، يرجى التواصل معنا عبر البريد الإلكتروني: <strong>ahmadalhawawsha@gmail.com</strong>.</p>
-
-            <p class="footer">آخر تحديث: 25 فبراير 2026</p>
-        </div>
-
-        <div id="englishContent" class="terms-content english" dir="ltr" style="display: none;">
-            <h2>1. Introduction</h2>
-            <p>At "Souq Pi", we are committed to protecting your privacy. This policy explains how we collect and safeguard your personal information.</p>
-
-            <h2>2. Information We Collect</h2>
-            <p>We may collect account information (username, Pi wallet address), usage details, and technical data.</p>
-
-            <h2>3. How We Use Information</h2>
-            <p>We use your information to provide our services, process Pi Network transactions, and improve user experience.</p>
-
-            <h2>4. Information Sharing</h2>
-            <p>We do not sell your personal data. Sharing only occurs to complete transactions or comply with legal requirements.</p>
-
-            <h2>5. Data Security</h2>
-            <p>We take strict security measures. All transactions are secured via the Pi Network Blockchain.</p>
-
-            <h2>6. Contact Us</h2>
-            <p>If you have any questions, please contact us at: <strong>ahmadalhawawsha@gmail.com</strong>.</p>
-
-            <p class="footer">Last updated: February 25, 2026</p>
-        </div>
+        <p class="footer" id="footerDate">آخر تحديث: 15 أبريل 2026</p>
     </div>
 
-    <div id="toastMessage" class="toast">✅ تم نسخ المحتوى</div>
+    <div id="toast" class="toast">✅ تم النسخ بنجاح</div>
 
     <script>
-        function switchLanguage(lang) {
-            if (lang === 'ar') {
-                document.getElementById('arabicContent').style.display = 'block';
-                document.getElementById('englishContent').style.display = 'none';
-                document.getElementById('arabicBtn').classList.add('active');
-                document.getElementById('englishBtn').classList.remove('active');
-                document.documentElement.lang = 'ar';
-                document.documentElement.dir = 'rtl';
-            } else {
-                document.getElementById('arabicContent').style.display = 'none';
-                document.getElementById('englishContent').style.display = 'block';
-                document.getElementById('arabicBtn').classList.remove('active');
-                document.getElementById('englishBtn').classList.add('active');
-                document.documentElement.lang = 'en';
-                document.documentElement.dir = 'ltr';
+        const data = {
+            ar: {
+                title: "سوق Pi - سياسة الخصوصية (Mainnet v2)",
+                sec: "درع الأمان: نحن لا نطلب إدخال \"كلمة السر\" (Passphrase) الخاصة بك أبداً. الدفع يتم فقط عبر نافذة Pi SDK الرسمية.",
+                body: `<h2>1. مقدمة الخدمة</h2><p>في نسخة الشبكة الرئيسية، نركز على توفير أقصى درجات الأمان لمقايضة السلع بـ Pi.</p><h2>2. البيانات التي نصل إليها</h2><p>نحصل فقط على معرف المستخدم واسم المستخدم من خلال SDK. أي بيانات شحن يتم توفيرها يتم تشفيرها ولا تظهر إلا للمدير المختص.</p><h2>3. حماية المعاملات</h2><p>جميع المعاملات مسجلة على البلوكشين العام لشبكة Pi، مما يضمن حقك في تتبع الدفعة.</p><h2>4. التواصل</h2><p>للدعم الفني: ahmadalhawawsha@gmail.com</p>`,
+                footer: "آخر تحديث: 15 أبريل 2026"
+            },
+            en: {
+                title: "Souq Pi - Privacy Policy (Mainnet v2)",
+                sec: "Security Shield: We NEVER ask for your Passphrase. Payments are processed only via the official Pi SDK.",
+                body: `<h2>1. Service Introduction</h2><p>In the Mainnet version, we focus on providing maximum security for bartering goods with Pi.</p><h2>2. Data Access</h2><p>We only retrieve UID and Username via SDK. Shipping data is encrypted and only visible to the authorized admin.</p><h2>3. Transaction Protection</h2><p>All transactions are recorded on the Pi Public Blockchain, ensuring your right to track payments.</p><h2>4. Contact</h2><p>Support: ahmadalhawawsha@gmail.com</p>`,
+                footer: "Last Updated: April 15, 2026"
             }
+        };
+
+        function setLang(l) {
+            document.getElementById('title').innerText = data[l].title;
+            document.getElementById('secBox').innerText = data[l].sec;
+            document.getElementById('textBody').innerHTML = data[l].body;
+            document.getElementById('footerDate').innerText = data[l].footer;
+            document.getElementById('arBtn').className = l === 'ar' ? 'active' : '';
+            document.getElementById('enBtn').className = l === 'en' ? 'active' : '';
+            document.getElementById('content').dir = l === 'ar' ? 'rtl' : 'ltr';
         }
 
-        function copyContent() {
-            const isArabic = document.getElementById('arabicContent').style.display !== 'none';
-            const contentElement = isArabic ? document.getElementById('arabicContent') : document.getElementById('englishContent');
-            const textToCopy = contentElement.innerText;
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                const toast = document.getElementById('toastMessage');
-                toast.style.display = 'block';
-                setTimeout(() => { toast.style.display = 'none'; }, 2000);
-            });
+        function copyText() {
+            const text = document.getElementById('content').innerText;
+            navigator.clipboard.writeText(text);
+            const t = document.getElementById('toast');
+            t.style.display = 'block';
+            setTimeout(() => t.style.display = 'none', 2000);
         }
+
+        setLang('ar');
     </script>
 </body>
 </html>
