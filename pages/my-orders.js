@@ -1,4 +1,3 @@
-// pages/my-orders.js
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 
@@ -8,10 +7,11 @@ export default function MyOrders() {
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState('');
   const [requesting, setRequesting] = useState(null);
+  const [balance, setBalance] = useState(null);
 
   function showToast(msg) {
     setToast(msg);
-    setTimeout(() => setToast(''), 3000);
+    setTimeout(() => setToast(''), 4000);
   }
 
   useEffect(() => {
@@ -35,9 +35,15 @@ export default function MyOrders() {
   async function loginWithPi() {
     try {
       if (!window.Pi) { showToast('يرجى الفتح من متصفح Pi'); return; }
-      const auth = await window.Pi.authenticate(['username', 'payments']);
+      const auth = await window.Pi.authenticate(['username', 'payments', 'wallet_address']);
       setUser(auth.user);
       loadOrders(auth.user.username);
+      const wallet = auth.user.wallet_address;
+      if (wallet) {
+        const balRes = await fetch(`/api/balance?walletAddress=${wallet}`);
+        const balData = await balRes.json();
+        setBalance(balData.balance);
+      }
     } catch(e) { showToast('فشل تسجيل الدخول'); }
   }
 
@@ -100,8 +106,9 @@ export default function MyOrders() {
         .btn-refund:disabled{opacity:0.5;cursor:not-allowed;}
         .empty{text-align:center;padding:60px 20px;color:#b0b0b0;}
         .empty-icon{font-size:3em;margin-bottom:12px;}
-        .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#6a0dad;padding:10px 20px;border-radius:20px;font-size:0.85em;z-index:2000;white-space:nowrap;}
+        .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#6a0dad;padding:10px 20px;border-radius:20px;font-size:0.85em;z-index:2000;max-width:90%;text-align:center;}
         .count-badge{background:rgba(212,175,55,0.15);border:1px solid rgba(212,175,55,0.3);border-radius:12px;padding:8px 16px;margin-bottom:16px;text-align:center;font-size:0.85em;color:#d4af37;}
+        .balance-badge{background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.3);border-radius:12px;padding:8px 16px;margin-bottom:16px;text-align:center;font-size:0.85em;color:#4ade80;}
       `}</style>
 
       <div className="header">
@@ -114,7 +121,6 @@ export default function MyOrders() {
       </div>
 
       <div className="container">
-
         {!user && (
           <div className="login-box">
             <div style={{fontSize:'3em'}}>📦</div>
@@ -130,10 +136,12 @@ export default function MyOrders() {
 
         {user && !loading && (
           <>
+            {balance && (
+              <div className="balance-badge">💰 رصيدك: π {parseFloat(balance).toFixed(2)}</div>
+            )}
             {orders.length > 0 && (
               <div className="count-badge">🛍️ لديك {orders.length} طلب</div>
             )}
-
             {orders.length === 0 ? (
               <div className="empty">
                 <div className="empty-icon">🛒</div>
