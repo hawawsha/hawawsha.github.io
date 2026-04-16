@@ -4,6 +4,7 @@ import { usePiPrice } from '../context/PiPriceContext';
 
 const ADMIN = 'alhawawsheh1524';
 
+// الأقسام مطابقة تماماً لأسماء الجداول في Airtable Mainnet
 const sections = [
   { key: 'Cars', ar: 'سيارات', icon: '🚗', gradient: 'linear-gradient(135deg,#1a0b2e,#6a0dad)' },
   { key: 'Electric', ar: 'كهربائيات', icon: '⚡', gradient: 'linear-gradient(135deg,#1a0b2e,#d4af37)' },
@@ -55,7 +56,6 @@ export default function Home() {
 
   const showToast = (m) => { setToast(m); setTimeout(() => setToast(''), 4000); };
 
-  // دالة جلب الرصيد المحدثة لتتوافق مع رد الـ RPC
   async function fetchPiBalance(walletAddress) {
     if (!walletAddress) return null;
     try {
@@ -65,7 +65,6 @@ export default function Home() {
         body: JSON.stringify({ method: 'get_account', params: [walletAddress] })
       });
       const data = await response.json();
-      // هنا السر: قمنا بتغيير طريقة قراءة الرصيد من رد الـ RPC
       if (data.result && data.result.balances) {
         const piBal = data.result.balances.find(b => b.asset_type === 'native');
         return piBal ? piBal.balance : '0.00';
@@ -83,20 +82,18 @@ export default function Home() {
       const auth = await window.Pi.authenticate(['username', 'payments', 'wallet_address']);
       setUser(auth.user);
       showToast(`مرحباً @${auth.user.username}`);
-      
       const wallet = auth.user.wallet_address;
       if (wallet) {
         const bal = await fetchPiBalance(wallet);
         if (bal !== null) setBalance(bal);
       }
-    } catch(e) { 
-      showToast('فشل الدخول'); 
-    }
+    } catch(e) { showToast('فشل الدخول'); }
   }
 
   async function loadProducts(t) {
     setLoading(true);
     try {
+      // نرسل اسم الجدول (مثلاً Cars) للـ API المؤمن
       const res = await fetch(`/api/products?table=${t}`);
       const d = await res.json();
       setProducts(d.records || []);
@@ -151,7 +148,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Souq Pi - V3</title>
+        <title>Souq Pi - Mainnet</title>
         <script src="https://sdk.minepi.com/pi-sdk.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
@@ -175,21 +172,18 @@ export default function Home() {
         .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:#1a0b2e;display:flex;justify-content:space-around;padding:12px;border-top:1px solid #6a0dad;z-index:1000;}
         .nav-item{text-align:center;font-size:0.7em;cursor:pointer;color:#b0b0b0;flex:1;}
         .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#6a0dad;padding:10px 20px;border-radius:20px;z-index:2000;max-width:90%;text-align:center;font-size:0.8em;}
-        .sell-banner{margin-top:20px;background:rgba(212,175,55,0.1);border:1px solid #d4af37;border-radius:15px;padding:15px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
       `}</style>
 
       <nav className="navbar">
         <div onClick={() => {setPage('home'); setSection(null);}} style={{display:'flex', gap:'8px', alignItems:'center', cursor:'pointer'}}>
           <div className="navbar-logo">π</div>
-          <div style={{fontWeight:900}}>Souq Pi <small style={{color:'#d4af37'}}>V3</small></div>
+          <div style={{fontWeight:900}}>Souq Pi <small style={{color:'#d4af37'}}>Mainnet</small></div>
         </div>
         {user ? (
           <div style={{textAlign:'left'}}>
             <div style={{color:'#d4af37', fontSize:'0.8em'}}>@{user.username}</div>
             {balance !== null && (
-              <div style={{color:'#4ade80', fontSize:'0.7em', fontWeight:'bold'}}>
-                💰 {balance} π
-              </div>
+              <div style={{color:'#4ade80', fontSize:'0.7em', fontWeight:'bold'}}>💰 {balance} π</div>
             )}
           </div>
         ) : (
@@ -202,17 +196,11 @@ export default function Home() {
           <div className="featured-slider">
             <div style={{fontSize:'2.2em'}}>{FEATURED[featuredIdx].icon}</div>
             <div style={{fontWeight:800}}>{FEATURED[featuredIdx].title}</div>
-            <div style={{fontSize:'0.66em', color:'#b0b0b0'}}>{FEATURED[featuredIdx].sub}</div>
+            <div style={{fontSize:'0.66em', color:#b0b0b0}}>{FEATURED[featuredIdx].sub}</div>
           </div>
 
           <div className="calc-box">
-            <input
-              className="calc-input"
-              type="number"
-              value={calcPi}
-              onChange={e => setCalcPi(e.target.value)}
-              placeholder="كمية π"
-            />
+            <input className="calc-input" type="number" value={calcPi} onChange={e => setCalcPi(e.target.value)} placeholder="كمية π" />
             <div style={{marginTop:10, color:'#4ade80', fontWeight:900, textAlign:'center'}}>
               $ {calcPi && piPrice ? (calcPi * piPrice).toFixed(2) : '0.00'}
             </div>
@@ -226,14 +214,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-
-          <div className="sell-banner" onClick={() => window.location.href = '/become-seller'}>
-            <div style={{textAlign:'right'}}>
-              <div style={{fontWeight:800}}>🏪 هل تريد البيع؟</div>
-              <div style={{fontSize:'0.7em', color:'#b0b0b0'}}>انضم كتاجر الآن</div>
-            </div>
-            <button style={{background:'#d4af37', border:'none', padding:'5px 12px', borderRadius:'10px', fontWeight:700, fontFamily:'Cairo', cursor:'pointer'}}>انضم ←</button>
-          </div>
         </div>
       ) : (
         <div className="section-page">
@@ -241,10 +221,11 @@ export default function Home() {
           <div className="products">
             {loading ? <p style={{gridColumn:'1/3', textAlign:'center', padding:40}}>جاري التحميل...</p> : products.map(r => (
               <div key={r.id} className="pcard">
+                {/* هنا تم التعديل ليقرأ image_url المطابق لـ Airtable */}
                 <img className="pimg" src={r.fields.image_url || '/placeholder.png'} alt="" />
                 <div className="pinfo">
                   <div style={{fontSize:'0.75em', fontWeight:700, height:'35px', overflow:'hidden'}}>{r.fields.name}</div>
-                  <div style={{color:'#d4af37', fontWeight:900, margin:'5px 0'}}>π {Number(r.fields.price_pi).toFixed(2)}</div>
+                  <div style={{color:'#d4af37', fontWeight:900, margin:'5px 0'}}>π {Number(r.fields.price_pi).toFixed(4)}</div>
                   <button className="buybtn" onClick={() => buyWithPi(r)} disabled={paying === r.id}>
                     {paying === r.id ? 'جاري...' : 'شراء'}
                   </button>
@@ -260,7 +241,6 @@ export default function Home() {
         <div className="nav-item" onClick={() => window.location.href = '/explore'}>🔍<br/>استكشف</div>
         <div className="nav-item" onClick={() => window.location.href = '/balance'}>💰<br/>الرصيد</div>
         <div className="nav-item" onClick={() => window.location.href = '/my-orders'}>📦<br/>طلباتي</div>
-        <div className="nav-item" onClick={() => window.location.href = '/become-seller'}>🏪<br/>بيّع</div>
       </div>
       {toast && <div className="toast">{toast}</div>}
     </>
