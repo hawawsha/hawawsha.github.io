@@ -93,7 +93,6 @@ export default function Home() {
   async function loadProducts(t) {
     setLoading(true);
     try {
-      // نرسل اسم الجدول (مثلاً Cars) للـ API المؤمن
       const res = await fetch(`/api/products?table=${t}`);
       const d = await res.json();
       setProducts(d.records || []);
@@ -196,7 +195,7 @@ export default function Home() {
           <div className="featured-slider">
             <div style={{fontSize:'2.2em'}}>{FEATURED[featuredIdx].icon}</div>
             <div style={{fontWeight:800}}>{FEATURED[featuredIdx].title}</div>
-            <div style={{fontSize:'0.66em', color:#b0b0b0}}>{FEATURED[featuredIdx].sub}</div>
+            <div style={{fontSize:'0.66em', color:'#b0b0b0'}}>{FEATURED[featuredIdx].sub}</div>
           </div>
 
           <div className="calc-box">
@@ -221,7 +220,7 @@ export default function Home() {
           <div className="products">
             {loading ? <p style={{gridColumn:'1/3', textAlign:'center', padding:40}}>جاري التحميل...</p> : products.map(r => (
               <div key={r.id} className="pcard">
-                {/* هنا تم التعديل ليقرأ image_url المطابق لـ Airtable */}
+                {/* التعديل: استخدام image_url و price_pi لتطابق Airtable الجديدة */}
                 <img className="pimg" src={r.fields.image_url || '/placeholder.png'} alt="" />
                 <div className="pinfo">
                   <div style={{fontSize:'0.75em', fontWeight:700, height:'35px', overflow:'hidden'}}>{r.fields.name}</div>
