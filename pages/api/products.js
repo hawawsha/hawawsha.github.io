@@ -1,24 +1,20 @@
+// بدلاً من كتابة الـ ID يدوياً، نستخدم عملية الاستدعاء المؤمنة
+const baseId = process.env.AIRTABLE_BASE_ID;
+const apiKey = process.env.AIRTABLE_API_KEY;
+
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
   const { table } = req.query;
-  if (!table) return res.status(400).json({ error: 'table required' });
-
-  const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
-  const AIRTABLE_BASE = process.env.AIRTABLE_BASE_ID;
-
+  
+  // الرابط سيصبح الآن ديناميكي وآمن
+  const url = `https://api.airtable.com/v0/${baseId}/${table}`;
+  
   try {
-    const response = await fetch(
-      `https://api.airtable.com/v0/${AIRTABLE_BASE}/${table}`,
-      {
-        headers: {
-          'Authorization': `Bearer ${AIRTABLE_TOKEN}`
-        }
-      }
-    );
+    const response = await fetch(url, {
+      headers: { Authorization: `Bearer ${apiKey}` }
+    });
     const data = await response.json();
-    return res.status(200).json(data);
-  } catch (e) {
-    return res.status(500).json({ error: e.message });
+    res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch data' });
   }
 }
