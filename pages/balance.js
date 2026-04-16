@@ -9,16 +9,12 @@ export default function BalancePage() {
 
   async function checkBalance() {
     if (!address.trim()) return;
-    
     setLoading(true);
     setBalance(null);
     setError('');
-    
     try {
-      // ✅ تم التوجيه إلى API الماينت الجديد
       const res = await fetch(`/api/get-balance?walletAddress=${address.trim()}`);
       const data = await res.json();
-      
       if (data.balance !== undefined) {
         setBalance(data.balance);
       } else {
@@ -65,21 +61,21 @@ export default function BalancePage() {
           <div style={{textAlign:'center', marginBottom:20}}>
             <div style={{fontSize:'2.5em'}}>💰</div>
             <div style={{fontWeight:800, fontSize:'1.1em', margin:'8px 0 4px'}}>رصيد محفظة Pi الحقيقي</div>
-            <div style={{fontSize:'0.8em', color:#b0b0b0}}>استعلم عن رصيدك المتاح في الشبكة العامة</div>
+            <div style={{fontSize:'0.8em', color:'#b0b0b0'}}>استعلم عن رصيدك المتاح في الشبكة العامة</div>
           </div>
-          
-          <input 
-            className="input" 
-            type="text" 
-            value={address} 
-            onChange={e => setAddress(e.target.value)} 
-            placeholder="أدخل عنوان المحفظة (G...)" 
+
+          <input
+            className="input"
+            type="text"
+            value={address}
+            onChange={e => setAddress(e.target.value)}
+            placeholder="أدخل عنوان المحفظة (G...)"
           />
-          
+
           <button className="btn" onClick={checkBalance} disabled={loading || !address.trim()}>
             {loading ? 'جاري الاتصال بالشبكة...' : '🔍 استعلام الآن'}
           </button>
-          
+
           {balance !== null && (
             <div className="result">
               <div style={{color:'#b0b0b0', fontSize:'0.85em', marginBottom:8}}>الرصيد المتاح:</div>
@@ -88,7 +84,7 @@ export default function BalancePage() {
               </div>
             </div>
           )}
-          
+
           {error && (
             <div className="result">
               <div style={{color:'#ef4444', fontWeight:700}}>{error}</div>
