@@ -33,7 +33,6 @@ export default function Home() {
   useEffect(() => {
     const initPi = () => {
       if (typeof window !== 'undefined' && window.Pi) {
-        // تم التعديل هنا: sandbox أصبح false للماينت
         window.Pi.init({ version: "2.0", sandbox: false }, {
           onIncompletePaymentFound: async (p) => {
             try {
@@ -59,19 +58,10 @@ export default function Home() {
   async function fetchPiBalance(walletAddress) {
     if (!walletAddress) return null;
     try {
-      const response = await fetch('/api/rpc', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ method: 'get_account', params: [walletAddress] })
-      });
-      const data = await response.json();
-      if (data.result && data.result.balances) {
-        const piBal = data.result.balances.find(b => b.asset_type === 'native');
-        return piBal ? piBal.balance : '0.00';
-      }
-      return null;
+      const res = await fetch(`/api/get-balance?walletAddress=${walletAddress}`);
+      const data = await res.json();
+      return data.balance || null;
     } catch (error) {
-      console.error('RPC Error:', error);
       return null;
     }
   }
@@ -112,6 +102,7 @@ export default function Home() {
         });
       },
       onReadyForServerCompletion: async (id, tx) => {
+        // ✅ await الحفظ أولاً ثم completePayment
         await fetch('/api/payment', {
           method: 'POST',
           headers: {'Content-Type':'application/json'},
@@ -126,7 +117,7 @@ export default function Home() {
             tableName: section
           })
         });
-        window.Pi.completePayment(id);
+        await window.Pi.completePayment(id);
         showToast('✅ تم الشراء بنجاح!');
         setPaying(null);
         if (user?.wallet_address) {
