@@ -81,7 +81,7 @@ export default function MyOrders() {
   return (
     <>
       <Head>
-        <title>طلباتي - Souq Pi</title>
+        <title>طلباتي - Souq Pi Mainnet</title>
         <script src="https://sdk.minepi.com/pi-sdk.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
@@ -116,7 +116,7 @@ export default function MyOrders() {
         <div className="badge">📦</div>
         <div>
           <div style={{fontWeight:900, fontSize:'0.9em'}}>طلباتي</div>
-          <div style={{fontSize:'0.65em', color:'#d4af37'}}>Souq Pi V3</div>
+          <div style={{fontSize:'0.65em', color:'#d4af37'}}>Souq Pi Mainnet</div>
         </div>
       </div>
 
@@ -160,7 +160,7 @@ export default function MyOrders() {
                   <div className="order-header">
                     <div>
                       <div className="order-name">{order.fields.product_name || 'منتج'}</div>
-                      <div className="order-date">📅 {order.fields.purchased_at || 'غير محدد'}</div>
+                      <div className="order-date">📅 {order.fields.created_at ? order.fields.created_at.split('T')[0] : 'غير محدد'}</div>
                       <div className="order-table">{order.fields.table_name || ''}</div>
                     </div>
                     <div className="order-price">π {order.fields.amount_pi}</div>
