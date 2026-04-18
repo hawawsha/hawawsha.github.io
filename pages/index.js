@@ -38,7 +38,6 @@ export default function Home() {
             try {
               await fetch('/api/payment', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ action: 'approve', paymentId: p.identifier }) });
               await fetch('/api/payment', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ action: 'complete', paymentId: p.identifier, txid: p.transaction?.txid }) });
-              window.Pi.completePayment(p.identifier);
             } catch(e) {}
           }
         });
@@ -102,7 +101,6 @@ export default function Home() {
         });
       },
       onReadyForServerCompletion: async (id, tx) => {
-        // ✅ await الحفظ أولاً ثم completePayment
         await fetch('/api/payment', {
           method: 'POST',
           headers: {'Content-Type':'application/json'},
@@ -117,7 +115,7 @@ export default function Home() {
             tableName: section
           })
         });
-        await window.Pi.completePayment(id);
+        // ✅ حذف window.Pi.completePayment - غير موجود في SDK
         showToast('✅ تم الشراء بنجاح!');
         setPaying(null);
         if (user?.wallet_address) {
@@ -126,7 +124,7 @@ export default function Home() {
         }
       },
       onCancel: () => setPaying(null),
-      onError: () => setPaying(null)
+      onError: () => { showToast('❌ فشل الدفع'); setPaying(null); }
     };
     window.Pi.createPayment({
       amount: Number(p.fields.price_pi),
