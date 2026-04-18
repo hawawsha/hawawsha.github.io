@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const response = await fetch(
-        `https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds?sort[0][field]=created_at&sort[0][direction]=desc`,
+        `https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds`,
         { headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}` } }
       );
       const data = await response.json();
@@ -24,10 +24,15 @@ export default async function handler(req, res) {
 
   const { action, productId, productName, buyerUid, buyerUsername, amountPi, recordId } = req.body || {};
 
+  console.log('Refund action:', action);
+  console.log('Body:', JSON.stringify(req.body));
+
   try {
     // ✅ الزبون يطلب استرجاع
     if (action === 'request') {
-      const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds`, {
+      console.log('Saving refund:', { productName, buyerUsername, amountPi });
+
+      const airtableRes = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}`, 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -37,12 +42,19 @@ export default async function handler(req, res) {
             buyer_uid: buyerUid,
             buyer_username: buyerUsername,
             amount_pi: Number(amountPi) || 0,
-            status: 'pending',
-            created_at: new Date().toISOString().split('T')[0]
+            status: 'pending'
           }
         })
       });
-      const data = await response.json();
+
+      const data = await airtableRes.json();
+      console.log('Airtable refund response:', JSON.stringify(data));
+
+      if (!airtableRes.ok) {
+        console.error('Airtable error:', data);
+        return res.status(500).json({ error: data });
+      }
+
       return res.status(200).json({ success: true, data });
     }
 
@@ -50,7 +62,6 @@ export default async function handler(req, res) {
     if (action === 'approve') {
       if (!recordId) return res.status(400).json({ error: 'recordId مطلوب' });
       try {
-        // جلب بيانات الطلب
         const getRes = await fetch(
           `https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds/${recordId}`,
           { headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}` } }
@@ -58,7 +69,6 @@ export default async function handler(req, res) {
         const record = await getRes.json();
         const fields = record.fields || {};
 
-        // إرسال Pi للزبون إذا توفر buyerUid
         if (fields.buyer_uid && PI_API_KEY) {
           try {
             await fetch('https://api.minepi.com/v2/payments', {
@@ -78,7 +88,6 @@ export default async function handler(req, res) {
           }
         }
 
-        // تحديث الحالة
         await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds/${recordId}`, {
           method: 'PATCH',
           headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}`, 'Content-Type': 'application/json' },
@@ -107,6 +116,7 @@ export default async function handler(req, res) {
 
     return res.status(400).json({ error: 'invalid action' });
   } catch(e) {
+    console.error('Refund error:', e);
     return res.status(500).json({ error: e.message });
   }
 }
