@@ -27,7 +27,6 @@ export default async function handler(req, res) {
     // 2. الإكمال
     if (action === 'complete') {
 
-      // إرسال أمر الإكمال لـ Pi
       const completeRes = await fetch(`https://api.minepi.com/v2/payments/${paymentId}/complete`, {
         method: 'POST',
         headers: { 'Authorization': `Key ${API_KEY}`, 'Content-Type': 'application/json' },
@@ -55,10 +54,8 @@ export default async function handler(req, res) {
                 product_name: productName || 'Unknown Product',
                 amount_pi: Number(amountPi) || 0,
                 payment_id: paymentId,
-                transaction_id: txid || '',
-                status: 'Paid/Verified',
-                table_origin: tableName || '',
-                created_at: new Date().toISOString()
+                table_name: tableName || '',
+                purchased_at: new Date().toISOString().split('T')[0]
               }
             })
           });
