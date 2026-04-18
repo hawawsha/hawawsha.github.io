@@ -6,12 +6,15 @@ export default async function handler(req, res) {
   const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
   const AIRTABLE_BASE = process.env.AIRTABLE_BASE_ID;
 
+  console.log('Payment action:', action);
+  console.log('AIRTABLE_BASE:', AIRTABLE_BASE);
+  console.log('AIRTABLE_TOKEN exists:', !!AIRTABLE_TOKEN);
+
   if (!API_KEY || !AIRTABLE_TOKEN || !AIRTABLE_BASE) {
     return res.status(500).json({ error: "Server Configuration Error" });
   }
 
   try {
-    // 1. الموافقة
     if (action === 'approve') {
       const approveRes = await fetch(`https://api.minepi.com/v2/payments/${paymentId}/approve`, {
         method: 'POST',
@@ -24,9 +27,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ message: "Payment Approved" });
     }
 
-    // 2. الإكمال
     if (action === 'complete') {
-
       const completeRes = await fetch(`https://api.minepi.com/v2/payments/${paymentId}/complete`, {
         method: 'POST',
         headers: { 'Authorization': `Key ${API_KEY}`, 'Content-Type': 'application/json' },
@@ -38,30 +39,36 @@ export default async function handler(req, res) {
         return res.status(completeRes.status).json(errData);
       }
 
-      // حفظ الطلب في Airtable
+      console.log('Saving to Airtable:', { username, productId, productName, amountPi, tableName });
+
       if (username && productId) {
-        try {
-          await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/Orders`, {
-            method: 'POST',
-            headers: {
-              'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              fields: {
-                username: username,
-                product_id: productId,
-                product_name: productName || 'Unknown Product',
-                amount_pi: Number(amountPi) || 0,
-                payment_id: paymentId,
-                table_name: tableName || '',
-                purchased_at: new Date().toISOString().split('T')[0]
-              }
-            })
-          });
-        } catch(e) {
-          console.error('فشل حفظ الطلب في Airtable:', e);
+        const airtableRes = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/Orders`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fields: {
+              username: username,
+              product_id: productId,
+              product_name: productName || 'Unknown Product',
+              amount_pi: Number(amountPi) || 0,
+              payment_id: paymentId,
+              table_name: tableName || '',
+              purchased_at: new Date().toISOString().split('T')[0]
+            }
+          })
+        });
+
+        const airtableData = await airtableRes.json();
+        console.log('Airtable response:', JSON.stringify(airtableData));
+
+        if (!airtableRes.ok) {
+          console.error('Airtable error:', airtableData);
         }
+      } else {
+        console.log('Missing username or productId:', { username, productId });
       }
 
       return res.status(200).json({ message: "Mainnet Transaction Success" });
