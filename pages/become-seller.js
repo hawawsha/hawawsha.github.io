@@ -5,12 +5,12 @@ import Head from 'next/head';
 export default function BecomeSeller() {
   const [user, setUser] = useState(null);
   const [shopName, setShopName] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [toast, setToast] = useState('');
 
-  // تهيئة Pi SDK
   useEffect(() => {
     const initPi = () => {
       if (typeof window !== 'undefined' && window.Pi) {
@@ -65,13 +65,18 @@ export default function BecomeSeller() {
 
   async function submitRequest() {
     if (!shopName.trim()) { showToast('أدخل اسم المتجر'); return; }
+    if (!whatsapp.trim()) { showToast('أدخل رقم الواتساب'); return; }
     if (!user) { showToast('سجّل الدخول أولاً'); return; }
     setSubmitting(true);
     try {
       const res = await fetch('/api/seller-request', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: user.username, shop_name: shopName.trim() })
+        body: JSON.stringify({
+          username: user.username,
+          shop_name: shopName.trim(),
+          whatsapp: whatsapp.trim()
+        })
       });
       const data = await res.json();
       if (data.success) {
@@ -116,6 +121,8 @@ export default function BecomeSeller() {
         .label{font-size:0.85em;color:#d4af37;font-weight:700;margin-bottom:8px;}
         .input{width:100%;background:#0a0118;border:1px solid #6a0dad;padding:14px;border-radius:12px;color:#fff;font-size:1em;font-family:'Cairo',sans-serif;margin-bottom:16px;direction:rtl;outline:none;}
         .input:focus{border-color:#d4af37;}
+        .input-wa{width:100%;background:#0a0118;border:1px solid #25d366;padding:14px;border-radius:12px;color:#fff;font-size:1em;font-family:'Cairo',sans-serif;margin-bottom:16px;direction:ltr;outline:none;}
+        .input-wa:focus{border-color:#25d366;}
         .btn-primary{background:linear-gradient(135deg,#6a0dad,#d4af37);color:white;border:none;padding:14px;border-radius:14px;font-weight:900;cursor:pointer;font-size:1em;width:100%;font-family:'Cairo',sans-serif;}
         .btn-primary:disabled{opacity:0.6;cursor:not-allowed;}
         .btn-login{background:rgba(106,13,173,0.3);border:1px solid #6a0dad;color:#fff;padding:14px;border-radius:14px;font-weight:700;cursor:pointer;font-size:1em;width:100%;font-family:'Cairo',sans-serif;margin-bottom:12px;}
@@ -131,6 +138,7 @@ export default function BecomeSeller() {
         .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#6a0dad;padding:10px 20px;border-radius:20px;font-size:0.85em;z-index:2000;white-space:nowrap;}
         .divider{height:1px;background:rgba(255,255,255,0.06);margin:20px 0;}
         .back-btn{background:rgba(255,255,255,0.08);border:none;color:#fff;padding:8px 16px;border-radius:10px;cursor:pointer;font-family:'Cairo',sans-serif;font-size:0.85em;}
+        .wa-label{font-size:0.85em;color:#25d366;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
       `}</style>
 
       <div className="header">
@@ -138,12 +146,11 @@ export default function BecomeSeller() {
         <div className="badge">🏪</div>
         <div>
           <div style={{fontWeight:900, fontSize:'0.9em'}}>انضم كتاجر</div>
-          <div style={{fontSize:'0.65em', color:'#d4af37'}}>Souq Pi V3</div>
+          <div style={{fontSize:'0.65em', color:'#d4af37'}}>Souq Pi Mainnet</div>
         </div>
       </div>
 
       <div className="container">
-
         <div className="hero">
           <div className="hero-icon">🛍️</div>
           <div className="hero-title">ابدأ البيع في <span style={{color:'#d4af37'}}>سوق Pi</span></div>
@@ -165,7 +172,6 @@ export default function BecomeSeller() {
         </div>
 
         <div className="card">
-
           {!user && (
             <div style={{textAlign:'center'}}>
               <div style={{fontSize:'0.9em', color:'#b0b0b0', marginBottom:16}}>
@@ -206,13 +212,26 @@ export default function BecomeSeller() {
                     onChange={e => setShopName(e.target.value)}
                     maxLength={50}
                   />
-                  <div style={{fontSize:'0.75em', color:'#b0b0b0', marginBottom:16, marginTop:-10}}>
-                    اختر اسماً مميزاً ويعبّر عن منتجاتك
+
+                  <div className="wa-label">
+                    <span>📱</span> رقم الواتساب للتواصل مع الزبائن
                   </div>
+                  <input
+                    className="input-wa"
+                    type="tel"
+                    placeholder="+962791234567"
+                    value={whatsapp}
+                    onChange={e => setWhatsapp(e.target.value)}
+                    maxLength={20}
+                  />
+                  <div style={{fontSize:'0.72em', color:'#b0b0b0', marginBottom:16, marginTop:-10}}>
+                    أدخل الرقم مع رمز الدولة — سيظهر للمشترين بعد الشراء
+                  </div>
+
                   <button
                     className="btn-primary"
                     onClick={submitRequest}
-                    disabled={submitting || !shopName.trim()}
+                    disabled={submitting || !shopName.trim() || !whatsapp.trim()}
                   >
                     {submitting ? 'جاري الإرسال...' : '🚀 أرسل طلب الانضمام'}
                   </button>
@@ -243,9 +262,9 @@ export default function BecomeSeller() {
                   <button
                     className="btn-primary"
                     style={{marginTop:16}}
-                    onClick={() => window.location.href = '/add-product'}
+                    onClick={() => window.location.href = '/seller-dashboard'}
                   >
-                    ➕ أضف منتجك الأول
+                    🏪 لوحة التاجر
                   </button>
                 </div>
               )}
