@@ -206,7 +206,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="sell-banner" onClick={() => window.location.href = '/become-seller'}>
+          <div className="sell-banner" onClick={() => window.location.href = '/seller-dashboard'}>
             <div style={{textAlign:'right'}}>
               <div style={{fontWeight:800}}>🏪 هل تريد البيع؟</div>
               <div style={{fontSize:'0.7em', color:'#b0b0b0'}}>انضم كتاجر الآن</div>
