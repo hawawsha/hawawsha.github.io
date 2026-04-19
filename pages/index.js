@@ -239,7 +239,8 @@ export default function Home() {
         <div className="nav-item" onClick={() => window.location.href = '/explore'}>🔍<br/>استكشف</div>
         <div className="nav-item" onClick={() => window.location.href = '/balance'}>💰<br/>الرصيد</div>
         <div className="nav-item" onClick={() => window.location.href = '/my-orders'}>📦<br/>طلباتي</div>
-        <div className="nav-item" onClick={() => window.location.href = '/become-seller'}>🏪<br/>بيّع</div>
+        <div className="nav-item"
+   onClick={() => window.location.href = '/seller-dashboard'} >🏪<br/>بيّع</div>
       </div>
       {toast && <div className="toast">{toast}</div>}
     </>
