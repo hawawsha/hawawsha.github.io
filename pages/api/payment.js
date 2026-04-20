@@ -1,4 +1,4 @@
-Export default async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
 
   const { action, paymentId, txid, username, productId, productName, amountPi, tableName, sellerUsername } = req.body;
