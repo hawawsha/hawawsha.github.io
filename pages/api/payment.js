@@ -1,7 +1,9 @@
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
 
+  // استقبال البيانات والتأكد من شمول اسم التاجر (sellerUsername)
   const { action, paymentId, txid, username, productId, productName, amountPi, tableName, sellerUsername } = req.body;
+  
   const API_KEY = process.env.PI_API_KEY;
   const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
   const AIRTABLE_BASE = process.env.AIRTABLE_BASE_ID;
@@ -11,6 +13,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    // 1. مرحلة الموافقة على الدفع (Approve)
     if (action === 'approve') {
       const approveRes = await fetch(`https://api.minepi.com/v2/payments/${paymentId}/approve`, {
         method: 'POST',
@@ -23,6 +26,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ message: "Payment Approved" });
     }
 
+    // 2. مرحلة إتمام الدفع (Complete) وحفظ البيانات
     if (action === 'complete') {
       const completeRes = await fetch(`https://api.minepi.com/v2/payments/${paymentId}/complete`, {
         method: 'POST',
@@ -35,6 +39,7 @@ export default async function handler(req, res) {
         return res.status(completeRes.status).json(errData);
       }
 
+      // بعد نجاح الدفع على الماينت، نقوم بحفظ الطلب في Airtable
       if (username && productId) {
         try {
           await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/Orders`, {
@@ -47,10 +52,11 @@ export default async function handler(req, res) {
               fields: {
                 username: username,
                 product_id: productId,
-                product_name: productName || 'Unknown Product',
+                product_name: productName || 'منتج غير معروف',
                 amount_pi: Number(amountPi) || 0,
                 payment_id: paymentId,
                 table_name: tableName || '',
+                // هنا يتم حفظ اسم التاجر لضمان ظهور زر الواتساب لاحقاً
                 seller_username: sellerUsername || '',
                 created_at: new Date().toISOString()
               }
