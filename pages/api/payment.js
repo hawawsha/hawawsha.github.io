@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).send('Method Not Allowed');
 
-  const { action, paymentId, txid, username, productId, productName, amountPi, tableName } = req.body;
+  const { action, paymentId, txid, username, productId, productName, amountPi, tableName, sellerUsername } = req.body;
   const API_KEY = process.env.PI_API_KEY;
   const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
   const AIRTABLE_BASE = process.env.AIRTABLE_BASE_ID;
@@ -51,6 +51,7 @@ export default async function handler(req, res) {
                 amount_pi: Number(amountPi) || 0,
                 payment_id: paymentId,
                 table_name: tableName || '',
+                seller_username: sellerUsername || '',
                 created_at: new Date().toISOString()
               }
             })
