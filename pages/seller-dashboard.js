@@ -89,6 +89,7 @@ export default function SellerDashboard() {
   }
 
   async function deleteProduct(product) {
+    if (!confirm('هل أنت متأكد من حذف هذا المنتج؟')) return;
     setDeleting(product.id);
     try {
       const res = await fetch('/api/seller-products', {
