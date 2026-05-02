@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { usePiPrice } from '../context/PiPriceContext';
 
+const ADMIN = 'alhawawsheh1524';
 
 const sections = [
   { key: 'Cars', ar: 'سيارات', icon: '🚗', gradient: 'linear-gradient(135deg,#1a0b2e,#6a0dad)' },
@@ -56,7 +57,7 @@ export default function Home() {
   async function fetchPiBalance(walletAddress) {
     if (!walletAddress) return null;
     try {
-      const res = await fetch(`/api/get-balance?walletAddress=${walletAddress}`);
+      const res = await fetch(`/api/balance?walletAddress=${walletAddress}`);
       const data = await res.json();
       return data.balance || null;
     } catch (error) {
