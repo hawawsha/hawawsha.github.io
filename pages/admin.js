@@ -1,16 +1,15 @@
-// pages/admin.js
 import { useState } from 'react';
 import Head from 'next/head';
 
 export default function AdminPage() {
   const [authed, setAuthed] = useState(false);
-  const [keyInput, setKeyInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
   const [requests, setRequests] = useState([]);
   const [refunds, setRefunds] = useState([]);
   const [loading, setLoading] = useState(false);
   const [toast, setToast] = useState('');
   const [acting, setActing] = useState(null);
-  const [tab, setTab] = useState('sellers');
+  const [tab, setTab] = useState('sellers'); // 'sellers' | 'refunds'
 
   function showToast(msg) {
     setToast(msg);
@@ -18,20 +17,22 @@ export default function AdminPage() {
   }
 
   async function login() {
-    if (!keyInput.trim()) return;
+    if (!passwordInput.trim()) return;
     setLoading(true);
     try {
-      const res = await fetch('/api/admin-sellers', {
-        headers: { 'x-admin-key': keyInput.trim() }
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: passwordInput.trim() })
       });
       if (res.status === 401) {
-        showToast('❌ مفتاح خاطئ');
+        showToast('❌ كلمة المرور خاطئة');
         setLoading(false);
         return;
       }
-      const data = await res.json();
-      setRequests(data.records || []);
       setAuthed(true);
+      setPasswordInput('');
+      await loadRequests();
       await loadRefunds();
     } catch (e) {
       showToast('خطأ في الاتصال');
@@ -39,12 +40,18 @@ export default function AdminPage() {
     setLoading(false);
   }
 
+  async function logout() {
+    await fetch('/api/auth/logout', { method: 'POST' });
+    setAuthed(false);
+    setRequests([]);
+    setRefunds([]);
+  }
+
   async function loadRequests() {
     setLoading(true);
     try {
-      const res = await fetch('/api/admin-sellers', {
-        headers: { 'x-admin-key': keyInput.trim() }
-      });
+      const res = await fetch('/api/admin-sellers');
+      if (res.status === 401) { setAuthed(false); return; }
       const data = await res.json();
       setRequests(data.records || []);
     } catch (e) {
@@ -68,10 +75,7 @@ export default function AdminPage() {
     try {
       const res = await fetch('/api/admin-sellers', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-admin-key': keyInput.trim()
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           recordId: record.id,
           action,
@@ -114,6 +118,7 @@ export default function AdminPage() {
   const pending = requests.filter(r => r.fields.status === 'pending');
   const approved = requests.filter(r => r.fields.status === 'approved');
   const rejected = requests.filter(r => r.fields.status === 'rejected');
+
   const refundsPending = refunds.filter(r => r.fields.status === 'pending');
   const refundsApproved = refunds.filter(r => r.fields.status === 'approved');
   const refundsRejected = refunds.filter(r => r.fields.status === 'rejected');
@@ -121,7 +126,7 @@ export default function AdminPage() {
   return (
     <>
       <Head>
-        <title>لوحة الأدمن - Souq Pi Mainnet</title>
+        <title>لوحة الأدمن - Souq Pi</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
       </Head>
@@ -157,6 +162,7 @@ export default function AdminPage() {
         .empty{text-align:center;padding:30px;color:#b0b0b0;font-size:0.85em;}
         .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#6a0dad;padding:10px 20px;border-radius:20px;font-size:0.85em;z-index:2000;white-space:nowrap;}
         .refresh-btn{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:#d4af37;padding:8px 14px;border-radius:10px;cursor:pointer;font-size:0.8em;font-family:'Cairo',sans-serif;margin-right:auto;}
+        .logout-btn{background:rgba(239,68,68,0.1);border:1px solid #ef4444;color:#ef4444;padding:8px 14px;border-radius:10px;cursor:pointer;font-size:0.8em;font-family:'Cairo',sans-serif;}
         .refund-info{font-size:0.78em;color:#c084fc;margin-top:4px;}
         .amount{font-size:0.82em;color:#d4af37;font-weight:800;margin-top:4px;}
       `}</style>
@@ -165,12 +171,13 @@ export default function AdminPage() {
         <div className="badge">🔐</div>
         <div>
           <div style={{fontWeight:900, fontSize:'0.9em'}}>لوحة الأدمن</div>
-          <div style={{fontSize:'0.65em', color:'#d4af37'}}>Souq Pi Mainnet</div>
+          <div style={{fontSize:'0.65em', color:'#d4af37'}}>Souq Pi V3</div>
         </div>
         {authed && (
-          <button className="refresh-btn" onClick={() => { loadRequests(); loadRefunds(); }}>
-            🔄 تحديث
-          </button>
+          <>
+            <button className="refresh-btn" onClick={() => { loadRequests(); loadRefunds(); }}>🔄 تحديث</button>
+            <button className="logout-btn" onClick={logout}>خروج</button>
+          </>
         )}
       </div>
 
@@ -178,13 +185,13 @@ export default function AdminPage() {
         <div className="login-box">
           <div style={{fontSize:'2.5em', marginBottom:10}}>🔑</div>
           <div style={{fontWeight:800, fontSize:'1.1em', marginBottom:6}}>دخول الأدمن</div>
-          <div style={{fontSize:'0.8em', color:'#b0b0b0', marginBottom:10}}>أدخل مفتاح الأدمن السري</div>
+          <div style={{fontSize:'0.8em', color:'#b0b0b0', marginBottom:10}}>أدخل كلمة المرور</div>
           <input
             className="input"
             type="password"
-            placeholder="ADMIN_SECRET_KEY"
-            value={keyInput}
-            onChange={e => setKeyInput(e.target.value)}
+            placeholder="••••••••"
+            value={passwordInput}
+            onChange={e => setPasswordInput(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && login()}
           />
           <button className="btn-primary" onClick={login} disabled={loading}>
@@ -193,15 +200,17 @@ export default function AdminPage() {
         </div>
       ) : (
         <>
+          {/* تابات */}
           <div className="tabs">
             <button className={`tab ${tab === 'sellers' ? 'active' : ''}`} onClick={() => setTab('sellers')}>
-              🏪 البائعون {pending.length > 0 && `(${pending.length})`}
+              🏪 طلبات البائعين {pending.length > 0 && `(${pending.length})`}
             </button>
             <button className={`tab ${tab === 'refunds' ? 'active' : ''}`} onClick={() => setTab('refunds')}>
               ↩️ الاسترجاعات {refundsPending.length > 0 && `(${refundsPending.length})`}
             </button>
           </div>
 
+          {/* ===== تاب البائعين ===== */}
           {tab === 'sellers' && (
             <>
               <div className="stats">
@@ -276,6 +285,7 @@ export default function AdminPage() {
             </>
           )}
 
+          {/* ===== تاب الاسترجاعات ===== */}
           {tab === 'refunds' && (
             <>
               <div className="stats">
