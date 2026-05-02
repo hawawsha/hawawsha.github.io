@@ -1,4 +1,3 @@
-// pages/my-orders.js
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 
@@ -79,10 +78,16 @@ export default function MyOrders() {
     setRequesting(null);
   }
 
+  function openWhatsapp(number, productName) {
+    const clean = number.replace(/\s+/g, '').replace(/[^0-9+]/g, '');
+    const msg = encodeURIComponent(`مرحباً، اشتريت منك منتج "${productName}" عبر سوق Pi. هل يمكنك التواصل معي؟`);
+    window.open(`https://wa.me/${clean}?text=${msg}`, '_blank');
+  }
+
   return (
     <>
       <Head>
-        <title>طلباتي - Souq Pi</title>
+        <title>طلباتي - Souq Pi Mainnet</title>
         <script src="https://sdk.minepi.com/pi-sdk.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
@@ -103,8 +108,9 @@ export default function MyOrders() {
         .order-price{color:#d4af37;font-weight:900;font-size:0.9em;white-space:nowrap;}
         .order-date{font-size:0.7em;color:#b0b0b0;margin-top:4px;}
         .order-table{display:inline-block;background:rgba(106,13,173,0.3);border:1px solid #6a0dad;border-radius:8px;padding:2px 10px;font-size:0.72em;color:#c084fc;margin-top:6px;}
-        .btn-refund{background:none;border:1px solid #ef4444;color:#ef4444;padding:8px;border-radius:10px;width:100%;font-size:0.8em;margin-top:10px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;}
+        .btn-refund{background:none;border:1px solid #ef4444;color:#ef4444;padding:8px;border-radius:10px;width:100%;font-size:0.8em;margin-top:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;}
         .btn-refund:disabled{opacity:0.5;cursor:not-allowed;}
+        .btn-whatsapp{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;padding:8px;border-radius:10px;width:100%;font-size:0.8em;margin-top:8px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;}
         .empty{text-align:center;padding:60px 20px;color:#b0b0b0;}
         .empty-icon{font-size:3em;margin-bottom:12px;}
         .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#6a0dad;padding:10px 20px;border-radius:20px;font-size:0.85em;z-index:2000;max-width:90%;text-align:center;}
@@ -117,7 +123,7 @@ export default function MyOrders() {
         <div className="badge">📦</div>
         <div>
           <div style={{fontWeight:900, fontSize:'0.9em'}}>طلباتي</div>
-          <div style={{fontSize:'0.65em', color:'#d4af37'}}>Souq Pi V3</div>
+          <div style={{fontSize:'0.65em', color:'#d4af37'}}>Souq Pi Mainnet</div>
         </div>
       </div>
 
@@ -161,11 +167,22 @@ export default function MyOrders() {
                   <div className="order-header">
                     <div>
                       <div className="order-name">{order.fields.product_name || 'منتج'}</div>
-                      <div className="order-date">📅 {order.fields.purchased_at || 'غير محدد'}</div>
+                      <div className="order-date">📅 {order.fields.created_at ? order.fields.created_at.split('T')[0] : 'غير محدد'}</div>
                       <div className="order-table">{order.fields.table_name || ''}</div>
                     </div>
                     <div className="order-price">π {order.fields.amount_pi}</div>
                   </div>
+
+                  {/* زر الواتساب */}
+                  {order.fields.seller_whatsapp && (
+                    <button
+                      className="btn-whatsapp"
+                      onClick={() => openWhatsapp(order.fields.seller_whatsapp, order.fields.product_name)}
+                    >
+                      📱 تواصل مع التاجر عبر واتساب
+                    </button>
+                  )}
+
                   <button
                     className="btn-refund"
                     onClick={() => requestRefund(order)}
