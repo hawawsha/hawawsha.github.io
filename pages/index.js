@@ -112,7 +112,8 @@ export default function Home() {
             productId: p.id,
             productName: p.fields.name,
             amountPi: p.fields.price_pi,
-            tableName: section
+            tableName: section,
+            sellerUsername: p.fields.seller_username || ''
           })
         });
         // ✅ حذف window.Pi.completePayment - غير موجود في SDK
@@ -206,7 +207,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="sell-banner" onClick={() => window.location.href = '/seller-dashboard'}>
+          <div className="sell-banner" onClick={() => window.location.href = '/become-seller'}>
             <div style={{textAlign:'right'}}>
               <div style={{fontWeight:800}}>🏪 هل تريد البيع؟</div>
               <div style={{fontSize:'0.7em', color:'#b0b0b0'}}>انضم كتاجر الآن</div>
@@ -239,8 +240,7 @@ export default function Home() {
         <div className="nav-item" onClick={() => window.location.href = '/explore'}>🔍<br/>استكشف</div>
         <div className="nav-item" onClick={() => window.location.href = '/balance'}>💰<br/>الرصيد</div>
         <div className="nav-item" onClick={() => window.location.href = '/my-orders'}>📦<br/>طلباتي</div>
-        <div className="nav-item"
-   onClick={() => window.location.href = '/seller-dashboard'} >🏪<br/>بيّع</div>
+        <div className="nav-item" onClick={() => window.location.href = '/become-seller'}>🏪<br/>بيّع</div>
       </div>
       {toast && <div className="toast">{toast}</div>}
     </>
