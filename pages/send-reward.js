@@ -13,7 +13,7 @@ export default function SendReward() {
           setStatus("❌ افتح الصفحة داخل Pi Browser");
           return;
         }
-        window.Pi.init({ version: "2.0", sandbox: true });
+        window.Pi.init({ version: "2.0", sandbox: false });
         const auth = await window.Pi.authenticate(
           ['username', 'payments', 'wallet_address']
         );
