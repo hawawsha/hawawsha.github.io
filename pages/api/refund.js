@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const response = await fetch(
-        `https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds?sort[0][field]=created_at&sort[0][direction]=desc`,
+        `https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds`,
         { headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}` } }
       );
       const data = await response.json();
