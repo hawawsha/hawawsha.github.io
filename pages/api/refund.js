@@ -37,8 +37,7 @@ export default async function handler(req, res) {
             buyer_uid: buyerUid,
             buyer_username: buyerUsername,
             amount_pi: Number(amountPi) || 0,
-            status: 'pending',
-            created_at: new Date().toISOString().split('T')[0]
+            status: 'pending'
           }
         })
       });
@@ -50,7 +49,6 @@ export default async function handler(req, res) {
     if (action === 'approve') {
       if (!recordId) return res.status(400).json({ error: 'recordId مطلوب' });
       try {
-        // جلب بيانات الطلب
         const getRes = await fetch(
           `https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds/${recordId}`,
           { headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}` } }
@@ -58,7 +56,6 @@ export default async function handler(req, res) {
         const record = await getRes.json();
         const fields = record.fields || {};
 
-        // إرسال Pi للزبون إذا توفر buyerUid
         if (fields.buyer_uid && PI_API_KEY) {
           try {
             await fetch('https://api.minepi.com/v2/payments', {
@@ -78,7 +75,6 @@ export default async function handler(req, res) {
           }
         }
 
-        // تحديث الحالة
         await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds/${recordId}`, {
           method: 'PATCH',
           headers: { 'Authorization': `Bearer ${AIRTABLE_TOKEN}`, 'Content-Type': 'application/json' },
