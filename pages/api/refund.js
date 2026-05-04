@@ -1,11 +1,21 @@
 import { verifyAdmin } from '../../lib/authMiddleware';
 
+// ✅ دالة تنظيف النصوص
+function sanitize(str, maxLen = 200) {
+  if (typeof str !== 'string') return '';
+  return str.trim().slice(0, maxLen).replace(/[<>'"]/g, '');
+}
+
 export default async function handler(req, res) {
   const PI_API_KEY = process.env.PI_API_KEY;
   const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
   const AIRTABLE_BASE = process.env.AIRTABLE_BASE_ID;
 
-  // ✅ GET - جلب كل الاسترجاعات للأدمن (مرتبة بالأحدث حسب الوقت)
+  if (!AIRTABLE_TOKEN || !AIRTABLE_BASE) {
+    return res.status(500).json({ error: 'Server configuration error' });
+  }
+
+  // ✅ GET - جلب كل الاسترجاعات للأدمن فقط
   if (req.method === 'GET') {
     const allowed = await verifyAdmin(req, res);
     if (!allowed) return;
@@ -16,19 +26,32 @@ export default async function handler(req, res) {
       );
       const data = await response.json();
       return res.status(200).json({ records: data.records || [] });
-    } catch (e) {
-      return res.status(500).json({ error: e.message });
+    } catch {
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 
   if (req.method !== 'POST') return res.status(405).end();
 
-  const { action, productId, productName, buyerUid, buyerUsername, amountPi, recordId } = req.body || {};
+  // ✅ تنظيف البيانات
+  const action = sanitize(req.body?.action, 20);
+  const productId = sanitize(req.body?.productId, 50);
+  const productName = sanitize(req.body?.productName, 200);
+  const buyerUid = sanitize(req.body?.buyerUid, 100);
+  const buyerUsername = sanitize(req.body?.buyerUsername, 50);
+  const recordId = sanitize(req.body?.recordId, 50);
+  const paymentId = sanitize(req.body?.paymentId, 100);
+  const amountPi = parseFloat(req.body?.amountPi);
 
-  // ✅ request - إرسال طلب استرجاع جديد مع الوقت الدقيق
+  // ✅ تحقق من action
+  if (!['request', 'approve', 'reject'].includes(action)) {
+    return res.status(400).json({ error: 'action غير صالح' });
+  }
+
+  // ✅ request - مفتوح للزبون
   if (action === 'request') {
-    if (!productId || !buyerUsername || !amountPi) {
-      return res.status(400).json({ error: 'بيانات ناقصة' });
+    if (!productId || !buyerUsername || isNaN(amountPi) || amountPi <= 0) {
+      return res.status(400).json({ error: 'بيانات ناقصة أو غير صالحة' });
     }
     try {
       const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds`, {
@@ -43,17 +66,18 @@ export default async function handler(req, res) {
             product_id: productId,
             buyer_uid: buyerUid,
             buyer_username: buyerUsername,
-            amount_pi: Number(amountPi),
+            amount_pi: amountPi,
             status: 'pending',
-            // 🛠 التعديل هنا: إرسال الوقت الكامل بصيغة ISO ليعرض الساعة والدقيقة
-            created_at: new Date().toISOString() 
+            created_at: new Date().toISOString(),
+            payment_id: paymentId
           }
         })
       });
       const data = await response.json();
+      if (!response.ok) return res.status(500).json({ error: 'Internal Server Error' });
       return res.status(200).json({ success: true, data });
-    } catch (e) {
-      return res.status(500).json({ error: e.message });
+    } catch {
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 
@@ -88,9 +112,7 @@ export default async function handler(req, res) {
               }
             })
           });
-        } catch (e) {
-          console.error('فشل إرسال دفعة Pi:', e);
-        }
+        } catch { /* Pi payment error - silent */ }
       }
 
       await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE}/Refunds/${recordId}`, {
@@ -103,8 +125,8 @@ export default async function handler(req, res) {
       });
 
       return res.status(200).json({ success: true });
-    } catch (e) {
-      return res.status(500).json({ error: e.message });
+    } catch {
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 
@@ -120,8 +142,8 @@ export default async function handler(req, res) {
         body: JSON.stringify({ fields: { status: 'rejected' } })
       });
       return res.status(200).json({ success: true });
-    } catch (e) {
-      return res.status(500).json({ error: e.message });
+    } catch {
+      return res.status(500).json({ error: 'Internal Server Error' });
     }
   }
 
