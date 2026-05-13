@@ -1,8 +1,4 @@
-// ============================================================
-// ملف: pages/api/refund.js
-// دعم كامل لـ A2U Payment + Airtable (متوافق مع الأعمدة الجديدة)
-// انسخ كل ما بين السطرين ⬇️
-// ============================================================
+
 
 const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
 const AIRTABLE_BASE = process.env.AIRTABLE_BASE_ID;
