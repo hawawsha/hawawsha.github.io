@@ -1,0 +1,15 @@
+# متغيرات البيئة السرية - لا تُرفع أبداً
+.env
+.env.local
+.env.*.local
+
+# مكتبات Node
+node_modules
+
+# ملفات بناء Next.js
+.next
+out
+
+# ملفات نظام التشغيل والمحررات
+.DS_Store
+*.log
