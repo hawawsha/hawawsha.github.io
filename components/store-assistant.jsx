@@ -33,23 +33,29 @@ export function StoreAssistant() {
     setLoading(true);
 
     try {
+      // استخراج سجل المحادثة فقط دون رسالة الترحيب
       const history = newMessages
         .filter((m) => m !== WELCOME_MESSAGE)
         .map((m) => ({ role: m.role, content: m.content }));
 
-      const res = await fetch("/api/assistant", {
+      // تعديل المسار ليتوافق مع /api/shop-assistant
+      const res = await fetch("/api/shop-assistant", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, history: history.slice(0, -1) }),
+        body: JSON.stringify({ 
+          message: text, 
+          history: history.slice(0, -1) // إرسال سجل الرسائل السابقة فقط
+        }),
       });
+      
       const data = await res.json();
 
-      if (res.ok && data.success) {
+      if (res.ok && data.reply) {
         setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
       } else {
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: data.message || "عذراً، صار خطأ. جرب مرة ثانية." },
+          { role: "assistant", content: data.reply || "عذراً، صار خطأ. جرب مرة ثانية." },
         ]);
       }
     } catch (error) {
